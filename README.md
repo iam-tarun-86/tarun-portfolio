@@ -2,7 +2,7 @@
 
 A personal portfolio website built to showcase my skills, projects, and background as an AI & ML engineering student.
 
-🌐 **Live Site:** [iam-tarun-86-.github.io/tarun-portfolio](https://iam-tarun-86-.github.io/tarun-portfolio)
+🌐 **Live Site:** [iam-tarun-86-.github.io/tarun-portfolio](https://iam-tarun-86.github.io/tarun-portfolio/)
 
 ---
 
