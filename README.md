@@ -48,4 +48,4 @@ open index.html
 
 - **Email:** tarunsanjay1910@gmail.com
 - **LinkedIn:** [linkedin.com/in/tarun-r-ai-ml](https://linkedin.com/in/tarun-r-ai-ml)
-- **GitHub:** [github.com/iam-tarun-86-](https://github.com/iam-tarun-86-)
+- **GitHub:** [github.com/iam-tarun-86-](https://github.com/iam-tarun-86)
