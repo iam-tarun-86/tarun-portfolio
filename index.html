@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarun R | AI & ML Infrastructure Command Center</title>
+
+  <!-- Fonts & Icons -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+  <style>
+    /* ---- Theme Variables (High-Contrast Solid Cyberpunk Minimalist) ---- */
+    :root {
+      /* Clean Light Doc Mode */
+      --bg-primary: #ffffff;
+      --bg-secondary: #f4f4f5;
+      --bg-panel: #fafafa;
+      --border-color: #e4e4e7;
+      --border-highlight: #a1a1aa;
+      --text-main: #09090b;
+      --text-muted: #71717a;
+
+      --accent-primary: #7c3aed;
+      /* Violet */
+      --accent-secondary: #0ea5e9;
+      /* Cyan */
+      --accent-success: #10b981;
+      /* Emerald */
+      --accent-error: #ef4444;
+      /* Red */
+
+      --grid-dot: rgba(124, 58, 237, 0.08);
+      --panel-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    [data-theme="dark"] {
+      /* Deep Void Dark Mode */
+      --bg-primary: #09090b;
+      --bg-secondary: #18181b;
+      --bg-panel: #121214;
+      --border-color: #27272a;
+      --border-highlight: #52525b;
+      --text-main: #fafafa;
+      --text-muted: #a1a1aa;
+
+      --accent-primary: #a855f7;
+      /* Neon Purple */
+      --accent-secondary: #06b6d4;
+      /* Neon Cyan */
+      --accent-success: #10b981;
+      /* Terminal Green */
+      --accent-error: #f43f5e;
+      /* Hot Pink/Red */
+
+      --grid-dot: rgba(168, 85, 247, 0.08);
+      --panel-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ---- Global Layout Settings ---- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    .code-font {
+      font-family: 'Fira Code', monospace;
+    }
+
+    /* ---- Background Elements (Mathematical Dot Grid & Matrix Canvas) ---- */
+    .tech-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -3;
+      background-size: 30px 30px;
+      background-image: radial-gradient(circle, var(--grid-dot) 1.5px, transparent 1.5px);
+      mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+    }
+
+    #ripple-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    /* ---- Core Layout Grid ---- */
+    .workspace {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      min-height: 100vh;
+      width: 100%;
+      max-width: 1500px;
+      margin: 0 auto;
+      border-left: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+    }
+
+    /* ---- Navigation Header Bar ---- */
+    nav {
+      grid-column: 1 / -1;
+      height: 60px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      background-color: var(--bg-panel);
+    }
+
+    .nav-logo {
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    #themeToggle {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 34px;
+      height: 34px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    #themeToggle:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      background-color: var(--bg-secondary);
+    }
+
+    /* ---- Left Panel: System Controller ---- */
+    aside {
+      border-right: 1px solid var(--border-color);
+      background-color: var(--bg-panel);
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1rem;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: all 0.3s ease;
+    }
+
+    .avatar-wrapper:hover .avatar {
+      filter: grayscale(0%);
+      border-color: var(--accent-primary);
+    }
+
+    .status-badge {
+      position: absolute;
+      bottom: -5px;
+      right: -5px;
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .status-indicator {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--accent-success);
+      display: inline-block;
+      animation: pulse 1.2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from {
+        opacity: 0.3;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .bio-summary {
+      text-align: center;
+    }
+
+    .bio-summary h1 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.5px;
+    }
+
+    .bio-summary .tagline {
+      font-size: 12px;
+      color: var(--accent-primary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .sys-metrics {
+      border-top: 1px dashed var(--border-color);
+      padding-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .metric-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .metric-row span {
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .aside-footer {
+      margin-top: auto;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .social-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .social-btn:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      background-color: var(--bg-secondary);
+    }
+
+    /* ---- Right Panel: Operational Console ---- */
+    main {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      max-height: calc(100vh - 60px);
+      overflow-y: auto;
+    }
+
+    /* ---- High-Impact Technical Panels ---- */
+    .panel {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: var(--panel-shadow);
+      transition: border-color 0.3s;
+      overflow: hidden;
+    }
+
+    .panel:hover {
+      border-color: var(--border-highlight);
+    }
+
+    .panel-header {
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .panel-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-title i {
+      color: var(--accent-primary);
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .window-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--border-color);
+    }
+
+    .window-dot:nth-child(1) {
+      background-color: #ff5f56;
+    }
+
+    .window-dot:nth-child(2) {
+      background-color: #ffbd2e;
+    }
+
+    .window-dot:nth-child(3) {
+      background-color: #27c93f;
+    }
+
+    /* ---- INTERACTIVE TERMINAL EMULATOR (Replacing boxes from image_dc047a.png) ---- */
+    .terminal-body {
+      padding: 1.5rem;
+      background-color: #0c0c0e;
+      color: #38bdf8;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .terminal-output {
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    .log-sys {
+      color: #52525b;
+    }
+
+    .log-prompt {
+      color: #10b981;
+    }
+
+    .log-success {
+      color: #10b981;
+    }
+
+    .log-error {
+      color: #f43f5e;
+    }
+
+    .log-white {
+      color: #fafafa;
+    }
+
+    .log-purple {
+      color: #a855f7;
+    }
+
+    /* Interactive input row */
+    .terminal-input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-top: 1px solid #18181b;
+      padding-top: 0.75rem;
+    }
+
+    .cli-prompt {
+      color: #10b981;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .cli-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #38bdf8;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      width: 100%;
+    }
+
+    .cli-hints {
+      font-size: 10px;
+      color: #52525b;
+      margin-top: 4px;
+    }
+
+    /* ---- Customization Vibe Tabs ---- */
+    .vibe-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+    }
+
+    .vibe-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .vibe-selector {
+      display: flex;
+      gap: 6px;
+      background-color: var(--bg-secondary);
+      padding: 4px;
+      border-radius: 6px;
+    }
+
+    .vibe-btn {
+      background: transparent;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .vibe-btn.active {
+      background-color: var(--bg-primary);
+      color: var(--accent-primary);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    [data-theme="dark"] .vibe-btn.active {
+      background-color: var(--accent-primary);
+      color: white;
+    }
+
+    /* ---- HIGH-IMPACT CAPABILITY LEDGER (Replacing simulated image_dc0b9f.png bar) ---- */
+    .capabilities-section-header {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .cap-item {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cap-item-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .cap-item-header i {
+      color: var(--accent-primary);
+    }
+
+    .cap-item p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ---- Skill Matrices (Sharp Dev Layout) ---- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-card {
+      padding: 1.5rem;
+    }
+
+    .skill-card-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-tag {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: var(--text-main);
+      font-weight: 500;
+      cursor: default;
+      transition: 0.2s;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    /* ---- Project Architecture Grid (Vercel Style) ---- */
+    .project-card {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent-primary);
+    }
+
+    .project-badge {
+      align-self: flex-start;
+      background-color: rgba(16, 185, 129, 0.1);
+      border: 1px solid var(--accent-success);
+      color: var(--accent-success);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .project-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .project-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .project-tag {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    /* ---- Certifications / Ledger Block ---- */
+    .ledger-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 1.5rem;
+      background-color: var(--bg-panel);
+      transition: background-color 0.2s;
+    }
+
+    .ledger-row:last-child {
+      border-bottom: none;
+    }
+
+    .ledger-row:hover {
+      background-color: var(--bg-secondary);
+    }
+
+    .ledger-title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .ledger-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--accent-primary);
+    }
+
+    .ledger-info h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .ledger-info p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .ledger-authority {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      border: 1px solid var(--border-color);
+      padding: 4px 10px;
+      border-radius: 4px;
+      background-color: var(--bg-primary);
+    }
+
+    /* ---- Contact Terminal Cards ---- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 1.25rem;
+    }
+
+    .contact-card:hover {
+      border-color: var(--accent-primary);
+    }
+
+    .contact-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--accent-primary);
+    }
+
+    .contact-info label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .contact-info a,
+    .contact-info span {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      color: var(--accent-primary);
+    }
+
+    /* ---- Section Titles ---- */
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-color), transparent);
+    }
+
+    /* ---- Custom Scrollbars ---- */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: var(--bg-primary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--border-color);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: var(--border-highlight);
+    }
+
+    @media (max-width: 900px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      main {
+        max-height: none;
+        overflow-y: visible;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="tech-grid"></div>
+  <canvas id="ripple-canvas"></canvas>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-logo code-font"><i class="ti ti-terminal-2"></i> SYS_PORTFOLIO // v3.0</div>
+    <div class="nav-actions">
+      <button id="themeToggle" title="Toggle Theme Matrix"><i class="ti ti-moon"></i></button>
+    </div>
+  </nav>
+
+  <!-- Double-Panel IDE Layout Scaffold -->
+  <div class="workspace">
+
+    <!-- Left Panel: Profile Control Center -->
+    <aside>
+      <div class="avatar-wrapper">
+        <img src="https://avatars.githubusercontent.com/u/295755570?v=4" alt="Tarun R" class="avatar">
+        <div class="status-badge code-font"><span class="status-indicator"></span> ONLINE</div>
+      </div>
+
+      <div class="bio-summary">
+        <h1>Tarun R</h1>
+        <p class="tagline code-font">AI & ML Infrastructure</p>
+      </div>
+
+      <div class="sys-metrics code-font">
+        <div class="metric-row">EDUCATION: <span>B.E. CSE @ SKCT</span></div>
+        <div class="metric-row">BATCH MATRIX: <span>2024 - 2028</span></div>
+        <div class="metric-row">STATION: <span>Coimbatore, TN</span></div>
+        <div class="metric-row">GPU ARCH: <span>RTX_4060_READY</span></div>
+        <div class="metric-row">INF_STATE: <span>llama.cpp_8085</span></div>
+      </div>
+
+      <div class="aside-footer">
+        <a href="mailto:tarunsanjay1910@gmail.com" class="social-btn" title="Send Mail"><i class="ti ti-mail"></i></a>
+        <a href="https://www.linkedin.com/in/tarun-r-ai-ml/" target="_blank" class="social-btn" title="LinkedIn"><i
+            class="ti ti-brand-linkedin"></i></a>
+        <a href="https://github.com/iam-tarun-86" target="_blank" class="social-btn" title="GitHub"><i
+            class="ti ti-brand-github"></i></a>
+      </div>
+    </aside>
+
+    <!-- Right Panel: Operational Console -->
+    <main>
+
+      <!-- Interactive System Command Block (CLI) -->
+      <section>
+        <div class="vibe-wrapper">
+          <div class="vibe-label code-font">Inference Vibe Mode</div>
+          <div class="vibe-selector code-font">
+            <button class="vibe-btn active" id="btn-recruiter" onclick="changeVibe('recruiter')">💼 Recruiter</button>
+            <button class="vibe-btn" id="btn-tech" onclick="changeVibe('tech')">⚡ Tech Lead</button>
+            <button class="vibe-btn" id="btn-eli5" onclick="changeVibe('eli5')">🧸 ELI5</button>
+          </div>
+        </div>
+
+        <!-- REPLACED: Real-world Architectural Advantages Grid (Replacing simulated image_dc0b9f.png telemetry) -->
+        <div class="capabilities-section-header code-font"><i class="ti ti-server-cog"></i> Core Value Propositions (Why
+          Local AI?)</div>
+        <div class="capabilities-grid">
+          <div class="cap-item">
+            <div class="cap-item-header"><i class="ti ti-coin-off"></i> Zero API Overhead</div>
+            <p>Deploying models completely offline using llama.cpp and deep context quantization skips costly
+              third-party API bills, creating a highly scalable solution with zero transactional costs.</p>
+          </div>
+          <div class="cap-item">
+            <div class="cap-item-header"><i class="ti ti-shield-lock"></i> Air-Gapped Compliance</div>
+            <p>When engineering pipelines handle sensitive logs (like in cybersecurity SIEM systems), routing data to
+              external endpoints poses immense compliance risks. Local architectures keep data on-premises.</p>
+          </div>
+          <div class="cap-item">
+            <div class="cap-item-header"><i class="ti ti-git-branch"></i> Agentic Resiliency</div>
+            <p>Using structured LangGraph layouts enforces logical state transitions (Ingest ➔ Categorize ➔ Route),
+              stopping LLMs from hallucinating outside predefined system boundaries.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title code-font"><i class="ti ti-terminal-2"></i> SYSTEM_INFERENCE_CLI</div>
+            <div class="window-dots">
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+            </div>
+          </div>
+          <!-- Real interactive terminal entry CLI input -->
+          <div class="terminal-body code-font">
+            <div class="terminal-output" id="cli-output">
+              <!-- Initial boot diagnostics print here -->
+            </div>
+
+            <div class="terminal-input-row">
+              <span class="cli-prompt">guest@skct-agent:~$</span>
+              <input type="text" id="cli-input-field" class="cli-input" placeholder="Type command..."
+                autocomplete="off" />
+            </div>
+            <div class="cli-hints">Available modules: <span style="color:#fafafa">help, cat bio.md, ls projects/,
+                systemctl status, curl contact/, clear</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technical Capabilities Section -->
+      <section id="skills">
+        <div class="section-title code-font"><i class="ti ti-code"></i> Engineering Arsenal</div>
+        <div class="skills-grid">
+          <div class="panel skill-card">
+            <div class="skill-card-title code-font">LLM & Agentic AI</div>
+            <div class="skill-tags code-font">
+              <span class="skill-tag">llama.cpp</span>
+              <span class="skill-tag">Ollama</span>
+              <span class="skill-tag">LangGraph</span>
+              <span class="skill-tag">LangChain</span>
+              <span class="skill-tag">LlamaIndex</span>
+              <span class="skill-tag">Prompt Tuning</span>
+            </div>
+          </div>
+          <div class="panel skill-card">
+            <div class="skill-card-title code-font">Machine Learning</div>
+            <div class="skill-tags code-font">
+              <span class="skill-tag">TensorFlow</span>
+              <span class="skill-tag">PyTorch</span>
+              <span class="skill-tag">scikit-learn</span>
+              <span class="skill-tag">Hugging Face</span>
+              <span class="skill-tag">NumPy / Pandas</span>
+            </div>
+          </div>
+          <div class="panel skill-card">
+            <div class="skill-card-title code-font">Backend & DevOps</div>
+            <div class="skill-tags code-font">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">FastAPI</span>
+              <span class="skill-tag">Flask</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Linux / Bash</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Clickable Projects section -->
+      <section id="projects">
+        <div class="section-title code-font"><i class="ti ti-cpu"></i> Forensic Pipeline</div>
+        <div class="panel project-card"
+          onclick="window.open('https://github.com/iam-tarun-86/local-ai-log-analyzer', '_blank')">
+          <span class="project-badge code-font"><i class="ti ti-shield-check"></i> Live Production Build</span>
+          <h3>Local AI Security Log Analyzer</h3>
+          <p>An automated SIEM pipeline driving complex incident analysis entirely offline. Employs a 3-node LangGraph
+            logic layout (Ingest → Classify → Route) executing real-time threat evaluations on telemetry packet streams.
+            Quantized via llama.cpp for localized low-overhead processing.</p>
+          <div class="project-tags code-font">
+            <span class="project-tag">LangGraph</span>
+            <span class="project-tag">llama.cpp</span>
+            <span class="project-tag">FastAPI</span>
+            <span class="project-tag">Docker</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Academic & Certification Ledger -->
+      <section id="certs">
+        <div class="section-title code-font"><i class="ti ti-certificate"></i> Certification Ledger</div>
+        <div class="panel" style="padding: 0;">
+          <div class="ledger-row">
+            <div class="ledger-title">
+              <div class="ledger-icon"><i class="ti ti-bulb"></i></div>
+              <div class="ledger-info">
+                <h4>Prompting Essentials</h4>
+                <p>Advanced instruction sequence restructuring</p>
+              </div>
+            </div>
+            <span class="ledger-authority code-font">Google</span>
+          </div>
+          <div class="ledger-row">
+            <div class="ledger-title">
+              <div class="ledger-icon"><i class="ti ti-brain"></i></div>
+              <div class="ledger-info">
+                <h4>Introduction to AI</h4>
+                <p>Mathematical neural layer structures & heuristic modeling</p>
+              </div>
+            </div>
+            <span class="ledger-authority code-font">Google</span>
+          </div>
+          <div class="ledger-row">
+            <div class="ledger-title">
+              <div class="ledger-icon"><i class="ti ti-chart-bar"></i></div>
+              <div class="ledger-info">
+                <h4>Advanced Statistical Methods</h4>
+                <p>Probability modeling & stochastic variance tracking</p>
+              </div>
+            </div>
+            <span class="ledger-authority code-font">Johns Hopkins</span>
+          </div>
+          <div class="ledger-row">
+            <div class="ledger-title">
+              <div class="ledger-icon"><i class="ti ti-calculator"></i></div>
+              <div class="ledger-info">
+                <h4>Computational Probability Models</h4>
+                <p>Graphical mathematical models & computational systems</p>
+              </div>
+            </div>
+            <span class="ledger-authority code-font">Johns Hopkins</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Direct Contact Channels -->
+      <section id="contact">
+        <div class="section-title code-font"><i class="ti ti-address-book"></i> Mechanical Routes</div>
+        <div class="contact-grid">
+          <div class="panel contact-card">
+            <div class="contact-icon"><i class="ti ti-mail"></i></div>
+            <div class="contact-info">
+              <label class="code-font">Mail Endpoint</label>
+              <a href="mailto:tarunsanjay1910@gmail.com">tarunsanjay1910@gmail.com</a>
+            </div>
+          </div>
+          <div class="panel contact-card">
+            <div class="contact-icon"><i class="ti ti-phone"></i></div>
+            <div class="contact-info">
+              <label class="code-font">Dial Node</label>
+              <span>+91 94896 60152</span>
+            </div>
+          </div>
+          <div class="panel contact-card">
+            <div class="contact-icon"><i class="ti ti-brand-linkedin"></i></div>
+            <div class="contact-info">
+              <label class="code-font">LinkedIn Node</label>
+              <a href="https://www.linkedin.com/in/tarun-r-ai-ml/" target="_blank">tarun-r-ai-ml</a>
+            </div>
+          </div>
+          <div class="panel contact-card">
+            <div class="contact-icon"><i class="ti ti-brand-github"></i></div>
+            <div class="contact-info">
+              <label class="code-font">GitHub Node</label>
+              <a href="https://github.com/iam-tarun-86" target="_blank">iam-tarun-86</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <script>
+    // ---- Dark & Light Mode Toggle System ----
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = themeToggleBtn.querySelector('i');
+    let currentParticleColor = '124, 58, 237'; // Purple defaults
+
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeIcon.className = 'ti ti-sun';
+      currentParticleColor = '168, 85, 247';
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        themeIcon.className = 'ti ti-moon';
+        currentParticleColor = '124, 58, 237';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeIcon.className = 'ti ti-sun';
+        currentParticleColor = '168, 85, 247';
+      }
+    });
+
+    // ---- Canvas Background Logic ----
+    const canvas = document.getElementById('ripple-canvas');
+    const ctx = canvas.getContext('2d');
+    let particlesArray = [];
+    let mouse = { x: null, y: null, radius: 100 };
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    class Particle {
+      constructor(x, y, size) {
+        this.baseX = x;
+        this.baseY = y;
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.density = (Math.random() * 30) + 10;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${currentParticleColor}, 0.25)`;
+        ctx.fill();
+      }
+      update() {
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        let forceDirectionX = dx / distance;
+        let forceDirectionY = dy / distance;
+
+        let maxDistance = mouse.radius;
+        let force = (maxDistance - distance) / maxDistance;
+        let directionX = forceDirectionX * force * this.density;
+        let directionY = forceDirectionY * force * this.density;
+
+        if (distance < mouse.radius) {
+          this.x -= directionX;
+          this.y -= directionY;
+        } else {
+          if (this.x !== this.baseX) {
+            let dx = this.x - this.baseX;
+            this.x -= dx / 15;
+          }
+          if (this.y !== this.baseY) {
+            let dy = this.y - this.baseY;
+            this.y -= dy / 15;
+          }
+        }
+        this.draw();
+      }
+    }
+
+    function initParticles() {
+      particlesArray = [];
+      let stepSize = 40;
+      for (let y = 0; y < canvas.height; y += stepSize) {
+        for (let x = 0; x < canvas.width; x += stepSize) {
+          particlesArray.push(new Particle(x, y, 1.5));
+        }
+      }
+    }
+
+    function animateParticles() {
+      requestAnimationFrame(animateParticles);
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+      }
+    }
+
+    initParticles();
+    animateParticles();
+
+    // ---- Terminal CLI Engine ----
+    let activeVibe = 'recruiter';
+    const outputEl = document.getElementById('cli-output');
+    const inputEl = document.getElementById('cli-input-field');
+
+    const terminalDemos = {
+      boot: [
+        "<span class='log-sys'>[SYSTEM]: Launching developer pipeline console...</span>",
+        "<span class='log-sys'>[SYSTEM]: Locating CUDA kernels...</span> <span class='log-success'>[NVIDIA_OK]</span>",
+        "<span class='log-sys'>[SYSTEM]: Direct memory bridge initialized on port 8085.</span>",
+        "<span class='log-success'>[ONLINE]: Execute terminal prompts natively. Type 'help' to begin.</span><br>"
+      ],
+      'ls projects/': [
+        "<span class='log-white'>total 1</span>",
+        "drwxr-xr-x  2  tarun  staff   64B  Jun 24 23:19  .",
+        "drwxr-xr-x  5  tarun  staff  160B  Jun 24 23:19  ..",
+        "-rwxr-xr-x  1  tarun  staff  4.2K  Jun 24 23:19  <span class='log-success'>local-ai-log-analyzer/</span>",
+        "<span class='log-white'>└─ config.yaml</span>",
+        "<span class='log-white'>└─ main.py [3-node LangGraph logic routing]</span>",
+        "<span class='log-white'>└─ server.py [llama.cpp integration]</span>"
+      ],
+      'systemctl status': [
+        "● skct-matrix-inference.service - Local LLM Engine Connection",
+        "   Loaded: loaded (/etc/systemd/system/skct-matrix-inference.service; active)",
+        "   Active: <span class='log-success'>active (running)</span> since Wed 2026-06-24 23:19; 10s ago",
+        "   Main PID: 8085 (llama-server)",
+        "   Tasks: 4 (limit: 4915)",
+        "   Memory: 6.2G (allocated quantized context buffer)",
+        "   CPU: RTX_4060 CUDA Core Acceleration [Active]"
+      ],
+      'curl contact/': [
+        "<span class='log-white'>{</span>",
+        "  \"name\": \"Tarun R\",",
+        "  \"role\": \"AI & ML Infrastructure Developer\",",
+        "  \"location\": \"Coimbatore, TN\",",
+        "  \"email\": \"tarunsanjay1910@gmail.com\",",
+        "  \"linkedin\": \"tarun-r-ai-ml\",",
+        "  \"github\": \"iam-tarun-86\"",
+        "<span class='log-white'>}</span>"
+      ],
+      'help': [
+        "Available shell inputs:",
+        "  <span class='log-purple'>cat bio.md</span>          Run local model prompt generation (10s limit)",
+        "  <span class='log-purple'>ls projects/</span>        Print project directories & configurations",
+        "  <span class='log-purple'>systemctl status</span>    Verify system daemon running benchmarks",
+        "  <span class='log-purple'>curl contact/</span>       Request raw JSON communication node endpoints",
+        "  <span class='log-purple'>clear</span>               Clear screen parameters"
+      ]
+    };
+
+    function runDiagnosticBoot() {
+      outputEl.innerHTML = '';
+      terminalDemos.boot.forEach((line, index) => {
+        setTimeout(() => {
+          outputEl.innerHTML += line + "<br>";
+          outputEl.scrollTop = outputEl.scrollHeight;
+          if (index === terminalDemos.boot.length - 1) {
+            executeCLI('cat bio.md'); // Automatically trigger local LLM on load
+          }
+        }, index * 200);
+      });
+    }
+
+    function changeVibe(vibe) {
+      document.querySelectorAll('.vibe-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`btn-${vibe}`).classList.add('active');
+      activeVibe = vibe;
+
+      executeCLI('cat bio.md');
+    }
+
+    // Capture CLI interactive keydowns
+    inputEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const command = inputEl.value.trim();
+        inputEl.value = '';
+        if (command) {
+          executeCLI(command);
+        }
+      }
+    });
+
+    async function executeCLI(command) {
+      outputEl.innerHTML += `<span class='log-prompt'>guest@skct-agent:~$</span> ${command}<br>`;
+      outputEl.scrollTop = outputEl.scrollHeight;
+
+      const normCmd = command.toLowerCase().trim();
+
+      if (normCmd === 'clear' || normCmd === 'cls') {
+        outputEl.innerHTML = '';
+        return;
+      }
+
+      if (normCmd === 'cat bio.md' || normCmd === 'cat bio' || normCmd === 'bio') {
+        await generateLLMBio(outputEl);
+      } else if (terminalDemos[normCmd]) {
+        const lines = terminalDemos[normCmd];
+        lines.forEach((line, index) => {
+          setTimeout(() => {
+            outputEl.innerHTML += line + "<br>";
+            outputEl.scrollTop = outputEl.scrollHeight;
+          }, index * 60);
+        });
+      } else {
+        // Fallback for typing alternatives
+        if (normCmd.includes('projects') || normCmd === 'ls') {
+          executeCLI('ls projects/');
+        } else if (normCmd.includes('status') || normCmd === 'systemctl') {
+          executeCLI('systemctl status');
+        } else if (normCmd.includes('contact') || normCmd === 'curl') {
+          executeCLI('curl contact/');
+        } else {
+          outputEl.innerHTML += `<span class='log-error'>Command not found: '${command}'. Type 'help' to see valid nodes.</span><br>`;
+          outputEl.scrollTop = outputEl.scrollHeight;
+        }
+      }
+    }
+
+    // Modern local inference client with prompt adjustments & fallback parameters
+    async function generateLLMBio(outputElement) {
+      const funnyLoadingMessages = [
+        "Waking up local model (it was dreaming of electric sheep)",
+        "Feeding the RTX 4060 some virtual espresso",
+        "Bribing llama.cpp with virtual cookies",
+        "Warming up local silicon space heater",
+        "Consulting silicon oracle on port 8085",
+        "Teaching sand how to think really fast"
+      ];
+
+      const fallbackBios = {
+        recruiter: "Hi, I'm Tarun R, and what really gets me excited is building smart, responsive systems that bridge the gap between machine learning models and high-performance backend pipelines.",
+        tech: "Hi, I'm Tarun R. I enjoy digging into local LLM workflows—like using llama.cpp and LangGraph—to create fast, secure systems and responsive backend services.",
+        eli5: "Hi, I'm Tarun R. I love building smart programs that think. It's like teaching computers to speak, understand what we want, and solve problems all on their own!"
+      };
+
+      const randomLoad = funnyLoadingMessages[Math.floor(Math.random() * funnyLoadingMessages.length)];
+      outputElement.innerHTML += `<span class='log-sys'>[SYSTEM]: Querying local model...</span><br><span class='log-purple'>${randomLoad}...</span><br>`;
+      outputElement.scrollTop = outputElement.scrollHeight;
+
+      const url = 'http://localhost:8085/v1/chat/completions';
+
+      // Strict 10-second controller limit
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+      let systemInstruction = "";
+      if (activeVibe === 'tech') {
+        systemInstruction = "You are a technical backend and AI infrastructure architect. Speak strictly in first person ('I', 'my'). Avoid marketing buzzwords. Focus on local deployments, compiler optimizations, LangGraph conditional routing, llama.cpp server parameters, and Python backend speed. Keep it strictly to 2 natural, technical sentences.";
+      } else if (activeVibe === 'eli5') {
+        systemInstruction = "You are explaining your passion for computer science and AI to a non-technical person. Use an engaging, simple, and warm analogy. Avoid jargon entirely. Keep it to 2 extremely simple, natural, and creative sentences.";
+      } else {
+        systemInstruction = "You are a professional, metric-driven AI engineer. Speak strictly in first person ('I', 'my'). Avoid corporate speak, robotic listing, and clichés like 'passionate'. Keep the tone conversational, clean, and professional. Respond ONLY with a 2-sentence introduction.";
+      }
+
+      const payload = {
+        messages: [
+          { role: "system", content: systemInstruction },
+          {
+            role: "user",
+            content: `Write a natural, clean, 2-sentence introduction for my portfolio.
+Details about me:
+- Name: Tarun R
+- Education: 3rd-year B.E. CSE student specializing in AI & ML at Sri Krishna College of Technology, Coimbatore.
+- My focus: Building smart AI systems (using local LLM infrastructure, LangGraph agentic workflows) and fast Python backends.`
+          }
+        ],
+        temperature: 0.7,
+        max_tokens: 1000,
+        stream: false
+      };
+
+      try {
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+        if (!res.ok) throw new Error('Local API Error');
+
+        const data = await res.json();
+        const text = data.choices[0].message.content || 'Could not parse response.';
+
+        typeWriter(outputElement, text.replace(/["']/g, "").trim());
+      } catch (e) {
+        clearTimeout(timeoutId);
+        console.warn("Local LLM offline. Executing cached client sandbox bypass presets.", e);
+
+        outputElement.innerHTML += `<span class='log-error'>[LOCAL_LLM: OFFLINE] Loading client-side cached ${activeVibe} preset...</span><br><br>`;
+        outputElement.scrollTop = outputElement.scrollHeight;
+
+        setTimeout(() => {
+          const fallbackText = fallbackBios[activeVibe];
+          typeWriter(outputElement, fallbackText);
+        }, 800);
+      }
+    }
+
+    // Smooth print typewriter function
+    function typeWriter(element, text) {
+      let i = 0;
+      const speed = 25;
+      function type() {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          element.scrollTop = element.scrollHeight;
+          setTimeout(type, speed);
+        } else {
+          element.innerHTML += "<br><br>";
+          element.scrollTop = element.scrollHeight;
+        }
+      }
+      type();
+    }
+
+    window.onload = function () {
+      runDiagnosticBoot();
+    }
+  </script>
+</body>
+
+</html>
