@@ -105,10 +105,13 @@ Available Shell Commands:
 
     if (norm === 'ls projects/' || norm === 'projects' || norm === 'ls') {
       this.print(`
-<span style="color:#94a3b8;">drwxr-xr-x 4 tarun staff 128B Jun 24 2026 .</span>
--rwxr-xr-x 1 tarun staff 4.2K <span style="color:#10b981;">local-ai-log-analyzer/</span> (3-node LangGraph SIEM + llama.cpp)
--rwxr-xr-x 1 tarun staff 3.8K <span style="color:#0ea5e9;">hybrid-rag-engine/</span> (LanceDB + Reciprocal Rank Fusion)
--rwxr-xr-x 1 tarun staff 5.1K <span style="color:#f59e0b;">tensorrt-edge-classifier/</span> (YOLOv11 + TensorRT C++ Engine)
+<span style="color:#94a3b8;">drwxr-xr-x 8 tarun staff 256B Sep 01 2026 .</span>
+-rwxr-xr-x 1 tarun staff 4.2K <span style="color:#10b981;">local-ai-log-analyzer/</span> (Full-stack LangGraph SIEM + llama.cpp)
+-rwxr-xr-x 1 tarun staff 3.8K <span style="color:#ef4444;">agent-sentinel/</span> (Zero-Trust Behavioral AI Agent Firewall)
+-rwxr-xr-x 1 tarun staff 5.1K <span style="color:#a855f7;">Aegis/</span> (Privacy-Preserving Research Intelligence & RAG)
+-rwxr-xr-x 1 tarun staff 3.2K <span style="color:#0ea5e9;">dockmind/</span> (Offline Document Analysis RAG + ChromaDB)
+-rwxr-xr-x 1 tarun staff 2.9K <span style="color:#f59e0b;">fraudlens-lstm/</span> (Sequential Deep Learning Fraud Detection)
+-rwxr-xr-x 1 tarun staff 3.5K <span style="color:#06b6d4;">carin/</span> (Intelligent In-Vehicle Vision & Voice AI Co-Pilot)
       `);
       return;
     }

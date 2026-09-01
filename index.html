@@ -280,68 +280,128 @@
     <section id="stage-projects" class="stage-section">
       <div class="stage-header">
         <div class="stage-kicker"><i class="ti ti-cpu"></i> 03. Production Engineering</div>
-        <h2 class="stage-title">Featured Projects & Systems</h2>
+        <h2 class="stage-title">Featured GitHub Repositories</h2>
       </div>
 
-      <div class="projects-3d-grid">
+      <div class="projects-3d-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
 
-        <!-- Project 1 -->
+        <!-- Project 1: local-ai-log-analyzer -->
         <div class="glass-panel" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86/local-ai-log-analyzer', '_blank')">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
             <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: #10b981; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px;">
-              <i class="ti ti-shield-check"></i> Live Production
+              <i class="ti ti-shield-check"></i> Production SIEM
             </span>
-            <i class="ti ti-external-link" style="color: var(--text-muted);"></i>
+            <i class="ti ti-brand-github" style="color: var(--text-muted); font-size: 1.1rem;"></i>
           </div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">Local AI Security Log Analyzer</h3>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">local-ai-log-analyzer</h3>
           <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
-            Automated SIEM incident analysis running entirely offline. Employs a 3-node LangGraph logic layout (Ingest &rarr; Classify &rarr; Route) executing real-time threat evaluations on telemetry streams with zero cloud API overhead.
+            Full-stack SIEM tool using LangGraph agentic workflows and local LLMs (llama.cpp) for real-time security log analysis with zero cloud API overhead.
           </p>
           <div class="project-tag-row">
             <span class="project-tag">LangGraph</span>
             <span class="project-tag">llama.cpp</span>
             <span class="project-tag">FastAPI</span>
-            <span class="project-tag">Docker</span>
+            <span class="project-tag">Python</span>
           </div>
         </div>
 
-        <!-- Project 2 -->
-        <div class="glass-panel" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86', '_blank')">
+        <!-- Project 2: agent-sentinel -->
+        <div class="glass-panel" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86/agent-sentinel', '_blank')">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: #ef4444; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px;">
+              <i class="ti ti-shield-bolt"></i> AI Safety & Firewall
+            </span>
+            <i class="ti ti-brand-github" style="color: var(--text-muted); font-size: 1.1rem;"></i>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">agent-sentinel</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+            Zero-Trust Behavioral Firewall & Runtime Circuit Breaker for Autonomous AI Agents, constraining execution paths against prompt injection and unauthorized tool calls.
+          </p>
+          <div class="project-tag-row">
+            <span class="project-tag">Zero-Trust</span>
+            <span class="project-tag">AI Safety</span>
+            <span class="project-tag">Circuit Breaker</span>
+            <span class="project-tag">Python</span>
+          </div>
+        </div>
+
+        <!-- Project 3: Aegis -->
+        <div class="glass-panel" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86/Aegis', '_blank')">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: #a855f7; background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px;">
+              <i class="ti ti-sparkles"></i> Research Intelligence
+            </span>
+            <i class="ti ti-brand-github" style="color: var(--text-muted); font-size: 1.1rem;"></i>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">Aegis</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+            Zero-cloud, privacy-preserving research intelligence platform with automated web extraction, academic report synthesis, and dense vector RAG pipelines.
+          </p>
+          <div class="project-tag-row">
+            <span class="project-tag">LangGraph</span>
+            <span class="project-tag">Privacy-First</span>
+            <span class="project-tag">Dense RAG</span>
+            <span class="project-tag">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Project 4: dockmind -->
+        <div class="glass-panel" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86/dockmind', '_blank')">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
             <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: #0ea5e9; background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(14, 165, 233, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px;">
-              <i class="ti ti-database"></i> High-Throughput RAG
+              <i class="ti ti-database"></i> Hybrid RAG
             </span>
-            <i class="ti ti-external-link" style="color: var(--text-muted);"></i>
+            <i class="ti ti-brand-github" style="color: var(--text-muted); font-size: 1.1rem;"></i>
           </div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">Hybrid Vector & Keyword RAG Engine</h3>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">dockmind</h3>
           <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
-            Sub-millisecond retrieval engine combining BM25 sparse matching and dense vector embeddings with Reciprocal Rank Fusion (RRF) and LanceDB embedded database.
+            Intelligent local AI assistant for document analysis. Chat with PDFs, Word docs, and text files offline using a Hybrid RAG pipeline (ChromaDB + BM25) and local LLMs.
           </p>
           <div class="project-tag-row">
-            <span class="project-tag">LanceDB</span>
-            <span class="project-tag">RRF Ranking</span>
+            <span class="project-tag">ChromaDB</span>
+            <span class="project-tag">BM25</span>
+            <span class="project-tag">Hybrid RAG</span>
             <span class="project-tag">Python</span>
-            <span class="project-tag">Hugging Face</span>
           </div>
         </div>
 
-        <!-- Project 3 -->
-        <div class="glass-panel" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86', '_blank')">
+        <!-- Project 5: fraudlens-lstm -->
+        <div class="glass-panel" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86/fraudlens-lstm', '_blank')">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
             <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: #f59e0b; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px;">
-              <i class="ti ti-microchip"></i> Edge Inference
+              <i class="ti ti-brain"></i> Deep Learning
             </span>
-            <i class="ti ti-external-link" style="color: var(--text-muted);"></i>
+            <i class="ti ti-brand-github" style="color: var(--text-muted); font-size: 1.1rem;"></i>
           </div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">TensorRT Edge Threat Classifier</h3>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">fraudlens-lstm</h3>
           <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
-            Compiled FP16/INT8 deep learning vision models optimized with NVIDIA TensorRT execution providers, achieving 180+ FPS on edge camera streams.
+            Sequential deep learning financial transaction fraud detection leveraging sequence LSTM neural networks and real-time statistical anomaly thresholding.
           </p>
           <div class="project-tag-row">
-            <span class="project-tag">TensorRT</span>
-            <span class="project-tag">CUDA</span>
+            <span class="project-tag">LSTM</span>
+            <span class="project-tag">TypeScript</span>
+            <span class="project-tag">Deep Learning</span>
             <span class="project-tag">PyTorch</span>
-            <span class="project-tag">C++</span>
+          </div>
+        </div>
+
+        <!-- Project 6: carin -->
+        <div class="glass-panel" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86/carin', '_blank')">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: #06b6d4; background: rgba(6, 182, 212, 0.12); border: 1px solid rgba(6, 182, 212, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px;">
+              <i class="ti ti-car"></i> Vision & Voice AI
+            </span>
+            <i class="ti ti-brand-github" style="color: var(--text-muted); font-size: 1.1rem;"></i>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">carin</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+            Intelligent in-vehicle AI co-pilot assistant combining multi-modal computer vision edge feeds, voice telemetry processing, and vehicle diagnostics.
+          </p>
+          <div class="project-tag-row">
+            <span class="project-tag">Computer Vision</span>
+            <span class="project-tag">Voice AI</span>
+            <span class="project-tag">Edge AI</span>
+            <span class="project-tag">Python</span>
           </div>
         </div>
 
