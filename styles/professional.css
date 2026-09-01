@@ -816,12 +816,171 @@ body {
   text-align: center;
 }
 
-.contact-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 16px;
-  padding: 3.5rem 2rem;
-  max-width: 800px;
-  margin: 0 auto 3rem;
+/* ==========================================================================
+   INTERACTIVE QUEST HUD & GAMIFICATION DOCK
+   ========================================================================== */
+.quest-dock {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 280px;
+  background: rgba(10, 13, 20, 0.92);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  z-index: 1000;
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease;
 }
+
+@media (max-width: 768px) {
+  .quest-dock {
+    display: none;
+  }
+}
+
+.quest-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.quest-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #c084fc;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.quest-rank {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.quest-progress-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+}
+
+.quest-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #06b6d4, #a855f7);
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+
+.quest-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  padding: 0.25rem 0;
+  transition: color 0.2s ease;
+}
+
+.quest-item i {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.quest-item strong {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent-cyan);
+}
+
+.quest-item.quest-done {
+  color: #f8fafc;
+}
+
+.quest-item.quest-done i {
+  color: #10b981;
+}
+
+.quest-item.quest-done strong {
+  color: #10b981;
+}
+
+/* Toast Notifications */
+.quest-toast {
+  position: fixed;
+  top: 5.5rem;
+  right: 1.5rem;
+  background: rgba(14, 18, 28, 0.95);
+  border: 1px solid #10b981;
+  border-radius: 10px;
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: #34d399;
+  z-index: 2000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.quest-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 3D Game Mode Fullscreen Modal */
+.game-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #050608;
+  z-index: 3000;
+  display: none;
+}
+
+.game-modal-overlay.active {
+  display: block;
+}
+
+.game-modal-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  z-index: 3100;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  padding: 0.5rem 1.2rem;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.game-modal-close-btn:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: #ef4444;
+}
+

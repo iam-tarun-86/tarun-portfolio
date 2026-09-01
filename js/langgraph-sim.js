@@ -96,6 +96,7 @@ class LangGraphSimulator {
         logOutput.scrollTop = logOutput.scrollHeight;
       }
       if (window.soundEngine) window.soundEngine.playGameBeep();
+      if (window.completeQuest) window.completeQuest('siem');
       this.isSimulating = false;
     }, 2400);
   }

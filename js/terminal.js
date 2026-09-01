@@ -209,6 +209,7 @@ Available Shell Commands:
 
     setTimeout(() => {
       this.print(`<span style="color:#10b981;">[BENCHMARK COMPLETE]: Completed in ${duration}ms (${gflops} GFLOPS). Ready for local client tensor workloads!</span>`);
+      if (window.completeQuest) window.completeQuest('bench');
     }, 200);
   }
 }

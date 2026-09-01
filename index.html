@@ -46,6 +46,9 @@
         <button class="btn-primary-gradient download-resume-action" title="Download Official Resume PDF">
           <i class="ti ti-file-download"></i> <span>Download Resume</span>
         </button>
+        <button class="btn-secondary" id="open-game-btn" onclick="window.openGameLab ? window.openGameLab() : window.open('index.html#simulator', '_self')" style="border-color: rgba(139, 92, 246, 0.4); color: #c084fc;" title="Interactive 3D Lab Simulation">
+          <i class="ti ti-device-gamepad-2"></i> <span>3D Game Mode</span>
+        </button>
         <a href="https://github.com/iam-tarun-86" target="_blank" class="btn-secondary" style="padding: 0.45rem 0.75rem;" title="GitHub Profile">
           <i class="ti ti-brand-github"></i>
         </a>
@@ -524,13 +527,36 @@
       </div>
     </footer>
 
-  </main>
+  <!-- =========================================================================
+       INTERACTIVE GAMIFIED QUEST HUD DOCK
+       ========================================================================= -->
+  <aside class="quest-dock" id="quest-dock">
+    <div class="quest-header">
+      <div class="quest-title">
+        <i class="ti ti-sword"></i> RECRUITER QUEST LOG
+      </div>
+      <div class="quest-rank" id="quest-rank-badge">
+        <span style="color:#94a3b8;"><i class="ti ti-user"></i> L1 GUEST</span>
+      </div>
+    </div>
+    <div class="quest-progress-track">
+      <div class="quest-progress-fill" id="quest-progress-fill"></div>
+    </div>
+    <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); margin-bottom: 0.5rem;">
+      <span>QUEST XP:</span>
+      <strong id="quest-total-xp" style="color: #38bdf8;">0 / 1100 XP</strong>
+    </div>
+    <div id="quest-items-list">
+      <!-- Generated dynamically by js/game-dock.js -->
+    </div>
+  </aside>
 
   <!-- Scripts -->
   <script src="js/audio.js"></script>
   <script src="js/quant-calc.js"></script>
   <script src="js/langgraph-sim.js"></script>
   <script src="js/terminal.js"></script>
+  <script src="js/game-dock.js"></script>
   <script src="js/main.js"></script>
 
 </body>
