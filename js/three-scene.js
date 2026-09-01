@@ -1,10 +1,11 @@
 /**
- * MotionSites Photorealistic 3D Cyberpunk AI Lab & Rover Engine
+ * MotionSites.ai-Grade Hyper-Realistic 3D Cyber Lab & Rover Engine
  * Features:
- * - Drivable Cyber-Rover (WASD / Touch D-pad / Smooth Scroll Auto-Pilot)
- * - MotionSites-grade Morphing Liquid-Chrome / Glass Neural Core (Procedural Noise Waves)
- * - 5 3D Lab Pods with Metallic Clearcoat & Translucent Glass Materials
- * - 5 3D Collectible GGUF Quantization Shards with Collision Physics & Particle Chimes
+ * - In-Memory Procedural Studio HDRI Environment Reflections (PMREMGenerator)
+ * - Organic Morphing Liquid-Chrome / Glass Neural Core (Procedural Multi-Frequency Noise Waves)
+ * - Photorealistic Cyber-Rover (Metallic Clearcoat, Cyan Glass Canopy, Rotating Wheels, Spotlights)
+ * - 5 3D Lab Pods with Refractive Glass & Metallic Clearcoat
+ * - 5 3D Collectible GGUF Quantization Shards with Collision Physics & Chimes
  * - Real-time 2D Canvas Minimap Radar
  * - 3-Point Studio Lighting (Key, Fill, Rim)
  */
@@ -20,7 +21,7 @@ class MotionSitesCyberLab {
     }
 
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(52, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
     this.renderer = new THREE.WebGLRenderer({
       canvas: this.canvas,
       antialias: true,
@@ -31,9 +32,9 @@ class MotionSitesCyberLab {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.25;
+    this.renderer.toneMappingExposure = 1.35;
 
-    // Rover & Interaction State
+    // Rover & Control State
     this.controlMode = 'scroll'; // 'scroll' or 'manual'
     this.rover = {
       x: 0,
@@ -41,7 +42,7 @@ class MotionSitesCyberLab {
       z: 15,
       angle: -Math.PI / 2, // Facing forward (-Z)
       speed: 0,
-      maxSpeed: 1.2,
+      maxSpeed: 1.25,
       accel: 0.05,
       friction: 0.94,
       mesh: null,
@@ -75,6 +76,7 @@ class MotionSitesCyberLab {
     this.objects = {};
     this.basePositions = [];
 
+    this.initStudioEnvironmentMap();
     this.initLights();
     this.initBackgroundParticles();
     this.initFloorGrid();
@@ -89,22 +91,59 @@ class MotionSitesCyberLab {
     requestAnimationFrame(this.animate);
   }
 
+  initStudioEnvironmentMap() {
+    // Generate Procedural High-Contrast Studio Environment Map for Photorealistic Chrome Reflections
+    const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(256);
+    cubeRenderTarget.texture.type = THREE.HalfFloatType;
+
+    const cubeCamera = new THREE.CubeCamera(0.1, 10, cubeRenderTarget);
+    const envScene = new THREE.Scene();
+
+    // Studio Softbox Lights inside the envScene
+    const softboxTop = new THREE.Mesh(
+      new THREE.PlaneGeometry(6, 6),
+      new THREE.MeshBasicMaterial({ color: 0xffffff })
+    );
+    softboxTop.position.set(0, 4, 0);
+    softboxTop.rotation.x = Math.PI / 2;
+    envScene.add(softboxTop);
+
+    const softboxViolet = new THREE.Mesh(
+      new THREE.PlaneGeometry(6, 6),
+      new THREE.MeshBasicMaterial({ color: 0xa855f7 })
+    );
+    softboxViolet.position.set(4, 2, 2);
+    softboxViolet.lookAt(0, 0, 0);
+    envScene.add(softboxViolet);
+
+    const softboxCyan = new THREE.Mesh(
+      new THREE.PlaneGeometry(6, 6),
+      new THREE.MeshBasicMaterial({ color: 0x06b6d4 })
+    );
+    softboxCyan.position.set(-4, -1, 3);
+    softboxCyan.lookAt(0, 0, 0);
+    envScene.add(softboxCyan);
+
+    cubeCamera.update(this.renderer, envScene);
+    this.scene.environment = cubeRenderTarget.texture;
+  }
+
   initLights() {
-    const ambient = new THREE.AmbientLight(0x0f172a, 1.2);
+    const ambient = new THREE.AmbientLight(0x0a0f1d, 1.4);
     this.scene.add(ambient);
 
     // Key Light (Neon Violet)
-    const keyLight = new THREE.DirectionalLight(0xa855f7, 4.5);
+    const keyLight = new THREE.DirectionalLight(0xa855f7, 5.0);
     keyLight.position.set(25, 30, 20);
     this.scene.add(keyLight);
 
     // Fill Light (Cyber Cyan)
-    const fillLight = new THREE.PointLight(0x06b6d4, 4.5, 120);
+    const fillLight = new THREE.PointLight(0x06b6d4, 5.0, 120);
     fillLight.position.set(-20, 20, -60);
     this.scene.add(fillLight);
 
     // Rim Light (Emerald Gold)
-    const rimLight = new THREE.PointLight(0x10b981, 4.0, 100);
+    const rimLight = new THREE.PointLight(0x10b981, 4.5, 100);
     rimLight.position.set(15, 20, -160);
     this.scene.add(rimLight);
   }
@@ -155,9 +194,10 @@ class MotionSitesCyberLab {
     const rackGeo = new THREE.BoxGeometry(3, 12, 5);
     const rackMat = new THREE.MeshPhysicalMaterial({
       color: 0x0a0e1a,
-      roughness: 0.2,
-      metalness: 0.85,
-      clearcoat: 1.0
+      roughness: 0.15,
+      metalness: 0.9,
+      clearcoat: 1.0,
+      reflectivity: 0.9
     });
 
     for (let z = 20; z >= -260; z -= 35) {
@@ -174,42 +214,45 @@ class MotionSitesCyberLab {
   initPhotorealisticRover() {
     this.rover.mesh = new THREE.Group();
 
-    // Metallic Chassis
+    // Metallic Obsidian Chassis
     const bodyGeo = new THREE.BoxGeometry(3.2, 1.1, 4.6);
     const bodyMat = new THREE.MeshPhysicalMaterial({
-      color: 0x0f172a,
-      metalness: 0.9,
-      roughness: 0.1,
+      color: 0x090d16,
+      metalness: 0.92,
+      roughness: 0.08,
       clearcoat: 1.0,
-      clearcoatRoughness: 0.05,
+      clearcoatRoughness: 0.03,
+      reflectivity: 1.0,
       emissive: 0x4c1d95,
-      emissiveIntensity: 0.3
+      emissiveIntensity: 0.35
     });
     const chassis = new THREE.Mesh(bodyGeo, bodyMat);
     chassis.position.y = 1.0;
     this.rover.mesh.add(chassis);
 
-    // Iridescent Cyan Cockpit Dome
-    const domeGeo = new THREE.SphereGeometry(1.2, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2);
+    // Iridescent Cyan Glass Cockpit Canopy
+    const domeGeo = new THREE.SphereGeometry(1.2, 32, 24, 0, Math.PI * 2, 0, Math.PI / 2);
     const domeMat = new THREE.MeshPhysicalMaterial({
       color: 0x06b6d4,
       metalness: 0.85,
-      roughness: 0.05,
+      roughness: 0.04,
       clearcoat: 1.0,
       emissive: 0x0ea5e9,
       emissiveIntensity: 0.8,
-      transmission: 0.4
+      transmission: 0.5,
+      ior: 1.52,
+      reflectivity: 0.95
     });
     const dome = new THREE.Mesh(domeGeo, domeMat);
     dome.position.set(0, 1.55, -0.2);
     this.rover.mesh.add(dome);
 
-    // 4 Glossy Wheels
-    const wheelGeo = new THREE.CylinderGeometry(0.7, 0.7, 0.6, 24);
+    // 4 High-Poly Metallic Wheels
+    const wheelGeo = new THREE.CylinderGeometry(0.7, 0.7, 0.6, 32);
     const wheelMat = new THREE.MeshPhysicalMaterial({
       color: 0x38bdf8,
-      metalness: 0.9,
-      roughness: 0.1,
+      metalness: 0.95,
+      roughness: 0.08,
       clearcoat: 1.0,
       emissive: 0x0284c7,
       emissiveIntensity: 0.5
@@ -229,13 +272,13 @@ class MotionSitesCyberLab {
     });
 
     // Dual Forward Headlight Spotlights
-    const lightL = new THREE.SpotLight(0x38bdf8, 3.5, 30, Math.PI / 6, 0.5);
+    const lightL = new THREE.SpotLight(0x38bdf8, 4.0, 35, Math.PI / 6, 0.5);
     lightL.position.set(-1.0, 1.2, -2.2);
     lightL.target.position.set(-1.0, 0, -15);
     this.rover.mesh.add(lightL);
     this.rover.mesh.add(lightL.target);
 
-    const lightR = new THREE.SpotLight(0x38bdf8, 3.5, 30, Math.PI / 6, 0.5);
+    const lightR = new THREE.SpotLight(0x38bdf8, 4.0, 35, Math.PI / 6, 0.5);
     lightR.position.set(1.0, 1.2, -2.2);
     lightR.target.position.set(1.0, 0, -15);
     this.rover.mesh.add(lightR);
@@ -249,20 +292,20 @@ class MotionSitesCyberLab {
     // 1. Pod 1: MotionSites-Grade Morphing Liquid-Chrome Neural Core (Hero)
     this.objects.corePod = new THREE.Group();
 
-    const sphereGeo = new THREE.SphereGeometry(7.0, 80, 80);
+    const sphereGeo = new THREE.SphereGeometry(7.0, 96, 96);
     this.basePositions = sphereGeo.attributes.position.array.slice();
 
     const liquidMat = new THREE.MeshPhysicalMaterial({
       color: 0x1e1b4b,
       emissive: 0x4c1d95,
-      emissiveIntensity: 0.4,
-      roughness: 0.08,
-      metalness: 0.85,
+      emissiveIntensity: 0.45,
+      roughness: 0.05,
+      metalness: 0.88,
       clearcoat: 1.0,
-      clearcoatRoughness: 0.05,
-      transmission: 0.3,
+      clearcoatRoughness: 0.03,
+      transmission: 0.35,
       ior: 1.55,
-      reflectivity: 0.95
+      reflectivity: 0.98
     });
     this.objects.liquidCore = new THREE.Mesh(sphereGeo, liquidMat);
     this.objects.corePod.add(this.objects.liquidCore);
@@ -272,22 +315,24 @@ class MotionSitesCyberLab {
     const innerMat = new THREE.MeshStandardMaterial({
       color: 0x06b6d4,
       emissive: 0x0ea5e9,
-      emissiveIntensity: 1.2,
-      roughness: 0.2,
+      emissiveIntensity: 1.3,
+      roughness: 0.15,
       metalness: 0.9
     });
     this.objects.innerCore = new THREE.Mesh(innerGeo, innerMat);
     this.objects.corePod.add(this.objects.innerCore);
 
-    // Orbiting Refractive Glass Rings
-    const ringGeo = new THREE.TorusGeometry(12.0, 0.35, 32, 100);
+    // Refractive Orbiting Glass Rings
+    const ringGeo = new THREE.TorusGeometry(12.0, 0.35, 32, 128);
     const ringMat = new THREE.MeshPhysicalMaterial({
       color: 0x38bdf8,
       emissive: 0x0284c7,
       emissiveIntensity: 0.5,
-      roughness: 0.05,
-      metalness: 0.9,
-      clearcoat: 1.0
+      roughness: 0.04,
+      metalness: 0.92,
+      clearcoat: 1.0,
+      transmission: 0.3,
+      ior: 1.52
     });
     this.objects.ring1 = new THREE.Mesh(ringGeo, ringMat);
     this.objects.ring1.rotation.x = Math.PI / 3;
@@ -302,8 +347,8 @@ class MotionSitesCyberLab {
       color: 0x0ea5e9,
       emissive: 0x0284c7,
       emissiveIntensity: 0.7,
-      roughness: 0.08,
-      metalness: 0.85,
+      roughness: 0.06,
+      metalness: 0.88,
       clearcoat: 1.0
     });
 
@@ -317,8 +362,8 @@ class MotionSitesCyberLab {
       color: 0xa855f7,
       emissive: 0x7c3aed,
       emissiveIntensity: 0.7,
-      roughness: 0.08,
-      metalness: 0.85,
+      roughness: 0.06,
+      metalness: 0.88,
       clearcoat: 1.0
     });
     const n2 = new THREE.Mesh(octGeo, purpleMat);
@@ -330,8 +375,8 @@ class MotionSitesCyberLab {
       color: 0x10b981,
       emissive: 0x059669,
       emissiveIntensity: 0.7,
-      roughness: 0.08,
-      metalness: 0.85,
+      roughness: 0.06,
+      metalness: 0.88,
       clearcoat: 1.0
     });
     const n3 = new THREE.Mesh(coneGeo, emeraldMat);
@@ -344,8 +389,8 @@ class MotionSitesCyberLab {
     // 3. Pod 3: Project Monoliths (Stage 3)
     this.objects.projectsPod = new THREE.Group();
     for (let i = -1; i <= 1; i++) {
-      const pedGeo = new THREE.CylinderGeometry(3.5, 4, 1.5, 24);
-      const pedMat = new THREE.MeshPhysicalMaterial({ color: 0x0ea5e9, metalness: 0.9, roughness: 0.1, clearcoat: 1.0 });
+      const pedGeo = new THREE.CylinderGeometry(3.5, 4, 1.5, 32);
+      const pedMat = new THREE.MeshPhysicalMaterial({ color: 0x0ea5e9, metalness: 0.92, roughness: 0.08, clearcoat: 1.0 });
       const ped = new THREE.Mesh(pedGeo, pedMat);
       ped.position.set(i * 18, 0.75, 0);
       this.objects.projectsPod.add(ped);
@@ -355,9 +400,9 @@ class MotionSitesCyberLab {
         color: 0x38bdf8,
         emissive: 0x0284c7,
         emissiveIntensity: 0.6,
-        roughness: 0.05,
-        metalness: 0.85,
-        transmission: 0.4,
+        roughness: 0.04,
+        metalness: 0.88,
+        transmission: 0.45,
         clearcoat: 1.0
       });
       const holo = new THREE.Mesh(holoGeo, holoMat);
@@ -369,13 +414,13 @@ class MotionSitesCyberLab {
 
     // 4. Pod 4: Skills Reactor Core (Stage 4)
     this.objects.skillsPod = new THREE.Group();
-    const reactorGeo = new THREE.TorusGeometry(12, 0.6, 24, 80);
+    const reactorGeo = new THREE.TorusGeometry(12, 0.6, 24, 96);
     const reactorMat = new THREE.MeshPhysicalMaterial({
       color: 0xf59e0b,
       emissive: 0xd97706,
-      emissiveIntensity: 0.7,
-      roughness: 0.08,
-      metalness: 0.85,
+      emissiveIntensity: 0.75,
+      roughness: 0.06,
+      metalness: 0.88,
       clearcoat: 1.0
     });
     const reactor = new THREE.Mesh(reactorGeo, reactorMat);
@@ -388,13 +433,13 @@ class MotionSitesCyberLab {
 
     // 5. Pod 5: Communications Uplink (Stage 5)
     this.objects.uplinkPod = new THREE.Group();
-    const towerGeo = new THREE.CylinderGeometry(0.5, 2.5, 16, 16);
+    const towerGeo = new THREE.CylinderGeometry(0.5, 2.5, 16, 24);
     const towerMat = new THREE.MeshPhysicalMaterial({
       color: 0xec4899,
       emissive: 0xbe185d,
-      emissiveIntensity: 0.7,
-      roughness: 0.08,
-      metalness: 0.85,
+      emissiveIntensity: 0.75,
+      roughness: 0.06,
+      metalness: 0.88,
       clearcoat: 1.0
     });
     const tower = new THREE.Mesh(towerGeo, towerMat);
@@ -411,8 +456,8 @@ class MotionSitesCyberLab {
       color: 0x38bdf8,
       emissive: 0x0ea5e9,
       emissiveIntensity: 1.0,
-      roughness: 0.05,
-      metalness: 0.9,
+      roughness: 0.04,
+      metalness: 0.95,
       clearcoat: 1.0
     });
 
