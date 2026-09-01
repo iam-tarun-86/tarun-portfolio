@@ -1,12 +1,12 @@
 /* ==========================================================================
-   3D SCROLL-DRIVEN ARCHITECTURE STYLES — TARUN R PORTFOLIO
-   High-Contrast Legibility + Cinematic Three.js Spatial Depth
+   CONCEPT 1: 3D CYBERPUNK AI LAB & ROVER QUEST STYLES
+   High-Contrast Legibility + Dual Mode (Manual Rover / Auto-Pilot Scroll)
    ========================================================================== */
 
 :root {
   --bg-deep: #050608;
-  --bg-card-glass: rgba(13, 16, 24, 0.85);
-  --bg-card-hover: rgba(20, 25, 38, 0.95);
+  --bg-card-glass: rgba(11, 14, 22, 0.88);
+  --bg-card-hover: rgba(18, 24, 38, 0.95);
   --border-glass: rgba(255, 255, 255, 0.12);
   --border-highlight: rgba(139, 92, 246, 0.5);
 
@@ -14,14 +14,15 @@
   --accent-cyan: #06b6d4;
   --accent-emerald: #10b981;
   --accent-amber: #f59e0b;
-  --accent-gradient: linear-gradient(135deg, #a855f7 0%, #38bdf8 50%, #10b981 100%);
+  --accent-pink: #ec4899;
+  --accent-gradient: linear-gradient(135deg, #a855f7 0%, #06b6d4 50%, #10b981 100%);
 
   --text-primary: #f8fafc;
   --text-muted: #94a3b8;
   --text-dim: #64748b;
 }
 
-/* Fixed Fullscreen 3D WebGL Canvas */
+/* Reset & Fixed Canvas */
 #webgl-canvas {
   position: fixed;
   top: 0;
@@ -29,7 +30,6 @@
   width: 100vw;
   height: 100vh;
   z-index: 1;
-  pointer-events: none;
 }
 
 /* Scroll Progress Bar at Top */
@@ -44,26 +44,187 @@
   transition: width 0.05s linear;
 }
 
-/* 3D Content Container */
+/* ==========================================================================
+   TOP ROVER HUD & CONTROLS BAR
+   ========================================================================== */
+.top-rover-hud {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  max-width: 1280px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1.25rem;
+  border-radius: 9999px;
+  background: rgba(10, 13, 20, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.hud-left-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.hud-mode-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(139, 92, 246, 0.18);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  color: #c084fc;
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hud-mode-pill:hover {
+  background: rgba(139, 92, 246, 0.3);
+  transform: scale(1.03);
+}
+
+.hud-stats-group {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-family: var(--font-code);
+  font-size: 0.78rem;
+}
+
+.hud-stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+}
+
+.hud-stat-pill strong {
+  color: #38bdf8;
+}
+
+/* ==========================================================================
+   MINIMAP & ON-SCREEN TOUCH JOYSTICK
+   ========================================================================== */
+.lab-minimap {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  width: 140px;
+  height: 140px;
+  background: rgba(10, 13, 20, 0.85);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: 12px;
+  z-index: 900;
+  backdrop-filter: blur(16px);
+  padding: 0.5rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+.minimap-title {
+  font-family: var(--font-code);
+  font-size: 0.65rem;
+  color: #c084fc;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+
+#minimap-canvas {
+  width: 100%;
+  height: calc(100% - 15px);
+  display: block;
+}
+
+/* Proximity Pod Banner */
+.proximity-banner {
+  position: fixed;
+  top: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(14, 18, 28, 0.95);
+  border: 1px solid #10b981;
+  border-radius: 9999px;
+  padding: 0.5rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  color: #34d399;
+  z-index: 1000;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+  animation: banner-pulse 1.5s infinite alternate;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.proximity-banner.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@keyframes banner-pulse {
+  from { transform: translateX(-50%) scale(1); }
+  to { transform: translateX(-50%) scale(1.04); }
+}
+
+/* Mobile Virtual Touch D-Pad */
+.touch-dpad-wrapper {
+  display: none;
+  position: fixed;
+  bottom: 2rem;
+  right: 1.5rem;
+  width: 120px;
+  height: 120px;
+  z-index: 900;
+}
+
+@media (max-width: 900px) {
+  .touch-dpad-wrapper {
+    display: flex;
+  }
+  .lab-minimap {
+    width: 100px;
+    height: 100px;
+    bottom: 1rem;
+    left: 1rem;
+  }
+}
+
+/* ==========================================================================
+   CONTENT VIEWPORT & HIGH-CONTRAST CARDS
+   ========================================================================== */
 .scroll-viewport {
   position: relative;
   z-index: 10;
   color: var(--text-primary);
+  pointer-events: auto;
 }
 
-/* Section Sections with Spatial Staging */
 .stage-section {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 6rem 2rem 5rem;
+  padding: 7rem 2rem 5rem;
   max-width: 1280px;
   margin: 0 auto;
-  position: relative;
 }
 
-/* Glassmorphic High-Legibility Cards */
 .glass-panel {
   background: var(--bg-card-glass);
   border: 1px solid var(--border-glass);
@@ -74,27 +235,21 @@
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
-  overflow: hidden;
 }
 
 .glass-panel:hover {
   background: var(--bg-card-hover);
   border-color: var(--border-highlight);
   box-shadow: 0 18px 50px rgba(139, 92, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  transform: translateY(-4px);
 }
 
-/* ==========================================================================
-   CLEAN 2-COLUMN HERO LAYOUT (Zero Text Overlap)
-   ========================================================================== */
+/* 2-Column Hero Layout */
 .hero-stage {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1.2fr 0.8fr;
   align-items: center;
   gap: 3.5rem;
-  padding-top: 6.5rem;
-  padding-bottom: 5rem;
 }
 
 @media (max-width: 1024px) {
@@ -201,7 +356,7 @@
   transform: translateY(-2px);
 }
 
-/* Horizontal Spec Pills Row in Hero */
+/* Horizontal Spec Pills */
 .hero-specs-row {
   display: flex;
   flex-wrap: wrap;
@@ -230,14 +385,12 @@
   color: #f1f5f9;
 }
 
-/* Hero Right Side: Dedicated 3D Hologram Stage & Telemetry Card */
+/* Right Stage Telemetry Card */
 .hero-right-stage {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  position: relative;
-  min-height: 380px;
 }
 
 .hero-telemetry-card {
@@ -249,7 +402,6 @@
   padding: 1.25rem;
   backdrop-filter: blur(20px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-  margin-top: auto;
 }
 
 .telemetry-row {
@@ -281,93 +433,4 @@
 .telemetry-row span {
   font-weight: 600;
   color: #f8fafc;
-}
-
-/* ==========================================================================
-   SECTION TYPOGRAPHY & LAYOUTS
-   ========================================================================== */
-.stage-header {
-  margin-bottom: 2.5rem;
-}
-
-.stage-kicker {
-  font-family: var(--font-code);
-  font-size: 0.8rem;
-  color: var(--accent-cyan);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.stage-title {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
-
-/* Grid Layouts for Projects, Skills, and Architecture */
-.projects-3d-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 1.75rem;
-}
-
-.project-tag-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-top: 1.25rem;
-}
-
-.project-tag {
-  font-family: var(--font-code);
-  font-size: 0.75rem;
-  padding: 0.3rem 0.75rem;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--text-muted);
-}
-
-/* 3D Spatial Interactive Depth Helpers */
-.spatial-card {
-  transform-style: preserve-3d;
-  transition: transform 0.15s ease-out;
-}
-
-/* Fixed 3D HUD Navigation Controls at Bottom */
-.spatial-hud-nav {
-  position: fixed;
-  bottom: 1.25rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: rgba(10, 13, 20, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 9999px;
-  padding: 0.35rem 0.75rem;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
-}
-
-.spatial-nav-link {
-  font-size: 0.76rem;
-  font-weight: 600;
-  padding: 0.35rem 0.8rem;
-  border-radius: 9999px;
-  color: var(--text-muted);
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.spatial-nav-link:hover, .spatial-nav-link.active {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
 }

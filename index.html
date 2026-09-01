@@ -31,21 +31,22 @@
   <!-- Fullscreen 3D WebGL Canvas -->
   <canvas id="webgl-canvas"></canvas>
 
-  <!-- Top Floating Navigation -->
-  <nav class="top-nav" style="background: rgba(10, 13, 20, 0.85); border: 1px solid rgba(255, 255, 255, 0.1);">
-    <div class="nav-brand">
-      <span>Tarun R</span>
-      <span class="nav-brand-badge" style="background: rgba(139, 92, 246, 0.15); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.3);">
-        <span class="nav-pulse-dot"></span> AI_INFRA // 3D_SPATIAL
-      </span>
+  <!-- Top Cyber-Rover HUD Navigation Bar -->
+  <nav class="top-rover-hud">
+    <div class="hud-left-brand">
+      <span style="font-weight:800; color:#fff;">Tarun R</span>
+      <button class="hud-mode-pill" id="hud-mode-btn" title="Toggle between Scroll Auto-Pilot & Manual WASD Rover Driving">
+        <i class="ti ti-route"></i> <span>AUTO-PILOT (SCROLL)</span>
+      </button>
     </div>
 
-    <div class="nav-links">
-      <a href="#stage-hero" class="nav-link">Overview</a>
-      <a href="#stage-architecture" class="nav-link">SIEM Architecture</a>
-      <a href="#stage-projects" class="nav-link">Projects</a>
-      <a href="#stage-arsenal" class="nav-link">Arsenal</a>
-      <a href="#stage-contact" class="nav-link">Contact</a>
+    <div class="hud-stats-group">
+      <div class="hud-stat-pill">
+        <i class="ti ti-diamond" style="color:#38bdf8;"></i> GGUF SHARDS: <strong id="hud-shards-count">0/5</strong>
+      </div>
+      <div class="hud-stat-pill" style="display:none;" id="desktop-controls-hint">
+        <i class="ti ti-keyboard"></i> <span>WASD / ARROWS TO DRIVE</span>
+      </div>
     </div>
 
     <div class="nav-actions">
@@ -58,13 +59,34 @@
     </div>
   </nav>
 
+  <!-- Lab 2D Radar Minimap -->
+  <div class="lab-minimap">
+    <div class="minimap-title">LAB RADAR</div>
+    <canvas id="minimap-canvas" width="120" height="110"></canvas>
+  </div>
+
+  <!-- Proximity Detection Alert Banner -->
+  <div class="proximity-banner" id="proximity-banner">
+    <i class="ti ti-radar"></i> <span id="proximity-text">APPROACHING LAB POD</span>
+  </div>
+
+  <!-- Mobile Touch Virtual Joystick -->
+  <div class="touch-dpad-wrapper">
+    <div class="virtual-dpad" style="display:flex;">
+      <button class="dpad-btn dpad-up" id="touch-up"><i class="ti ti-arrow-up"></i></button>
+      <button class="dpad-btn dpad-down" id="touch-down"><i class="ti ti-arrow-down"></i></button>
+      <button class="dpad-btn dpad-left" id="touch-left"><i class="ti ti-arrow-left"></i></button>
+      <button class="dpad-btn dpad-right" id="touch-right"><i class="ti ti-arrow-right"></i></button>
+    </div>
+  </div>
+
   <!-- =========================================================================
        3D SCROLL-DRIVEN STAGES CONTAINER
        ========================================================================= -->
   <main class="scroll-viewport">
 
     <!-- =====================================================================
-         STAGE 1: HERO SPACE & AI NEURAL CORE (0% - 20% Scroll)
+         STAGE 1: HERO SPACE & QUANTUM AI CORE (0% - 20% Scroll)
          ===================================================================== -->
     <section id="stage-hero" class="stage-section hero-stage">
       <div class="hero-left-content">
@@ -89,7 +111,7 @@
           </button>
         </div>
 
-        <!-- Horizontal Spec Pills Row (Zero Overlap) -->
+        <!-- Horizontal Spec Badges -->
         <div class="hero-specs-row">
           <div class="hero-spec-badge">
             <i class="ti ti-school"></i> <span>SKCT (2024 &ndash; 2028)</span>
@@ -137,7 +159,7 @@
     </section>
 
     <!-- =====================================================================
-         STAGE 2: 3D DISASSEMBLING ARCHITECTURE & LIVE SIEM SIMULATOR (25% - 45% Scroll)
+         STAGE 2: 3D SIEM THREAT RADAR POD (25% - 45% Scroll)
          ===================================================================== -->
     <section id="stage-architecture" class="stage-section">
       <div class="stage-header">
@@ -227,7 +249,7 @@
     </section>
 
     <!-- =====================================================================
-         STAGE 3: 3D PROJECT MONOLITHS (45% - 70% Scroll)
+         STAGE 3: 3D PROJECT MONOLITHS POD (45% - 70% Scroll)
          ===================================================================== -->
     <section id="stage-projects" class="stage-section">
       <div class="stage-header">
@@ -301,7 +323,7 @@
     </section>
 
     <!-- =====================================================================
-         STAGE 4: TECHNICAL ARSENAL & CERTIFICATIONS (70% - 88% Scroll)
+         STAGE 4: SKILLS REACTOR POD & CERTIFICATIONS (70% - 88% Scroll)
          ===================================================================== -->
     <section id="stage-arsenal" class="stage-section">
       <div class="stage-header">
@@ -373,7 +395,7 @@
     </section>
 
     <!-- =====================================================================
-         STAGE 5: INTERACTIVE CLI & DIRECT CONTACT (88% - 100% Scroll)
+         STAGE 5: COMMUNICATIONS UPLINK & CLI TERMINAL (88% - 100% Scroll)
          ===================================================================== -->
     <section id="stage-contact" class="stage-section" style="padding-bottom: 8rem;">
       <div class="stage-header">
@@ -396,7 +418,7 @@
 
         <div style="padding: 1.5rem; background: rgba(5, 6, 8, 0.95); min-height: 220px; display: flex; flex-direction: column; font-family: var(--font-code);">
           <div id="cli-output" style="flex: 1; max-height: 180px; overflow-y: auto; font-size: 0.85rem; line-height: 1.7; color: #38bdf8; margin-bottom: 1rem;">
-            <span style="color: #64748b;">[SYSTEM]: 3D Spatial Environment Ready.</span><br>
+            <span style="color: #64748b;">[SYSTEM]: 3D Cyberpunk Lab Environment Online.</span><br>
             <span style="color: #10b981;">[ONLINE]: Type 'help', 'bench', 'cat bio.md', or 'ls projects/'.</span><br>
           </div>
 
@@ -432,11 +454,11 @@
 
   <!-- Bottom Spatial HUD Navigation -->
   <div class="spatial-hud-nav">
-    <a href="#stage-hero" class="spatial-nav-link active">🌌 Overview</a>
-    <a href="#stage-architecture" class="spatial-nav-link">🛡️ Architecture</a>
+    <a href="#stage-hero" class="spatial-nav-link active">🌌 Core Lab</a>
+    <a href="#stage-architecture" class="spatial-nav-link">🛡️ SIEM Radar</a>
     <a href="#stage-projects" class="spatial-nav-link">💻 Projects</a>
-    <a href="#stage-arsenal" class="spatial-nav-link">⚡ Arsenal</a>
-    <a href="#stage-contact" class="spatial-nav-link">📬 Contact</a>
+    <a href="#stage-arsenal" class="spatial-nav-link">⚡ Reactor</a>
+    <a href="#stage-contact" class="spatial-nav-link">📬 Uplink</a>
   </div>
 
   <!-- Scripts -->
