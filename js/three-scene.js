@@ -383,7 +383,7 @@ class MotionSitesCyberLab {
     n3.position.set(14, 5, 0);
     this.objects.siemPod.add(n3);
 
-    this.objects.siemPod.position.set(0, 0, -60);
+    this.objects.siemPod.position.set(0, -6, -75);
     this.scene.add(this.objects.siemPod);
 
     // 3. Pod 3: Project Monoliths (Stage 3)

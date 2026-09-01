@@ -66,17 +66,6 @@
     </div>
   </nav>
 
-  <!-- Lab 2D Radar Minimap -->
-  <div class="lab-minimap">
-    <div class="minimap-title">LAB RADAR</div>
-    <canvas id="minimap-canvas" width="120" height="110"></canvas>
-  </div>
-
-  <!-- Proximity Detection Alert Banner -->
-  <div class="proximity-banner" id="proximity-banner">
-    <i class="ti ti-radar"></i> <span id="proximity-text">APPROACHING LAB POD</span>
-  </div>
-
   <!-- =========================================================================
        3D SCROLL-DRIVEN STAGES CONTAINER
        ========================================================================= -->
@@ -542,30 +531,6 @@
 
   </main>
 
-  <!-- =========================================================================
-       INTERACTIVE GAMIFIED QUEST HUD DOCK
-       ========================================================================= -->
-  <aside class="quest-dock" id="quest-dock">
-    <div class="quest-header">
-      <div class="quest-title">
-        <i class="ti ti-sword"></i> RECRUITER QUEST LOG
-      </div>
-      <div class="quest-rank" id="quest-rank-badge">
-        <span style="color:#94a3b8;"><i class="ti ti-user"></i> L1 GUEST</span>
-      </div>
-    </div>
-    <div class="quest-progress-track">
-      <div class="quest-progress-fill" id="quest-progress-fill"></div>
-    </div>
-    <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); margin-bottom: 0.5rem;">
-      <span>QUEST XP:</span>
-      <strong id="quest-total-xp" style="color: #38bdf8;">0 / 1100 XP</strong>
-    </div>
-    <div id="quest-items-list">
-      <!-- Generated dynamically by js/game-dock.js -->
-    </div>
-  </aside>
-
   <!-- Bottom Spatial HUD Navigation -->
   <div class="spatial-hud-nav">
     <a href="#stage-hero" class="spatial-nav-link active">🌌 Core Lab</a>
@@ -582,7 +547,6 @@
   <script src="js/terminal.js"></script>
   <script src="js/three-scene.js"></script>
   <script src="js/scroll-controller.js"></script>
-  <script src="js/game-dock.js"></script>
   <script src="js/spotlight.js"></script>
   <script src="js/main.js"></script>
 
