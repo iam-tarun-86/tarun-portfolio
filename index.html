@@ -7,466 +7,530 @@
   <title>Tarun R | AI & ML Infrastructure Engineer</title>
   <meta name="description" content="Portfolio of Tarun R — AI & ML Infrastructure, Local LLM Systems (llama.cpp), and LangGraph Agentic Architectures.">
 
-  <!-- Open Graph / Social -->
+  <!-- Open Graph / Social Meta -->
   <meta property="og:title" content="Tarun R | AI & ML Infrastructure Engineer">
-  <meta property="og:description" content="Local LLM Infrastructure, LangGraph Agentic Architectures, and Zero-API-Cost SIEM Systems.">
+  <meta property="og:description" content="Low-Latency AI Infrastructure, LangGraph Agentic Architectures, and Zero-API-Cost SIEM Systems.">
   <meta property="og:type" content="website">
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
-  <!-- Three.js CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles/base.css">
-  <link rel="stylesheet" href="styles/3d-scroll.css">
+  <link rel="stylesheet" href="styles/professional.css">
 </head>
 
-<body style="background-color: #050608; color: #f8fafc; overflow-x: hidden;">
-
-  <!-- Scroll Progress Indicator -->
-  <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
-
-  <!-- Fullscreen 3D WebGL Canvas -->
-  <canvas id="webgl-canvas"></canvas>
-
-  <!-- Top Cyber-Rover HUD Navigation Bar -->
-  <nav class="top-rover-hud">
-    <div class="hud-left-brand">
-      <span style="font-weight:800; color:#fff;">Tarun R</span>
-      <button class="hud-mode-pill" id="hud-mode-btn" title="Toggle between Scroll Auto-Pilot & Manual WASD Rover Driving">
-        <i class="ti ti-route"></i> <span>AUTO-PILOT (SCROLL)</span>
-      </button>
-    </div>
-
-    <div class="hud-stats-group">
-      <div class="hud-stat-pill">
-        <i class="ti ti-diamond" style="color:#38bdf8;"></i> GGUF SHARDS: <strong id="hud-shards-count">0/5</strong>
-      </div>
-      <div class="hud-stat-pill" style="display:none;" id="desktop-controls-hint">
-        <i class="ti ti-keyboard"></i> <span>WASD / ARROWS TO DRIVE</span>
-      </div>
-    </div>
-
-    <div class="nav-actions">
-      <button class="nav-btn nav-btn-primary download-resume-action" style="background: linear-gradient(135deg, #a855f7, #06b6d4); color: white; box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);" title="Download Official Resume PDF">
-        <i class="ti ti-file-download"></i> <span>Resume</span>
-      </button>
-      <button class="icon-btn" id="sound-toggle-btn" title="Toggle Sound FX" style="border: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8;">
-        <i class="ti ti-volume-3"></i>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Lab 2D Radar Minimap -->
-  <div class="lab-minimap">
-    <div class="minimap-title">LAB RADAR</div>
-    <canvas id="minimap-canvas" width="120" height="110"></canvas>
-  </div>
-
-  <!-- Proximity Detection Alert Banner -->
-  <div class="proximity-banner" id="proximity-banner">
-    <i class="ti ti-radar"></i> <span id="proximity-text">APPROACHING LAB POD</span>
-  </div>
-
-  <!-- Mobile Touch Virtual Joystick -->
-  <div class="touch-dpad-wrapper">
-    <div class="virtual-dpad" style="display:flex;">
-      <button class="dpad-btn dpad-up" id="touch-up"><i class="ti ti-arrow-up"></i></button>
-      <button class="dpad-btn dpad-down" id="touch-down"><i class="ti ti-arrow-down"></i></button>
-      <button class="dpad-btn dpad-left" id="touch-left"><i class="ti ti-arrow-left"></i></button>
-      <button class="dpad-btn dpad-right" id="touch-right"><i class="ti ti-arrow-right"></i></button>
-    </div>
-  </div>
+<body>
 
   <!-- =========================================================================
-       3D SCROLL-DRIVEN STAGES CONTAINER
+       NAVIGATION BAR
        ========================================================================= -->
-  <main class="scroll-viewport">
+  <header>
+    <nav class="prof-nav">
+      <a href="#overview" class="prof-nav-brand">
+        <span>Tarun R</span>
+        <span class="prof-status-pill">
+          <span class="pulse-dot"></span> Available for Roles
+        </span>
+      </a>
+
+      <div class="prof-nav-links">
+        <a href="#overview" class="prof-nav-link">Overview</a>
+        <a href="#architecture" class="prof-nav-link">Architecture</a>
+        <a href="#simulator" class="prof-nav-link">SIEM Simulator</a>
+        <a href="#projects" class="prof-nav-link">Projects</a>
+        <a href="#arsenal" class="prof-nav-link">Arsenal</a>
+        <a href="#terminal" class="prof-nav-link">CLI</a>
+      </div>
+
+      <div class="prof-nav-actions">
+        <button class="btn-primary-gradient download-resume-action" title="Download Official Resume PDF">
+          <i class="ti ti-file-download"></i> <span>Download Resume</span>
+        </button>
+        <a href="https://github.com/iam-tarun-86" target="_blank" class="btn-secondary" style="padding: 0.45rem 0.75rem;" title="GitHub Profile">
+          <i class="ti ti-brand-github"></i>
+        </a>
+        <a href="https://linkedin.com/in/tarun-r-ai-ml" target="_blank" class="btn-secondary" style="padding: 0.45rem 0.75rem;" title="LinkedIn Profile">
+          <i class="ti ti-brand-linkedin"></i>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- =========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================= -->
+  <main class="main-container">
 
     <!-- =====================================================================
-         STAGE 1: HERO SPACE & QUANTUM AI CORE (0% - 20% Scroll)
+         HERO SECTION (2-Column with Interactive Quantization Calculator)
          ===================================================================== -->
-    <section id="stage-hero" class="stage-section hero-stage">
-      <div class="hero-left-content">
-        <div class="hero-pill-badge">
+    <section id="overview" class="hero-wrapper">
+      <div class="hero-left">
+        <div class="hero-pill">
           <i class="ti ti-sparkles"></i> AI & ML Infrastructure Specialist
         </div>
 
-        <h1 class="hero-headline">
-          Engineering <span class="gradient-title">Low-Latency AI</span> & Agentic Systems
+        <h1 class="hero-h1">
+          Engineering <span class="gradient-text">Low-Latency AI</span> & Agentic Systems
         </h1>
 
-        <p class="hero-description">
-          B.E. CSE (AI & ML) @ <strong>Sri Krishna College of Technology (SKCT), Coimbatore</strong>. I architect localized LLM inference engines with <span style="color:#c084fc; font-weight:600;">llama.cpp</span>, multi-node <span style="color:#38bdf8; font-weight:600;">LangGraph</span> agent workflows, and zero-API-cost SIEM security pipelines.
+        <p class="hero-lead">
+          B.E. CSE (AI & ML) @ <strong>Sri Krishna College of Technology (SKCT), Coimbatore</strong>. I design offline LLM inference acceleration pipelines with <strong>llama.cpp</strong>, deterministic multi-node <strong>LangGraph</strong> agent workflows, and zero-API-cost SIEM security architectures.
         </p>
 
-        <div class="hero-actions">
-          <a href="#stage-architecture" class="hero-cta-btn hero-cta-primary">
-            <i class="ti ti-cpu"></i> Explore 3D Architecture &darr;
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+          <a href="#architecture" class="btn-primary-gradient" style="padding: 0.65rem 1.4rem; font-size: 0.9rem;">
+            <i class="ti ti-cpu"></i> Explore Architecture &darr;
           </a>
-          <button class="hero-cta-btn hero-cta-secondary download-resume-action">
-            <i class="ti ti-download"></i> Download Resume [PDF]
+          <button class="btn-secondary download-resume-action" style="padding: 0.65rem 1.4rem; font-size: 0.9rem;">
+            <i class="ti ti-file-text"></i> View Resume [PDF]
           </button>
         </div>
 
-        <!-- Horizontal Spec Badges -->
-        <div class="hero-specs-row">
-          <div class="hero-spec-badge">
-            <i class="ti ti-school"></i> <span>SKCT (2024 &ndash; 2028)</span>
-          </div>
-          <div class="hero-spec-badge">
-            <i class="ti ti-map-pin"></i> <span>Coimbatore, TN</span>
-          </div>
-          <div class="hero-spec-badge">
-            <i class="ti ti-microchip"></i> <span>RTX 4060 (8GB VRAM)</span>
-          </div>
-          <div class="hero-spec-badge">
-            <i class="ti ti-activity"></i> <span>llama.cpp_8085</span>
-          </div>
+        <div class="hero-specs-grid">
+          <div class="hero-spec-pill"><i class="ti ti-school"></i> <span>SKCT (2024 &ndash; 2028)</span></div>
+          <div class="hero-spec-pill"><i class="ti ti-map-pin"></i> <span>Coimbatore, India</span></div>
+          <div class="hero-spec-pill"><i class="ti ti-microchip"></i> <span>RTX 4060 (8GB VRAM)</span></div>
+          <div class="hero-spec-pill"><i class="ti ti-activity"></i> <span>llama.cpp Active</span></div>
         </div>
       </div>
 
-      <!-- Right Stage: Dedicated 3D Hologram Area & Telemetry Card -->
-      <div class="hero-right-stage">
-        <div class="hero-telemetry-card">
-          <div style="font-family:var(--font-code); font-size:0.75rem; color:#38bdf8; font-weight:700; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.4rem;">
-            <i class="ti ti-server"></i> LIVE SYSTEM TELEMETRY
+      <!-- Right Column: Interactive Quantization & VRAM Calculator -->
+      <div class="hero-right">
+        <div class="calc-card">
+          <div class="calc-header">
+            <div class="calc-title">
+              <i class="ti ti-calculator"></i> LOCAL INFERENCE & VRAM FIT CALCULATOR
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #10b981;">RTX 4060 (8GB)</span>
           </div>
-          <div class="telemetry-row">
-            <label><i class="ti ti-school"></i> Education</label>
-            <span>B.E. CSE @ SKCT</span>
+
+          <div class="calc-control-group">
+            <div class="calc-label">
+              <span>Select Model Architecture</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan);">GGUF Engine</span>
+            </div>
+            <select id="calc-model-select" class="calc-select">
+              <option value="llama3_8b" selected>Meta Llama-3 8B (8.03B Parameters)</option>
+              <option value="mistral_7b">Mistral 7B v0.3 (7.24B Parameters)</option>
+              <option value="qwen25_7b">Qwen 2.5 7B Coder (7.61B Parameters)</option>
+              <option value="deepseek_8b">DeepSeek-R1 Distill 8B (8.10B Parameters)</option>
+              <option value="llama3_70b">Meta Llama-3 70B (70.6B Parameters)</option>
+            </select>
           </div>
-          <div class="telemetry-row">
-            <label><i class="ti ti-calendar"></i> Batch Matrix</label>
-            <span>2024 &ndash; 2028</span>
+
+          <div class="calc-control-group">
+            <div class="calc-label">
+              <span>Quantization Level</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan);">Bits Per Weight</span>
+            </div>
+            <select id="calc-quant-select" class="calc-select">
+              <option value="q4_k_m" selected>Q4_K_M &mdash; 4.5-bit (Recommended Performance)</option>
+              <option value="q5_k_m">Q5_K_M &mdash; 5.5-bit (Balanced Perplexity)</option>
+              <option value="q8_0">Q8_0 &mdash; 8.5-bit (Near-FP16 Precision)</option>
+              <option value="fp16">FP16 &mdash; 16.0-bit (Uncompressed Baseline)</option>
+              <option value="q2_k">Q2_K &mdash; 2.6-bit (Extreme Compression)</option>
+            </select>
           </div>
-          <div class="telemetry-row">
-            <label><i class="ti ti-map-pin"></i> Station</label>
-            <span>Coimbatore, TN</span>
+
+          <div class="calc-control-group">
+            <div class="calc-label">
+              <span>Context Window (KV Cache)</span>
+              <span id="calc-ctx-val" style="font-family: var(--font-mono); font-size: 0.75rem; color: #38bdf8;">8k Tokens</span>
+            </div>
+            <input type="range" id="calc-ctx-range" class="calc-range" min="2048" max="32768" step="2048" value="8192">
           </div>
-          <div class="telemetry-row">
-            <label><i class="ti ti-microchip"></i> Hardware</label>
-            <span>RTX 4060 CUDA</span>
-          </div>
-          <div class="telemetry-row">
-            <label><i class="ti ti-activity"></i> Local Inference</label>
-            <span style="color:#10b981;">llama.cpp ACTIVE</span>
+
+          <div class="calc-metric-box">
+            <div class="calc-metric-row">
+              <span style="color: var(--text-secondary);">Estimated VRAM Footprint:</span>
+              <strong id="calc-vram-val" style="color: #fff; font-size: 0.95rem;">5.42 GB</strong>
+            </div>
+            <div class="calc-metric-row">
+              <span style="color: var(--text-secondary);">Hardware Allocation Status:</span>
+              <span id="calc-fit-status"></span>
+            </div>
+            <div class="calc-metric-row">
+              <span style="color: var(--text-secondary);">Estimated Inference Speed:</span>
+              <strong id="calc-speed-val" style="color: #38bdf8;">78.0 tok/s</strong>
+            </div>
+
+            <div class="calc-progress-track">
+              <div id="calc-vram-fill" class="calc-progress-fill"></div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         STAGE 2: 3D SIEM THREAT RADAR POD (25% - 45% Scroll)
+         SECTION 2: ARCHITECTURAL FOUNDATIONS (BENTO GRID)
          ===================================================================== -->
-    <section id="stage-architecture" class="stage-section">
-      <div class="stage-header">
-        <div class="stage-kicker"><i class="ti ti-shield-bolt"></i> 02. Architectural Foundations</div>
-        <h2 class="stage-title">Why Localized & Agentic AI?</h2>
+    <section id="architecture" class="section-wrapper">
+      <div class="section-header">
+        <div class="section-badge"><i class="ti ti-layout-grid"></i> 01. Architectural Philosophy</div>
+        <h2 class="section-title">Why Localized & Agentic Infrastructure?</h2>
+        <p class="section-subtitle">
+          Moving beyond fragile, high-latency cloud API dependencies into resilient, high-throughput on-premises execution.
+        </p>
       </div>
 
-      <!-- Core Value Propositions Grid -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
-        <div class="glass-panel spatial-card">
-          <div style="font-weight: 700; font-size: 1rem; color: #10b981; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="ti ti-coin-off"></i> Zero API Overhead
-          </div>
-          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+      <div class="bento-grid">
+        <!-- Bento Tile 1 -->
+        <div class="bento-card col-4">
+          <div class="bento-icon icon-purple"><i class="ti ti-coin-off"></i></div>
+          <h3 class="bento-title">Zero API Overhead</h3>
+          <p class="bento-desc">
             Deploying quantized models locally via llama.cpp completely eliminates third-party token bills, delivering infinite high-throughput scaling with zero transactional cost.
           </p>
         </div>
 
-        <div class="glass-panel spatial-card">
-          <div style="font-weight: 700; font-size: 1rem; color: #0ea5e9; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="ti ti-shield-lock"></i> Air-Gapped SIEM
-          </div>
-          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+        <!-- Bento Tile 2 -->
+        <div class="bento-card col-4">
+          <div class="bento-icon icon-cyan"><i class="ti ti-shield-lock"></i></div>
+          <h3 class="bento-title">Air-Gapped Security</h3>
+          <p class="bento-desc">
             Routing sensitive security logs to cloud endpoints introduces data leakage risks. Local inference processes telemetry entirely on-premises for total compliance.
           </p>
         </div>
 
-        <div class="glass-panel spatial-card">
-          <div style="font-weight: 700; font-size: 1rem; color: #a855f7; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="ti ti-git-branch"></i> LangGraph Resiliency
-          </div>
-          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+        <!-- Bento Tile 3 -->
+        <div class="bento-card col-4">
+          <div class="bento-icon icon-emerald"><i class="ti ti-git-branch"></i></div>
+          <h3 class="bento-title">LangGraph Resiliency</h3>
+          <p class="bento-desc">
             Stateful multi-node DAG transitions (Ingest &rarr; Classify &rarr; Route) constrain LLMs to deterministic execution paths, eliminating hallucinations.
           </p>
         </div>
-      </div>
 
-      <!-- Interactive 3-Node LangGraph SIEM Threat Simulator -->
-      <div class="glass-panel" style="padding: 2rem; border-color: rgba(16, 185, 129, 0.3);">
-        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="font-family: var(--font-code); font-size: 1.05rem; font-weight: 700; color: #34d399; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="ti ti-radar"></i> Live 3-Node SIEM Threat Pipeline Simulator
-          </div>
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            <button class="nav-btn" style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #34d399; font-size: 0.75rem;" onclick="window.langGraphSim.runSimulation('ssh_brute')">
-              Simulate SSH Brute Force
-            </button>
-            <button class="nav-btn" style="background: rgba(14, 165, 233, 0.15); border: 1px solid #0ea5e9; color: #38bdf8; font-size: 0.75rem;" onclick="window.langGraphSim.runSimulation('sqli_attempt')">
-              Simulate SQL Injection
-            </button>
-            <button class="nav-btn" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); font-size: 0.75rem;" onclick="window.langGraphSim.runSimulation('benign_telemetry')">
-              Simulate Benign Ping
-            </button>
-          </div>
+        <!-- Bento Tile 4 -->
+        <div class="bento-card col-6">
+          <div class="bento-icon icon-amber"><i class="ti ti-bolt"></i></div>
+          <h3 class="bento-title">Sub-50ms TTFT Latency</h3>
+          <p class="bento-desc">
+            Optimized CUDA kernels and pinned memory allocations bypass HTTP network round-trips to achieve instant time-to-first-token responses across security streams.
+          </p>
         </div>
 
-        <!-- 3-Node Wireframe Flow -->
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 2rem 0;" class="dag-nodes-wrapper">
-          <div class="glass-panel" id="node-ingest" style="flex: 1; text-align: center; padding: 1.25rem;">
-            <div style="font-size: 1.5rem; color: #0ea5e9; margin-bottom: 0.5rem;"><i class="ti ti-database-import"></i></div>
-            <div style="font-family: var(--font-code); font-weight: 700; font-size: 0.85rem;">NODE 1: INGEST</div>
-            <div style="font-size: 0.75rem; color: var(--text-muted);">Packet Schema Extraction</div>
-          </div>
-
-          <div style="flex: 0 0 30px; height: 2px; background: rgba(255,255,255,0.2);" id="conn-1"></div>
-
-          <div class="glass-panel" id="node-classify" style="flex: 1; text-align: center; padding: 1.25rem;">
-            <div style="font-size: 1.5rem; color: #a855f7; margin-bottom: 0.5rem;"><i class="ti ti-brain"></i></div>
-            <div style="font-family: var(--font-code); font-weight: 700; font-size: 0.85rem;">NODE 2: CLASSIFY</div>
-            <div style="font-size: 0.75rem; color: var(--text-muted);">llama.cpp Quantized Model</div>
-          </div>
-
-          <div style="flex: 0 0 30px; height: 2px; background: rgba(255,255,255,0.2);" id="conn-2"></div>
-
-          <div class="glass-panel" id="node-route" style="flex: 1; text-align: center; padding: 1.25rem;">
-            <div style="font-size: 1.5rem; color: #10b981; margin-bottom: 0.5rem;"><i class="ti ti-route"></i></div>
-            <div style="font-family: var(--font-code); font-weight: 700; font-size: 0.85rem;">NODE 3: ROUTE</div>
-            <div style="font-size: 0.75rem; color: var(--text-muted);">FastAPI Action Trigger</div>
-          </div>
-        </div>
-
-        <!-- Live Forensic Terminal Stream Output -->
-        <div id="dag-log-output" style="background: rgba(5, 6, 8, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem 1.25rem; font-family: var(--font-code); font-size: 0.82rem; color: #34d399; min-height: 80px; max-height: 160px; overflow-y: auto; line-height: 1.6;">
-          <span style="color: #94a3b8;">[SIEM READY]: Click one of the simulation buttons above to trigger live forensic routing...</span>
+        <!-- Bento Tile 5 -->
+        <div class="bento-card col-6">
+          <div class="bento-icon icon-purple"><i class="ti ti-school"></i></div>
+          <h3 class="bento-title">Academic & Systems Rigor</h3>
+          <p class="bento-desc">
+            B.E. CSE (AI & ML) candidate @ SKCT Coimbatore (2024&ndash;2028). Combining foundational computer science principles with modern generative AI infrastructure.
+          </p>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         STAGE 3: 3D PROJECT MONOLITHS POD (45% - 70% Scroll)
+         SECTION 3: INTERACTIVE 3-NODE LANGGRAPH SIEM SIMULATOR
          ===================================================================== -->
-    <section id="stage-projects" class="stage-section">
-      <div class="stage-header">
-        <div class="stage-kicker"><i class="ti ti-cpu"></i> 03. Production Engineering</div>
-        <h2 class="stage-title">Featured Projects & Systems</h2>
+    <section id="simulator" class="section-wrapper">
+      <div class="section-header">
+        <div class="section-badge"><i class="ti ti-radar"></i> 02. Live Technical Demonstration</div>
+        <h2 class="section-title">Interactive 3-Node SIEM Threat Pipeline</h2>
+        <p class="section-subtitle">
+          Test live security incident routing across an automated LangGraph execution DAG.
+        </p>
       </div>
 
-      <div class="projects-3d-grid">
-
-        <!-- Project 1 -->
-        <div class="glass-panel spatial-card" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86/local-ai-log-analyzer', '_blank')">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-            <span style="font-family: var(--font-code); font-size: 0.75rem; font-weight: 600; color: #10b981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px;">
-              <i class="ti ti-shield-check"></i> Live Production
-            </span>
-            <i class="ti ti-external-link" style="color: var(--text-muted);"></i>
+      <div class="siem-wrapper">
+        <div class="siem-actions">
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: #34d399; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="ti ti-server"></i> INCIDENT INJECTION ENGINE
           </div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">Local AI Security Log Analyzer</h3>
-          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
-            Automated SIEM incident analysis running entirely offline. Employs a 3-node LangGraph logic layout (Ingest &rarr; Classify &rarr; Route) executing real-time threat evaluations on telemetry streams with zero cloud API overhead.
-          </p>
-          <div class="project-tag-row">
-            <span class="project-tag">LangGraph</span>
-            <span class="project-tag">llama.cpp</span>
-            <span class="project-tag">FastAPI</span>
-            <span class="project-tag">Docker</span>
+          <div class="siem-btn-group">
+            <button class="siem-sim-btn" onclick="window.langGraphSim.runSimulation('ssh_brute')">
+              <i class="ti ti-alert-triangle" style="color: #ef4444;"></i> Simulate SSH Brute Force
+            </button>
+            <button class="siem-sim-btn" onclick="window.langGraphSim.runSimulation('sqli_attempt')">
+              <i class="ti ti-bug" style="color: #f59e0b;"></i> Simulate SQL Injection
+            </button>
+            <button class="siem-sim-btn" onclick="window.langGraphSim.runSimulation('benign_telemetry')">
+              <i class="ti ti-circle-check" style="color: #10b981;"></i> Simulate Benign Ping
+            </button>
+          </div>
+        </div>
+
+        <!-- 3-Node DAG Flow Diagram -->
+        <div class="dag-flow">
+          <div class="dag-node" id="node-ingest">
+            <div class="dag-node-icon" style="color: #0ea5e9;"><i class="ti ti-database-import"></i></div>
+            <div class="dag-node-title">NODE 1: INGEST</div>
+            <div class="dag-node-desc">Schema Validation & Normalization</div>
+          </div>
+
+          <div class="dag-connector" id="conn-1"></div>
+
+          <div class="dag-node" id="node-classify">
+            <div class="dag-node-icon" style="color: #a855f7;"><i class="ti ti-brain"></i></div>
+            <div class="dag-node-title">NODE 2: CLASSIFY</div>
+            <div class="dag-node-desc">llama.cpp Quantized Model Engine</div>
+          </div>
+
+          <div class="dag-connector" id="conn-2"></div>
+
+          <div class="dag-node" id="node-route">
+            <div class="dag-node-icon" style="color: #10b981;"><i class="ti ti-route"></i></div>
+            <div class="dag-node-title">NODE 3: ROUTE</div>
+            <div class="dag-node-desc">FastAPI Endpoint / Mitigation Action</div>
+          </div>
+        </div>
+
+        <!-- Live Forensic Terminal Output -->
+        <div id="dag-log-output" class="siem-terminal">
+          <span style="color: #94a3b8;">[SIEM READY]: Select an incident trigger above to execute real-time forensic packet routing...</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 4: FEATURED PRODUCTION PROJECTS
+         ===================================================================== -->
+    <section id="projects" class="section-wrapper">
+      <div class="section-header">
+        <div class="section-badge"><i class="ti ti-code"></i> 03. Production Engineering</div>
+        <h2 class="section-title">Featured Systems & Repositories</h2>
+        <p class="section-subtitle">
+          Engineered for deterministic execution, high throughput, and memory efficiency.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card">
+          <div>
+            <div class="project-top">
+              <span class="project-badge badge-emerald"><i class="ti ti-shield-check"></i> Production SIEM</span>
+              <a href="https://github.com/iam-tarun-86/local-ai-log-analyzer" target="_blank" class="project-link-icon" title="View Source on GitHub">
+                <i class="ti ti-brand-github"></i>
+              </a>
+            </div>
+            <h3 class="project-h3">Local AI Security Log Analyzer</h3>
+            <p class="project-summary">
+              Automated SIEM incident analysis running entirely offline. Employs a 3-node LangGraph logic layout (Ingest &rarr; Classify &rarr; Route) executing real-time threat evaluations on telemetry streams with zero cloud API overhead.
+            </p>
+          </div>
+          <div>
+            <div class="project-metric-row">
+              <div class="project-metric-item"><span>Throughput</span><strong>120 EPS</strong></div>
+              <div class="project-metric-item"><span>Latency</span><strong>38ms TTFT</strong></div>
+              <div class="project-metric-item"><span>Cloud Cost</span><strong>$0.00 / mo</strong></div>
+            </div>
+            <div class="project-tags">
+              <span class="project-pill-tag">LangGraph</span>
+              <span class="project-pill-tag">llama.cpp</span>
+              <span class="project-pill-tag">FastAPI</span>
+              <span class="project-pill-tag">Docker</span>
+            </div>
           </div>
         </div>
 
         <!-- Project 2 -->
-        <div class="glass-panel spatial-card" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86', '_blank')">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-            <span style="font-family: var(--font-code); font-size: 0.75rem; font-weight: 600; color: #0ea5e9; background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px;">
-              <i class="ti ti-database"></i> High-Throughput RAG
-            </span>
-            <i class="ti ti-external-link" style="color: var(--text-muted);"></i>
+        <div class="project-card">
+          <div>
+            <div class="project-top">
+              <span class="project-badge badge-cyan"><i class="ti ti-database"></i> High-Throughput RAG</span>
+              <a href="https://github.com/iam-tarun-86" target="_blank" class="project-link-icon" title="View Source on GitHub">
+                <i class="ti ti-brand-github"></i>
+              </a>
+            </div>
+            <h3 class="project-h3">Hybrid Vector & Keyword RAG Engine</h3>
+            <p class="project-summary">
+              Sub-millisecond retrieval engine combining BM25 sparse matching and dense vector embeddings with Reciprocal Rank Fusion (RRF) and LanceDB embedded database for contextual precision.
+            </p>
           </div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">Hybrid Vector & Keyword RAG Engine</h3>
-          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
-            Sub-millisecond retrieval engine combining BM25 sparse matching and dense vector embeddings with Reciprocal Rank Fusion (RRF) and LanceDB embedded database.
-          </p>
-          <div class="project-tag-row">
-            <span class="project-tag">LanceDB</span>
-            <span class="project-tag">RRF Ranking</span>
-            <span class="project-tag">Python</span>
-            <span class="project-tag">Hugging Face</span>
+          <div>
+            <div class="project-metric-row">
+              <div class="project-metric-item"><span>Retrieval</span><strong>&lt;4ms RRF</strong></div>
+              <div class="project-metric-item"><span>Storage</span><strong>LanceDB</strong></div>
+              <div class="project-metric-item"><span>Embeddings</span><strong>MiniLM-L6</strong></div>
+            </div>
+            <div class="project-tags">
+              <span class="project-pill-tag">LanceDB</span>
+              <span class="project-pill-tag">RRF Ranking</span>
+              <span class="project-pill-tag">Python</span>
+              <span class="project-pill-tag">PyTorch</span>
+            </div>
           </div>
         </div>
 
         <!-- Project 3 -->
-        <div class="glass-panel spatial-card" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86', '_blank')">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-            <span style="font-family: var(--font-code); font-size: 0.75rem; font-weight: 600; color: #f59e0b; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px;">
-              <i class="ti ti-microchip"></i> Edge Inference
-            </span>
-            <i class="ti ti-external-link" style="color: var(--text-muted);"></i>
+        <div class="project-card">
+          <div>
+            <div class="project-top">
+              <span class="project-badge badge-amber"><i class="ti ti-microchip"></i> Edge Optimization</span>
+              <a href="https://github.com/iam-tarun-86" target="_blank" class="project-link-icon" title="View Source on GitHub">
+                <i class="ti ti-brand-github"></i>
+              </a>
+            </div>
+            <h3 class="project-h3">TensorRT Edge Threat Classifier</h3>
+            <p class="project-summary">
+              Compiled FP16/INT8 deep learning vision models optimized with NVIDIA TensorRT execution providers, achieving 180+ FPS on edge camera streams with sub-6ms end-to-end inference latency.
+            </p>
           </div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">TensorRT Edge Threat Classifier</h3>
-          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
-            Compiled FP16/INT8 deep learning vision models optimized with NVIDIA TensorRT execution providers, achieving 180+ FPS on edge camera streams.
-          </p>
-          <div class="project-tag-row">
-            <span class="project-tag">TensorRT</span>
-            <span class="project-tag">CUDA</span>
-            <span class="project-tag">PyTorch</span>
-            <span class="project-tag">C++</span>
+          <div>
+            <div class="project-metric-row">
+              <div class="project-metric-item"><span>Framerate</span><strong>185 FPS</strong></div>
+              <div class="project-metric-item"><span>Precision</span><strong>INT8 Quant</strong></div>
+              <div class="project-metric-item"><span>Backend</span><strong>CUDA C++</strong></div>
+            </div>
+            <div class="project-tags">
+              <span class="project-pill-tag">TensorRT</span>
+              <span class="project-pill-tag">CUDA</span>
+              <span class="project-pill-tag">PyTorch</span>
+              <span class="project-pill-tag">C++</span>
+            </div>
           </div>
         </div>
-
       </div>
     </section>
 
     <!-- =====================================================================
-         STAGE 4: SKILLS REACTOR POD & CERTIFICATIONS (70% - 88% Scroll)
+         SECTION 5: ARSENAL & VERIFIED ACCREDITATIONS
          ===================================================================== -->
-    <section id="stage-arsenal" class="stage-section">
-      <div class="stage-header">
-        <div class="stage-kicker"><i class="ti ti-code"></i> 04. Technical Capabilities</div>
-        <h2 class="stage-title">Engineering Arsenal & Accreditations</h2>
+    <section id="arsenal" class="section-wrapper">
+      <div class="section-header">
+        <div class="section-badge"><i class="ti ti-tool"></i> 04. Technical Capabilities</div>
+        <h2 class="section-title">Technical Arsenal & Accreditations</h2>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
-
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem;">
         <!-- Skills Card -->
-        <div class="glass-panel spatial-card">
+        <div class="bento-card">
           <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; color: #38bdf8; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="ti ti-tool"></i> Core Tooling
+            <i class="ti ti-terminal"></i> Categorized Tooling
           </h3>
           <div style="margin-bottom: 1.25rem;">
-            <div style="font-family: var(--font-code); font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase;">LLM & Agentic AI</div>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
-              <span class="project-tag">llama.cpp</span>
-              <span class="project-tag">LangGraph</span>
-              <span class="project-tag">LangChain</span>
-              <span class="project-tag">Ollama</span>
-              <span class="project-tag">LlamaIndex</span>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.5rem; text-transform: uppercase;">LLM & Agentic AI</div>
+            <div class="project-tags">
+              <span class="project-pill-tag">llama.cpp</span>
+              <span class="project-pill-tag">LangGraph</span>
+              <span class="project-pill-tag">LangChain</span>
+              <span class="project-pill-tag">Ollama</span>
+              <span class="project-pill-tag">LlamaIndex</span>
             </div>
           </div>
           <div>
-            <div style="font-family: var(--font-code); font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase;">Backend & Systems</div>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
-              <span class="project-tag">Python</span>
-              <span class="project-tag">FastAPI</span>
-              <span class="project-tag">Docker</span>
-              <span class="project-tag">Linux / Bash</span>
-              <span class="project-tag">PyTorch</span>
-              <span class="project-tag">CUDA</span>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.5rem; text-transform: uppercase;">Backend & Acceleration</div>
+            <div class="project-tags">
+              <span class="project-pill-tag">Python</span>
+              <span class="project-pill-tag">FastAPI</span>
+              <span class="project-pill-tag">Docker</span>
+              <span class="project-pill-tag">Linux / Bash</span>
+              <span class="project-pill-tag">PyTorch</span>
+              <span class="project-pill-tag">CUDA</span>
             </div>
           </div>
         </div>
 
         <!-- Certifications Card -->
-        <div class="glass-panel spatial-card">
+        <div class="bento-card">
           <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; color: #fbbf24; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="ti ti-certificate"></i> Certification Ledger
+            <i class="ti ti-certificate"></i> Verified Accreditations
           </h3>
           <div style="display: flex; flex-direction: column; gap: 0.85rem;">
-            <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.06);">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-subtle);">
               <div>
                 <div style="font-size: 0.88rem; font-weight: 600; color: #fff;">Prompting Essentials</div>
-                <div style="font-size: 0.75rem; color: var(--text-muted);">Google Professional Certification</div>
+                <div style="font-size: 0.75rem; color: var(--text-secondary);">Google Professional Certification</div>
               </div>
-              <span style="font-family: var(--font-code); font-size: 0.75rem; color: #fbbf24;">Google</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #fbbf24;">Google</span>
             </div>
-            <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.06);">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-subtle);">
               <div>
                 <div style="font-size: 0.88rem; font-weight: 600; color: #fff;">Introduction to Artificial Intelligence</div>
-                <div style="font-size: 0.75rem; color: var(--text-muted);">Neural architectures & heuristics</div>
+                <div style="font-size: 0.75rem; color: var(--text-secondary);">Neural heuristics & search</div>
               </div>
-              <span style="font-family: var(--font-code); font-size: 0.75rem; color: #fbbf24;">Google</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #fbbf24;">Google</span>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between;">
               <div>
                 <div style="font-size: 0.88rem; font-weight: 600; color: #fff;">Advanced Statistical Methods</div>
-                <div style="font-size: 0.75rem; color: var(--text-muted);">Computational Probability Models</div>
+                <div style="font-size: 0.75rem; color: var(--text-secondary);">Computational Probability Models</div>
               </div>
-              <span style="font-family: var(--font-code); font-size: 0.75rem; color: #0ea5e9;">Johns Hopkins</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #0ea5e9;">Johns Hopkins</span>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
     <!-- =====================================================================
-         STAGE 5: COMMUNICATIONS UPLINK & CLI TERMINAL (88% - 100% Scroll)
+         SECTION 6: DEVELOPER CLI CONSOLE
          ===================================================================== -->
-    <section id="stage-contact" class="stage-section" style="padding-bottom: 8rem;">
-      <div class="stage-header">
-        <div class="stage-kicker"><i class="ti ti-terminal-2"></i> 05. Command Center & Uplink</div>
-        <h2 class="stage-title">Interactive Terminal & Contact</h2>
+    <section id="terminal" class="section-wrapper">
+      <div class="section-header">
+        <div class="section-badge"><i class="ti ti-terminal-2"></i> 05. Command Interface</div>
+        <h2 class="section-title">Developer Interactive Console</h2>
       </div>
 
-      <!-- Terminal Component -->
-      <div class="glass-panel" style="padding: 0; overflow: hidden; margin-bottom: 2rem;">
-        <div style="background: rgba(20, 24, 38, 0.9); padding: 0.75rem 1.25rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08);">
-          <div style="font-family: var(--font-code); font-size: 0.8rem; font-weight: 600; color: #38bdf8; display: flex; align-items: center; gap: 0.5rem;">
+      <div class="terminal-window">
+        <div class="terminal-topbar">
+          <div class="terminal-title">
             <i class="ti ti-terminal-2"></i> INFERENCE_CLI // guest@skct-agent
           </div>
-          <div style="display: flex; gap: 6px;">
-            <span style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444;"></span>
-            <span style="width: 10px; height: 10px; border-radius: 50%; background: #f59e0b;"></span>
-            <span style="width: 10px; height: 10px; border-radius: 50%; background: #10b981;"></span>
+          <div class="terminal-dots">
+            <span class="terminal-dot" style="background: #ef4444;"></span>
+            <span class="terminal-dot" style="background: #f59e0b;"></span>
+            <span class="terminal-dot" style="background: #10b981;"></span>
           </div>
         </div>
 
-        <div style="padding: 1.5rem; background: rgba(5, 6, 8, 0.95); min-height: 220px; display: flex; flex-direction: column; font-family: var(--font-code);">
-          <div id="cli-output" style="flex: 1; max-height: 180px; overflow-y: auto; font-size: 0.85rem; line-height: 1.7; color: #38bdf8; margin-bottom: 1rem;">
-            <span style="color: #64748b;">[SYSTEM]: 3D Cyberpunk Lab Environment Online.</span><br>
+        <div class="terminal-body">
+          <div id="cli-output">
+            <span style="color: #64748b;">[SYSTEM]: Tarun R &mdash; AI & ML Infrastructure Console</span><br>
             <span style="color: #10b981;">[ONLINE]: Type 'help', 'bench', 'cat bio.md', or 'ls projects/'.</span><br>
           </div>
 
-          <div style="display: flex; align-items: center; gap: 0.5rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.75rem;">
+          <div class="terminal-input-row">
             <span style="color: #10b981; font-size: 0.85rem; white-space: nowrap;">guest@skct-agent:~$</span>
-            <input type="text" id="cli-input-field" style="background: transparent; border: none; outline: none; color: #38bdf8; font-family: var(--font-code); font-size: 0.85rem; width: 100%;" placeholder="Type command..." autocomplete="off" />
+            <input type="text" id="cli-input-field" placeholder="Type command..." autocomplete="off" />
           </div>
-        </div>
-      </div>
-
-      <!-- Direct Contact Channels -->
-      <div class="glass-panel spatial-card" style="text-align: center; padding: 3rem 2rem;">
-        <h3 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff;">Let's Build High-Throughput AI Systems</h3>
-        <p style="color: var(--text-muted); max-width: 550px; margin: 0 auto 2rem; font-size: 0.95rem;">
-          Available for engineering roles, LLM infrastructure optimizations, and collaborative research.
-        </p>
-
-        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-          <a href="mailto:tarunsanjay1910@gmail.com" class="nav-btn nav-btn-primary" style="background: linear-gradient(135deg, #a855f7, #06b6d4); color: white; padding: 0.6rem 1.4rem;">
-            <i class="ti ti-mail"></i> tarunsanjay1910@gmail.com
-          </a>
-          <a href="https://linkedin.com/in/tarun-r-ai-ml" target="_blank" class="nav-btn" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); padding: 0.6rem 1.4rem;">
-            <i class="ti ti-brand-linkedin"></i> LinkedIn
-          </a>
-          <a href="https://github.com/iam-tarun-86" target="_blank" class="nav-btn" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); padding: 0.6rem 1.4rem;">
-            <i class="ti ti-brand-github"></i> GitHub
-          </a>
         </div>
       </div>
     </section>
 
-  </main>
+    <!-- =====================================================================
+         SECTION 7: CONTACT & TRANSMISSION
+         ===================================================================== -->
+    <footer id="contact" class="footer-wrapper">
+      <div class="contact-card">
+        <h3 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff;">Let's Build High-Throughput AI Systems</h3>
+        <p style="color: var(--text-secondary); max-width: 550px; margin: 0 auto 2rem; font-size: 0.95rem;">
+          Available for engineering roles, offline LLM optimization consulting, and research collaborations.
+        </p>
 
-  <!-- Bottom Spatial HUD Navigation -->
-  <div class="spatial-hud-nav">
-    <a href="#stage-hero" class="spatial-nav-link active">🌌 Core Lab</a>
-    <a href="#stage-architecture" class="spatial-nav-link">🛡️ SIEM Radar</a>
-    <a href="#stage-projects" class="spatial-nav-link">💻 Projects</a>
-    <a href="#stage-arsenal" class="spatial-nav-link">⚡ Reactor</a>
-    <a href="#stage-contact" class="spatial-nav-link">📬 Uplink</a>
-  </div>
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+          <a href="mailto:tarunsanjay1910@gmail.com" class="btn-primary-gradient" style="padding: 0.65rem 1.4rem; font-size: 0.9rem;">
+            <i class="ti ti-mail"></i> tarunsanjay1910@gmail.com
+          </a>
+          <a href="https://linkedin.com/in/tarun-r-ai-ml" target="_blank" class="btn-secondary" style="padding: 0.65rem 1.4rem; font-size: 0.9rem;">
+            <i class="ti ti-brand-linkedin"></i> LinkedIn
+          </a>
+          <a href="https://github.com/iam-tarun-86" target="_blank" class="btn-secondary" style="padding: 0.65rem 1.4rem; font-size: 0.9rem;">
+            <i class="ti ti-brand-github"></i> GitHub
+          </a>
+        </div>
+
+        <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim);">
+          <i class="ti ti-phone"></i> +91 94896 60152 &nbsp;|&nbsp; <i class="ti ti-map-pin"></i> Coimbatore, TN, India
+        </div>
+      </div>
+
+      <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim);">
+        &copy; 2026 Tarun R. Built with modern web standards and zero unnecessary dependencies.
+      </div>
+    </footer>
+
+  </main>
 
   <!-- Scripts -->
   <script src="js/audio.js"></script>
+  <script src="js/quant-calc.js"></script>
   <script src="js/langgraph-sim.js"></script>
   <script src="js/terminal.js"></script>
-  <script src="js/three-scene.js"></script>
-  <script src="js/scroll-controller.js"></script>
   <script src="js/main.js"></script>
 
 </body>
