@@ -1,0 +1,249 @@
+/* ==========================================================================
+   THEME 3: AKOR SECURITY — MISSION CONTROL & LIVE LANGGRAPH SIEM DAG
+   ========================================================================== */
+
+[data-style="akor"] {
+  --bg-core: #090d10;
+  --bg-card: #0e141a;
+  --bg-card-hover: #141c24;
+  --border-card: #1b2631;
+  --border-card-glow: #10b981;
+
+  --accent-primary: #10b981; /* Emerald Green */
+  --accent-secondary: #06b6d4; /* Cyber Cyan */
+  --accent-alert: #ef4444; /* Threat Red */
+  --accent-warn: #f59e0b; /* Amber */
+  --accent-glow: 0 0 25px rgba(16, 185, 129, 0.25);
+
+  --text-main: #f0fdf4;
+  --text-muted: #94a3b8;
+  --text-subtle: #475569;
+
+  background-color: var(--bg-core);
+  color: var(--text-main);
+  background-image: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.06) 0%, transparent 60%);
+}
+
+[data-style="akor"] .top-nav {
+  background: rgba(10, 15, 20, 0.9);
+  border: 1px solid #1b2631;
+}
+
+[data-style="akor"] .nav-brand-badge {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+[data-style="akor"] .nav-btn-primary {
+  background: #10b981;
+  color: #022c22;
+  font-weight: 700;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+[data-style="akor"] .nav-btn-primary:hover {
+  background: #34d399;
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.7);
+}
+
+[data-style="akor"] .style-dock {
+  background: rgba(10, 15, 20, 0.95);
+  border: 1px solid #1b2631;
+}
+
+[data-style="akor"] .style-tab.active {
+  background: #10b981;
+  color: #022c22;
+  font-weight: 700;
+}
+
+/* AKOR Mission Control Hero */
+.akor-hero {
+  padding: 8rem 1.5rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.akor-status-ribbon {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #0e141a;
+  border: 1px solid #1b2631;
+  border-radius: var(--radius-md);
+  margin-bottom: 2.5rem;
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.akor-status-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+}
+
+.akor-status-item strong {
+  color: #34d399;
+}
+
+/* Live LangGraph DAG Pipeline Visualizer Component */
+.langgraph-container {
+  background: #0e141a;
+  border: 1px solid #1b2631;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin: 3rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.langgraph-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.langgraph-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: var(--font-code);
+  color: #34d399;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.dag-preset-btns {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.dag-btn {
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background: #141c24;
+  border: 1px solid #1b2631;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-family: var(--font-code);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.dag-btn:hover, .dag-btn.active {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+  color: #34d399;
+}
+
+/* DAG Node Map */
+.dag-nodes-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 2.5rem 0;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .dag-nodes-wrapper {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.dag-node {
+  flex: 1;
+  background: #141c24;
+  border: 1px solid #1b2631;
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  text-align: center;
+  position: relative;
+  transition: all var(--transition-normal);
+  z-index: 2;
+}
+
+.dag-node.active {
+  border-color: #10b981;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+  transform: scale(1.03);
+}
+
+.dag-node-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #0e141a;
+  border: 1px solid #1b2631;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.75rem;
+  font-size: 1.25rem;
+  color: #34d399;
+}
+
+.dag-node-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: var(--font-code);
+  margin-bottom: 0.25rem;
+}
+
+.dag-node-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* DAG Animated Connecting Line */
+.dag-connector {
+  flex: 0 0 40px;
+  height: 2px;
+  background: #1b2631;
+  position: relative;
+}
+
+.dag-connector.active::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: dag-flow 1.2s infinite ease-in-out;
+}
+
+@keyframes dag-flow {
+  0% { left: 0; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+/* Live Terminal Log Inspection Stream */
+.dag-log-output {
+  background: #090d10;
+  border: 1px solid #1b2631;
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  color: #34d399;
+  min-height: 90px;
+  max-height: 180px;
+  overflow-y: auto;
+  line-height: 1.7;
+}

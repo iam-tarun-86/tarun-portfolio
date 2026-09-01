@@ -1,0 +1,373 @@
+/* ==========================================================================
+   3D SCROLL-DRIVEN ARCHITECTURE STYLES — TARUN R PORTFOLIO
+   High-Contrast Legibility + Cinematic Three.js Spatial Depth
+   ========================================================================== */
+
+:root {
+  --bg-deep: #050608;
+  --bg-card-glass: rgba(13, 16, 24, 0.85);
+  --bg-card-hover: rgba(20, 25, 38, 0.95);
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --border-highlight: rgba(139, 92, 246, 0.5);
+
+  --accent-violet: #8b5cf6;
+  --accent-cyan: #06b6d4;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-gradient: linear-gradient(135deg, #a855f7 0%, #38bdf8 50%, #10b981 100%);
+
+  --text-primary: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+}
+
+/* Fixed Fullscreen 3D WebGL Canvas */
+#webgl-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Scroll Progress Bar at Top */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--accent-gradient);
+  z-index: 2000;
+  width: 0%;
+  transition: width 0.05s linear;
+}
+
+/* 3D Content Container */
+.scroll-viewport {
+  position: relative;
+  z-index: 10;
+  color: var(--text-primary);
+}
+
+/* Section Sections with Spatial Staging */
+.stage-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem 2rem 5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Glassmorphic High-Legibility Cards */
+.glass-panel {
+  background: var(--bg-card-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+  padding: 2rem;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-panel:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-highlight);
+  box-shadow: 0 18px 50px rgba(139, 92, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-4px);
+}
+
+/* ==========================================================================
+   CLEAN 2-COLUMN HERO LAYOUT (Zero Text Overlap)
+   ========================================================================== */
+.hero-stage {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 3.5rem;
+  padding-top: 6.5rem;
+  padding-bottom: 5rem;
+}
+
+@media (max-width: 1024px) {
+  .hero-stage {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-top: 6rem;
+  }
+}
+
+.hero-left-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 20;
+}
+
+.hero-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.1rem;
+  border-radius: 9999px;
+  background: rgba(139, 92, 246, 0.18);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  color: #c084fc;
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  backdrop-filter: blur(12px);
+}
+
+.hero-headline {
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+}
+
+.gradient-title {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.hero-description {
+  font-size: 1.05rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 620px;
+  background: rgba(8, 10, 15, 0.6);
+  padding: 0.85rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.hero-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.hero-cta-primary {
+  background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+}
+
+.hero-cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(139, 92, 246, 0.6);
+}
+
+.hero-cta-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #f8fafc;
+}
+
+.hero-cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Horizontal Spec Pills Row in Hero */
+.hero-specs-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.hero-spec-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  background: rgba(13, 16, 24, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-code);
+  font-size: 0.76rem;
+  color: #94a3b8;
+  backdrop-filter: blur(12px);
+}
+
+.hero-spec-badge i {
+  color: var(--accent-cyan);
+}
+
+.hero-spec-badge strong {
+  color: #f1f5f9;
+}
+
+/* Hero Right Side: Dedicated 3D Hologram Stage & Telemetry Card */
+.hero-right-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  min-height: 380px;
+}
+
+.hero-telemetry-card {
+  width: 100%;
+  max-width: 340px;
+  background: rgba(11, 14, 22, 0.85);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 14px;
+  padding: 1.25rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  margin-top: auto;
+}
+
+.telemetry-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: var(--font-code);
+  font-size: 0.78rem;
+}
+
+.telemetry-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.telemetry-row label {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.telemetry-row label i {
+  color: var(--accent-cyan);
+}
+
+.telemetry-row span {
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+/* ==========================================================================
+   SECTION TYPOGRAPHY & LAYOUTS
+   ========================================================================== */
+.stage-header {
+  margin-bottom: 2.5rem;
+}
+
+.stage-kicker {
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stage-title {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Grid Layouts for Projects, Skills, and Architecture */
+.projects-3d-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.75rem;
+}
+
+.project-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+}
+
+.project-tag {
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+}
+
+/* 3D Spatial Interactive Depth Helpers */
+.spatial-card {
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+}
+
+/* Fixed 3D HUD Navigation Controls at Bottom */
+.spatial-hud-nav {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(10, 13, 20, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 9999px;
+  padding: 0.35rem 0.75rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+}
+
+.spatial-nav-link {
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.35rem 0.8rem;
+  border-radius: 9999px;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.spatial-nav-link:hover, .spatial-nav-link.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}

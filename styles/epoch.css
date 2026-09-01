@@ -1,0 +1,219 @@
+/* ==========================================================================
+   THEME 2: DIGITAL EPOCH — CYBER-GRID, MARQUEE & TECH HUD
+   ========================================================================== */
+
+[data-style="epoch"] {
+  --bg-core: #090a0f;
+  --bg-card: rgba(14, 16, 24, 0.9);
+  --bg-card-hover: rgba(20, 24, 38, 0.95);
+  --border-card: #1e293b;
+  --border-card-glow: #0ea5e9;
+
+  --accent-primary: #0ea5e9; /* Neon Blue */
+  --accent-secondary: #6366f1; /* Indigo */
+  --accent-gradient: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+  --accent-glow: 0 0 25px rgba(14, 165, 233, 0.2);
+
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-subtle: #475569;
+
+  background-color: var(--bg-core);
+  color: var(--text-main);
+  background-image: 
+    linear-gradient(rgba(14, 165, 233, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 165, 233, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+[data-style="epoch"] .top-nav {
+  background: rgba(10, 12, 18, 0.85);
+  border: 1px solid #1e293b;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+[data-style="epoch"] .nav-brand-badge {
+  background: rgba(14, 165, 233, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(14, 165, 233, 0.3);
+}
+
+[data-style="epoch"] .nav-btn-primary {
+  background: #0ea5e9;
+  color: #030712;
+  font-weight: 700;
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
+}
+
+[data-style="epoch"] .nav-btn-primary:hover {
+  background: #38bdf8;
+  box-shadow: 0 0 30px rgba(14, 165, 233, 0.7);
+}
+
+[data-style="epoch"] .style-dock {
+  background: rgba(12, 14, 22, 0.95);
+  border: 1px solid #1e293b;
+}
+
+[data-style="epoch"] .style-tab.active {
+  background: #0ea5e9;
+  color: #030712;
+  font-weight: 700;
+}
+
+/* Epoch Hero */
+.epoch-hero {
+  padding: 8rem 1.5rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.epoch-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.epoch-hud-badge {
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  color: #38bdf8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.epoch-title {
+  font-size: clamp(2.6rem, 6.5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.5rem;
+}
+
+.epoch-gradient-text {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Infinite Smooth Marquee Ticker */
+.epoch-marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 3rem 0;
+  padding: 1rem 0;
+  border-top: 1px solid #1e293b;
+  border-bottom: 1px solid #1e293b;
+  background: rgba(15, 23, 42, 0.3);
+}
+
+.epoch-marquee-container::before,
+.epoch-marquee-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.epoch-marquee-container::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg-core), transparent);
+}
+
+.epoch-marquee-container::after {
+  right: 0;
+  background: linear-gradient(-90deg, var(--bg-core), transparent);
+}
+
+.epoch-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 25s linear infinite;
+}
+
+.epoch-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1.25rem;
+  margin: 0 0.5rem;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid #334155;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.marquee-item i {
+  color: var(--accent-primary);
+}
+
+/* Epoch Tech Grid Section */
+.epoch-section {
+  max-width: 1200px;
+  margin: 0 auto 5rem;
+  padding: 0 1.5rem;
+}
+
+.epoch-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #1e293b;
+  padding-bottom: 0.75rem;
+}
+
+.epoch-section-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-code);
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.epoch-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.epoch-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.epoch-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: var(--accent-glow);
+  transform: translateY(-2px);
+}
