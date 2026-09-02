@@ -160,3 +160,22 @@ class SoundEngine {
 }
 
 window.soundEngine = new SoundEngine();
+
+window.toggleAudioSFX = function() {
+  const enabled = window.soundEngine.toggle();
+  const btn = document.getElementById('sfx-toggle-btn');
+  const icon = document.getElementById('sfx-icon');
+  const text = document.getElementById('sfx-text');
+
+  if (btn && text) {
+    if (enabled) {
+      btn.classList.add('active');
+      text.innerText = 'SFX: ON';
+      if (icon) icon.className = 'ti ti-volume';
+    } else {
+      btn.classList.remove('active');
+      text.innerText = 'SFX: OFF';
+      if (icon) icon.className = 'ti ti-volume-off';
+    }
+  }
+};

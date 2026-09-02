@@ -583,27 +583,124 @@ html, body {
 .sticky-project-card {
   position: sticky;
   top: 100px;
-  background: #111216;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(30, 41, 59, 0.45) 0%, #111216 70%);
   border: 2px solid var(--border-light);
   border-radius: 40px;
   padding: 3rem;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.15s ease-out, border-color 0.25s ease, box-shadow 0.25s ease;
   min-height: 380px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transform-style: preserve-3d;
 }
 
 @media (max-width: 768px) {
   .sticky-project-card {
     padding: 2rem 1.5rem;
     border-radius: 28px;
+    transform: none !important;
   }
 }
 
 .sticky-project-card:hover {
+  border-color: rgba(56, 189, 248, 0.7);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9), 0 0 30px rgba(56, 189, 248, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+/* Hero Telemetry HUD Chip */
+.hero-telemetry-hud {
+  position: absolute;
+  top: 7rem;
+  right: 3rem;
+  background: rgba(14, 18, 26, 0.82);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 16px;
+  padding: 1rem 1.35rem;
+  backdrop-filter: blur(24px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), inset 0 0 18px rgba(56, 189, 248, 0.1);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-silver);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  z-index: 20;
+  max-width: 320px;
+  animation: hud-float 4s ease-in-out infinite alternate;
+}
+
+@media (max-width: 900px) {
+  .hero-telemetry-hud {
+    position: relative;
+    top: 0;
+    right: 0;
+    margin-top: 1.5rem;
+    max-width: 100%;
+  }
+}
+
+@keyframes hud-float {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-6px); }
+}
+
+.hud-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.hud-pill-green {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #34d399;
+  font-weight: 600;
+}
+
+.hud-dot-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+  animation: pulse-dot 1.5s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.btn-sfx-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-silver);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-sfx-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
   border-color: var(--accent-cyan);
+  color: #FFF;
+}
+
+.btn-sfx-toggle.active {
+  background: rgba(0, 206, 201, 0.15);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
 }
 
 .project-card-header {

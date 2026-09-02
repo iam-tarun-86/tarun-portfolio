@@ -335,23 +335,62 @@ class MotionSitesCyberLab {
     this.objects.innerCore = new THREE.Mesh(innerGeo, innerMat);
     this.objects.corePod.add(this.objects.innerCore);
 
-    // Refractive Orbiting Glass Rings
-    const ringGeo = new THREE.TorusGeometry(12.0, 0.35, 32, 128);
-    const ringMat = new THREE.MeshPhysicalMaterial({
+    // 1st Refractive Orbiting Torus Ring (Cyan / Blue)
+    const ringGeo1 = new THREE.TorusGeometry(11.5, 0.3, 32, 128);
+    const ringMat1 = new THREE.MeshPhysicalMaterial({
       color: 0x38bdf8,
       emissive: 0x0284c7,
-      emissiveIntensity: 0.5,
+      emissiveIntensity: 0.6,
       roughness: 0.04,
       metalness: 0.92,
       clearcoat: 1.0,
       transmission: 0.3,
       ior: 1.52
     });
-    this.objects.ring1 = new THREE.Mesh(ringGeo, ringMat);
+    this.objects.ring1 = new THREE.Mesh(ringGeo1, ringMat1);
     this.objects.ring1.rotation.x = Math.PI / 3;
     this.objects.corePod.add(this.objects.ring1);
 
-    this.objects.corePod.position.set(16, 6, 0);
+    // 2nd Counter-Rotating Torus Ring (Magenta / Violet)
+    const ringGeo2 = new THREE.TorusGeometry(13.2, 0.25, 32, 128);
+    const ringMat2 = new THREE.MeshPhysicalMaterial({
+      color: 0xb600a8,
+      emissive: 0x7621b0,
+      emissiveIntensity: 0.8,
+      roughness: 0.04,
+      metalness: 0.95,
+      clearcoat: 1.0,
+      transmission: 0.25,
+      ior: 1.55
+    });
+    this.objects.ring2 = new THREE.Mesh(ringGeo2, ringMat2);
+    this.objects.ring2.rotation.x = -Math.PI / 4;
+    this.objects.corePod.add(this.objects.ring2);
+
+    // Orbiting Data Particle Halo
+    const haloParticleGeo = new THREE.BufferGeometry();
+    const haloCount = 120;
+    const haloPositions = new Float32Array(haloCount * 3);
+    for (let i = 0; i < haloCount; i++) {
+      const theta = (i / haloCount) * Math.PI * 2;
+      const radius = 9.5 + (Math.random() - 0.5) * 3.5;
+      haloPositions[i * 3] = Math.cos(theta) * radius;
+      haloPositions[i * 3 + 1] = (Math.random() - 0.5) * 4.0;
+      haloPositions[i * 3 + 2] = Math.sin(theta) * radius;
+    }
+    haloParticleGeo.setAttribute('position', new THREE.BufferAttribute(haloPositions, 3));
+    const haloMat = new THREE.PointsMaterial({
+      color: 0x38bdf8,
+      size: 0.35,
+      transparent: true,
+      opacity: 0.85,
+      blending: THREE.AdditiveBlending
+    });
+    this.objects.coreHalo = new THREE.Points(haloParticleGeo, haloMat);
+    this.objects.corePod.add(this.objects.coreHalo);
+
+    // Center directly in Hero Viewport
+    this.objects.corePod.position.set(0, 4.2, 5);
     this.scene.add(this.objects.corePod);
 
     // 2. Pod 2: SIEM Threat Defense Radar (Stage 2)
@@ -669,7 +708,35 @@ class MotionSitesCyberLab {
       this.objects.liquidCore.rotation.x = time * 0.15;
     }
 
-    if (this.objects.ring1) this.objects.ring1.rotation.z = time * 0.35;
+    // Magnetic mouse tilt on Core Pod
+    if (this.objects.corePod) {
+      this.objects.corePod.rotation.y = this.mouse.x * 0.45 + Math.sin(time * 0.6) * 0.08;
+      this.objects.corePod.rotation.x = -this.mouse.y * 0.35 + Math.cos(time * 0.5) * 0.06;
+    }
+
+    // Inner Core breathing pulse
+    if (this.objects.innerCore) {
+      const pulse = 1 + Math.sin(time * 3.5) * 0.08;
+      this.objects.innerCore.scale.set(pulse, pulse, pulse);
+      this.objects.innerCore.rotation.y = -time * 0.6;
+    }
+
+    // Dual Counter-Rotating Rings
+    if (this.objects.ring1) {
+      this.objects.ring1.rotation.z = time * 0.5;
+      this.objects.ring1.rotation.x = Math.PI / 3 + Math.sin(time * 0.8) * 0.12;
+    }
+    if (this.objects.ring2) {
+      this.objects.ring2.rotation.z = -time * 0.45;
+      this.objects.ring2.rotation.y = Math.cos(time * 0.7) * 0.15;
+    }
+
+    // Core Particle Halo rotation
+    if (this.objects.coreHalo) {
+      this.objects.coreHalo.rotation.y = time * 0.25;
+      this.objects.coreHalo.rotation.z = Math.sin(time * 0.3) * 0.1;
+    }
+
     if (this.objects.skillsPod) this.objects.skillsPod.rotation.y = time * 0.35;
     if (this.objects.uplinkPod) this.objects.uplinkPod.rotation.y = time * 0.4;
     if (this.objects.wireframeTerrain) {
