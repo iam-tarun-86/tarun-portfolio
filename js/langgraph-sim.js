@@ -58,12 +58,20 @@ class LangGraphSimulator {
     [nodeIngest, nodeClassify, nodeRoute].forEach(n => n && n.classList.remove('active'));
     [conn1, conn2].forEach(c => c && c.classList.remove('active'));
 
+    const splash1 = document.getElementById('splash-node-1');
+    const splash2 = document.getElementById('splash-node-2');
+    const splash3 = document.getElementById('splash-node-3');
+
+    // Reset splashes
+    [splash1, splash2, splash3].forEach(s => s && s.classList.remove('animate'));
+
     if (logOutput) {
       logOutput.innerHTML = `<span style="color:#94a3b8;">[SIEM INIT]: Received packet trace for evaluation: <strong>${data.name}</strong></span><br><span style="color:#e2e8f0;">[RAW LOG]: ${data.raw}</span><br>`;
     }
 
     // Step 1: Ingest (0ms - 800ms)
     if (nodeIngest) nodeIngest.classList.add('active');
+    if (splash1) splash1.classList.add('animate');
     setTimeout(() => {
       if (conn1) conn1.classList.add('active');
       if (logOutput) {
@@ -77,6 +85,7 @@ class LangGraphSimulator {
     setTimeout(() => {
       if (nodeIngest) nodeIngest.classList.remove('active');
       if (nodeClassify) nodeClassify.classList.add('active');
+      if (splash2) splash2.classList.add('animate');
       if (conn2) conn2.classList.add('active');
 
       if (logOutput) {
@@ -90,6 +99,7 @@ class LangGraphSimulator {
     setTimeout(() => {
       if (nodeClassify) nodeClassify.classList.remove('active');
       if (nodeRoute) nodeRoute.classList.add('active');
+      if (splash3) splash3.classList.add('animate');
 
       if (logOutput) {
         logOutput.innerHTML += `<span style="color:#10b981;">[NODE 3: FASTAPI ACTION ROUTER] ${data.route}</span><br><span style="color:#34d399; font-weight:bold;">[STATUS]: Threat mitigation completed in 18.4ms (Zero Cloud API Costs).</span><br>`;

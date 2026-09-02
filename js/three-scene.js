@@ -190,6 +190,19 @@ class MotionSitesCyberLab {
     gridHelper.position.set(0, -0.01, -120);
     this.scene.add(gridHelper);
 
+    // Dynamic Scrolling Wireframe Terrain Plane (Interactive_3D_Hero MotionSites spec)
+    const terrainGeo = new THREE.PlaneGeometry(360, 360, 60, 60);
+    const terrainMat = new THREE.MeshBasicMaterial({
+      color: 0x38bdf8,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.08
+    });
+    this.objects.wireframeTerrain = new THREE.Mesh(terrainGeo, terrainMat);
+    this.objects.wireframeTerrain.rotation.x = -Math.PI / 2;
+    this.objects.wireframeTerrain.position.set(0, -0.05, -120);
+    this.scene.add(this.objects.wireframeTerrain);
+
     // Boundary Server Racks
     const rackGeo = new THREE.BoxGeometry(3, 12, 5);
     const rackMat = new THREE.MeshPhysicalMaterial({
@@ -659,6 +672,9 @@ class MotionSitesCyberLab {
     if (this.objects.ring1) this.objects.ring1.rotation.z = time * 0.35;
     if (this.objects.skillsPod) this.objects.skillsPod.rotation.y = time * 0.35;
     if (this.objects.uplinkPod) this.objects.uplinkPod.rotation.y = time * 0.4;
+    if (this.objects.wireframeTerrain) {
+      this.objects.wireframeTerrain.position.z = -120 + ((time * 12) % 6);
+    }
 
     this.shards.forEach(s => {
       if (!s.collected && s.mesh) {
