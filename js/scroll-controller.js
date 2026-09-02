@@ -1,64 +1,103 @@
 /**
- * Scroll Controller & Rover Input Coordinator (Concept 1)
+ * MotionSites "3D Jack Portfolio" Scroll & Interaction Controller
+ * Features:
+ * - Character-by-character scroll-driven text reveal
+ * - Sticky card stacking scale animation
+ * - Top scroll progress bar
+ * - Three.js scroll synchronization
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-  const progressBar = document.getElementById('scroll-progress-bar');
-  const modeBtn = document.getElementById('hud-mode-btn');
+class JackScrollController {
+  constructor() {
+    this.progressBar = document.getElementById('scroll-progress');
+    this.revealParagraph = document.getElementById('scroll-reveal-text');
+    this.cards = document.querySelectorAll('.sticky-project-card');
 
-  // Initialize 3D Cyber Lab Universe
-  if (window.initSpatialUniverse) {
-    window.initSpatialUniverse();
+    this.charSpans = [];
+    this.initCharacterReveal();
+    this.bindScrollEvents();
   }
 
-  // Scroll Progress Listener
-  window.addEventListener('scroll', () => {
-    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const currentScroll = window.scrollY;
-    const progress = totalHeight > 0 ? Math.min(Math.max(currentScroll / totalHeight, 0), 1) : 0;
+  initCharacterReveal() {
+    if (!this.revealParagraph) return;
+    const text = this.revealParagraph.innerText.trim();
+    this.revealParagraph.innerHTML = '';
 
-    if (progressBar) {
-      progressBar.style.width = `${progress * 100}%`;
+    // Wrap each character in a span
+    for (let i = 0; i < text.length; i++) {
+      const span = document.createElement('span');
+      span.className = 'char-span';
+      span.innerText = text[i];
+      this.revealParagraph.appendChild(span);
+      this.charSpans.push(span);
+    }
+  }
+
+  bindScrollEvents() {
+    window.addEventListener('scroll', () => {
+      this.onScroll();
+    }, { passive: true });
+
+    // Initial check
+    this.onScroll();
+  }
+
+  onScroll() {
+    const scrollY = window.scrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? scrollY / maxScroll : 0;
+
+    // 1. Top progress bar
+    if (this.progressBar) {
+      this.progressBar.style.width = `${Math.min(progress * 100, 100)}%`;
     }
 
-    if (window.cyberLab) {
+    // 2. Three.js scroll progress link
+    if (window.cyberLab && typeof window.cyberLab.setScrollProgress === 'function') {
       window.cyberLab.setScrollProgress(progress);
     }
-  });
 
-  // Toggle Control Mode
-  if (modeBtn) {
-    modeBtn.addEventListener('click', () => {
-      if (!window.cyberLab) return;
-      const newMode = window.cyberLab.controlMode === 'scroll' ? 'manual' : 'scroll';
-      window.cyberLab.setControlMode(newMode);
-      if (window.soundEngine) window.soundEngine.playClick();
+    // 3. Character-by-character scroll reveal
+    if (this.revealParagraph && this.charSpans.length > 0) {
+      const rect = this.revealParagraph.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      
+      // Calculate how far the paragraph is through the viewport
+      const start = windowH * 0.85;
+      const end = windowH * 0.25;
+      const current = rect.top;
+      
+      let textProgress = (start - current) / (start - end);
+      textProgress = Math.max(0, Math.min(1, textProgress));
+
+      const countToReveal = Math.floor(textProgress * this.charSpans.length);
+      for (let i = 0; i < this.charSpans.length; i++) {
+        if (i < countToReveal) {
+          this.charSpans[i].classList.add('revealed');
+        } else {
+          this.charSpans[i].classList.remove('revealed');
+        }
+      }
+    }
+
+    // 4. Sticky Project Cards scale & stack calculations
+    const totalCards = this.cards.length;
+    this.cards.forEach((card, index) => {
+      const rect = card.getBoundingClientRect();
+      // If card is sticking near the top
+      const topOffset = 100 + index * 25;
+      if (rect.top <= topOffset + 5) {
+        // As user scrolls further past, scale down slightly
+        const diff = Math.max(0, topOffset - rect.top);
+        const scale = Math.max(0.88, 1 - (totalCards - 1 - index) * 0.025 - diff * 0.0002);
+        card.style.transform = `scale(${scale})`;
+      } else {
+        card.style.transform = 'scale(1)';
+      }
     });
   }
+}
 
-  // Mobile Touch D-pad bindings
-  const bindTouchKey = (id, keyName) => {
-    const btn = document.getElementById(id);
-    if (!btn) return;
-
-    btn.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      if (window.cyberLab) {
-        window.cyberLab.setControlMode('manual');
-        window.cyberLab.keys[keyName] = true;
-      }
-    });
-
-    btn.addEventListener('touchend', (e) => {
-      e.preventDefault();
-      if (window.cyberLab) {
-        window.cyberLab.keys[keyName] = false;
-      }
-    });
-  };
-
-  bindTouchKey('touch-up', 'up');
-  bindTouchKey('touch-down', 'down');
-  bindTouchKey('touch-left', 'left');
-  bindTouchKey('touch-right', 'right');
+document.addEventListener('DOMContentLoaded', () => {
+  window.jackScroll = new JackScrollController();
 });

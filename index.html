@@ -2,607 +2,560 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tarun R | AI & ML Infrastructure Engineer</title>
-  <meta name="description" content="Portfolio of Tarun R — AI & ML Infrastructure, Local LLM Systems (llama.cpp), and LangGraph Agentic Architectures.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tarun R — AI & ML Infrastructure Specialist</title>
+  <meta name="description" content="Portfolio of Tarun R — B.E. CSE (AI & ML) at SKCT. Low-latency LLM inference, LangGraph agentic workflows, and zero-trust SIEM architectures." />
 
-  <!-- Open Graph / Social Meta -->
-  <meta property="og:title" content="Tarun R | AI & ML Infrastructure Engineer">
-  <meta property="og:description" content="Low-Latency AI Infrastructure, LangGraph Agentic Architectures, and Zero-API-Cost SIEM Systems.">
-  <meta property="og:type" content="website">
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-
-  <!-- Three.js CDN -->
+  <!-- Three.js Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles/3d-scroll.css">
+  <!-- MotionSites 3D Jack Portfolio Stylesheet -->
+  <link rel="stylesheet" href="styles/3d-scroll.css" />
 </head>
 
 <body>
 
-  <!-- Top Scroll Progress Indicator -->
-  <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+  <!-- Ambient Studio Lighting Glows -->
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
 
-  <!-- Fullscreen Photorealistic 3D WebGL Canvas -->
+  <!-- Three.js Canvas -->
   <canvas id="webgl-canvas"></canvas>
 
+  <!-- Top Scroll Progress Indicator -->
+  <div class="scroll-progress-bar" id="scroll-progress"></div>
+
   <!-- =========================================================================
-       TOP ROVER HUD & NAVIGATION
+       1. NAVBAR (Clean Minimal MotionSites Header)
        ========================================================================= -->
-  <nav class="top-rover-hud">
-    <div class="hud-left-brand">
-      <span style="font-weight:800; color:#fff;">Tarun R</span>
-      <button class="hud-mode-pill" id="hud-mode-btn" title="Toggle between Scroll Auto-Pilot & Manual WASD Rover Driving">
-        <i class="ti ti-route"></i> <span>AUTO-PILOT (SCROLL)</span>
-      </button>
-    </div>
+  <nav class="jack-navbar">
+    <a href="#" class="nav-brand">TARUN R</a>
 
-    <div class="hud-stats-group">
-      <div class="hud-stat-pill">
-        <i class="ti ti-diamond" style="color:#38bdf8;"></i> GGUF SHARDS: <strong id="hud-shards-count">0/5</strong>
-      </div>
-      <div class="hud-stat-pill" style="color: #94a3b8;">
-        <i class="ti ti-keyboard"></i> <span>WASD TO DRIVE ROVER</span>
-      </div>
-    </div>
+    <ul class="nav-links">
+      <li><a href="#about" class="nav-link-item">About</a></li>
+      <li><a href="#capabilities" class="nav-link-item">Capabilities</a></li>
+      <li><a href="#projects" class="nav-link-item">Projects</a></li>
+      <li><a href="#terminal" class="nav-link-item">Terminal</a></li>
+      <li><a href="#contact" class="nav-link-item">Contact</a></li>
+    </ul>
 
-    <div class="nav-actions">
-      <button class="btn-primary-gradient download-resume-action" title="Download Official Resume PDF">
-        <i class="ti ti-file-download"></i> <span>Resume [PDF]</span>
-      </button>
-      <a href="https://github.com/iam-tarun-86" target="_blank" class="btn-secondary" style="padding: 0.45rem 0.75rem;" title="GitHub Profile">
-        <i class="ti ti-brand-github"></i>
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <a href="https://github.com/iam-tarun-86" target="_blank" class="btn-secondary-ghost" style="padding: 0.5rem 1.1rem; font-size: 0.78rem;">
+        <i class="ti ti-brand-github"></i> GitHub
       </a>
-      <a href="https://linkedin.com/in/tarun-r-ai-ml" target="_blank" class="btn-secondary" style="padding: 0.45rem 0.75rem;" title="LinkedIn Profile">
-        <i class="ti ti-brand-linkedin"></i>
+      <a href="#contact" class="btn-contact-motionsites" style="padding: 0.5rem 1.25rem; font-size: 0.78rem;">
+        Contact Me
       </a>
-      <button class="btn-secondary" id="sound-toggle-btn" style="padding: 0.45rem 0.75rem;" title="Toggle Sound FX">
-        <i class="ti ti-volume-3"></i>
-      </button>
     </div>
   </nav>
 
   <!-- =========================================================================
-       3D SCROLL-DRIVEN STAGES CONTAINER
+       2. HERO SECTION
        ========================================================================= -->
-  <main class="scroll-viewport">
+  <section class="jack-hero-section" id="hero">
+    <div class="hero-title-wrapper">
+      <div style="display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.8rem; color: #00cec9; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.75rem;">
+        <span style="width: 8px; height: 8px; border-radius: 50%; background: #00cec9; box-shadow: 0 0 10px #00cec9;"></span>
+        AI & ML Systems Engineer &bull; SKCT Coimbatore
+      </div>
+      <h1 class="hero-heading hero-giant-heading">
+        HI, I'M TARUN
+      </h1>
+    </div>
 
-    <!-- =====================================================================
-         STAGE 1: HERO & QUANTUM AI CORE (0% - 20% Scroll)
-         ===================================================================== -->
-    <section id="stage-hero" class="stage-section hero-stage">
-      <div class="hero-left-content">
-        <div class="hero-pill-badge">
-          <i class="ti ti-sparkles"></i> AI & ML Infrastructure Specialist
+    <!-- Center 3D Space Placeholder / Perspective Zone -->
+    <div class="hero-center-3d-stage"></div>
+
+    <!-- Bottom Bar -->
+    <div class="hero-bottom-bar">
+      <p class="hero-bottom-tagline">
+        An AI & ML infrastructure specialist driven by crafting low-latency local inference pipelines and robust agentic systems.
+      </p>
+
+      <div class="hero-bottom-actions">
+        <a href="#projects" class="btn-secondary-ghost">
+          <i class="ti ti-code"></i> View Projects
+        </a>
+        <a href="#contact" class="btn-contact-motionsites">
+          Contact Me &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. MARQUEE SECTION (Dual Infinite Rows)
+       ========================================================================= -->
+  <div class="jack-marquee-section">
+    <div class="marquee-row row-right">
+      <div class="marquee-tile"><i class="ti ti-brain" style="color:#a855f7;"></i> Meta Llama-3 8B</div>
+      <div class="marquee-tile"><i class="ti ti-shield-bolt" style="color:#ef4444;"></i> Zero-Trust Agent-Sentinel</div>
+      <div class="marquee-tile"><i class="ti ti-git-branch" style="color:#10b981;"></i> LangGraph Deterministic DAG</div>
+      <div class="marquee-tile"><i class="ti ti-microchip" style="color:#38bdf8;"></i> llama.cpp CUDA Kernel</div>
+      <div class="marquee-tile"><i class="ti ti-sparkles" style="color:#c084fc;"></i> Aegis Research Intelligence</div>
+      <div class="marquee-tile"><i class="ti ti-database" style="color:#0ea5e9;"></i> ChromaDB & BM25 Hybrid RAG</div>
+      <div class="marquee-tile"><i class="ti ti-bolt" style="color:#f59e0b;"></i> FastAPI Low-Latency</div>
+      <div class="marquee-tile"><i class="ti ti-activity" style="color:#34d399;"></i> DeepSeek-R1 Distill 8B</div>
+      <!-- Duplicate for infinite seamless scroll -->
+      <div class="marquee-tile"><i class="ti ti-brain" style="color:#a855f7;"></i> Meta Llama-3 8B</div>
+      <div class="marquee-tile"><i class="ti ti-shield-bolt" style="color:#ef4444;"></i> Zero-Trust Agent-Sentinel</div>
+      <div class="marquee-tile"><i class="ti ti-git-branch" style="color:#10b981;"></i> LangGraph Deterministic DAG</div>
+      <div class="marquee-tile"><i class="ti ti-microchip" style="color:#38bdf8;"></i> llama.cpp CUDA Kernel</div>
+      <div class="marquee-tile"><i class="ti ti-sparkles" style="color:#c084fc;"></i> Aegis Research Intelligence</div>
+      <div class="marquee-tile"><i class="ti ti-database" style="color:#0ea5e9;"></i> ChromaDB & BM25 Hybrid RAG</div>
+      <div class="marquee-tile"><i class="ti ti-bolt" style="color:#f59e0b;"></i> FastAPI Low-Latency</div>
+      <div class="marquee-tile"><i class="ti ti-activity" style="color:#34d399;"></i> DeepSeek-R1 Distill 8B</div>
+    </div>
+
+    <div class="marquee-row row-left">
+      <div class="marquee-tile"><i class="ti ti-binary" style="color:#38bdf8;"></i> GGUF 4.5-bit Q4_K_M</div>
+      <div class="marquee-tile"><i class="ti ti-device-desktop" style="color:#10b981;"></i> NVIDIA RTX 4060 8GB VRAM</div>
+      <div class="marquee-tile"><i class="ti ti-chart-dots" style="color:#f59e0b;"></i> fraudlens-lstm Anomaly Detection</div>
+      <div class="marquee-tile"><i class="ti ti-file-analytics" style="color:#06b6d4;"></i> dockmind Offline Documents</div>
+      <div class="marquee-tile"><i class="ti ti-car" style="color:#a855f7;"></i> carin Vision & Voice AI</div>
+      <div class="marquee-tile"><i class="ti ti-certificate" style="color:#34d399;"></i> Google & Johns Hopkins Certified</div>
+      <div class="marquee-tile"><i class="ti ti-school" style="color:#c084fc;"></i> SKCT Coimbatore (2024–2028)</div>
+      <!-- Duplicate for infinite seamless scroll -->
+      <div class="marquee-tile"><i class="ti ti-binary" style="color:#38bdf8;"></i> GGUF 4.5-bit Q4_K_M</div>
+      <div class="marquee-tile"><i class="ti ti-device-desktop" style="color:#10b981;"></i> NVIDIA RTX 4060 8GB VRAM</div>
+      <div class="marquee-tile"><i class="ti ti-chart-dots" style="color:#f59e0b;"></i> fraudlens-lstm Anomaly Detection</div>
+      <div class="marquee-tile"><i class="ti ti-file-analytics" style="color:#06b6d4;"></i> dockmind Offline Documents</div>
+      <div class="marquee-tile"><i class="ti ti-car" style="color:#a855f7;"></i> carin Vision & Voice AI</div>
+      <div class="marquee-tile"><i class="ti ti-certificate" style="color:#34d399;"></i> Google & Johns Hopkins Certified</div>
+      <div class="marquee-tile"><i class="ti ti-school" style="color:#c084fc;"></i> SKCT Coimbatore (2024–2028)</div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       4. ABOUT SECTION (Character-by-Character Scroll Reveal + VRAM Calculator)
+       ========================================================================= -->
+  <section class="jack-about-section" id="about">
+    <div class="section-label-kicker">
+      <i class="ti ti-user"></i> 01 &mdash; About Me
+    </div>
+
+    <h2 class="hero-heading" style="font-size: clamp(2.5rem, 6vw, 5rem); margin-bottom: 2rem;">
+      ABOUT ME
+    </h2>
+
+    <!-- Character Scroll-Reveal Paragraph -->
+    <p class="about-scroll-paragraph" id="scroll-reveal-text">
+      Pursuing B.E. in Computer Science (AI & ML) at Sri Krishna College of Technology, Coimbatore. I focus on deploying high-throughput, localized inference engines with llama.cpp, deterministic multi-node LangGraph workflows, and zero-API-cost SIEM security pipelines on NVIDIA RTX hardware.
+    </p>
+
+    <!-- Interactive Local Inference & VRAM Calculator -->
+    <div class="calc-jack-wrapper">
+      <div class="calc-header">
+        <div class="calc-title">
+          <i class="ti ti-calculator"></i> LOCAL INFERENCE & VRAM FIT CALCULATOR
+        </div>
+        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #10b981;">RTX 4060 (8GB)</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
+        <div class="calc-control-group">
+          <div class="calc-label">
+            <span>Model Architecture</span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #00cec9;">GGUF Weights</span>
+          </div>
+          <select id="calc-model-select" class="calc-select">
+            <option value="llama3_8b" selected>Meta Llama-3 8B (8.03B Params)</option>
+            <option value="mistral_7b">Mistral 7B v0.3 (7.24B Params)</option>
+            <option value="qwen25_7b">Qwen 2.5 7B Coder (7.61B Params)</option>
+            <option value="deepseek_8b">DeepSeek-R1 Distill 8B (8.10B Params)</option>
+            <option value="llama3_70b">Meta Llama-3 70B (70.6B Params)</option>
+          </select>
         </div>
 
-        <h1 class="hero-headline">
-          Engineering <span class="gradient-title">Low-Latency AI</span> & Agentic Systems
-        </h1>
-
-        <p class="hero-description">
-          B.E. CSE (AI & ML) @ <strong>Sri Krishna College of Technology (SKCT), Coimbatore</strong>. I design offline LLM inference pipelines with <strong>llama.cpp</strong>, deterministic multi-node <strong>LangGraph</strong> agent workflows, and zero-API-cost SIEM security architectures.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#stage-architecture" class="btn-contact-motionsites">
-            <i class="ti ti-cpu"></i> Explore 3D Architecture &darr;
-          </a>
-          <button class="btn-secondary download-resume-action" style="padding: 0.7rem 1.4rem; font-size: 0.85rem;">
-            <i class="ti ti-file-text"></i> Download Resume [PDF]
-          </button>
-        </div>
-
-        <div class="hero-specs-row">
-          <div class="hero-spec-badge"><i class="ti ti-school"></i> <span>SKCT (2024 &ndash; 2028)</span></div>
-          <div class="hero-spec-badge"><i class="ti ti-map-pin"></i> <span>Coimbatore, India</span></div>
-          <div class="hero-spec-badge"><i class="ti ti-microchip"></i> <span>RTX 4060 (8GB VRAM)</span></div>
-          <div class="hero-spec-badge"><i class="ti ti-activity"></i> <span>llama.cpp Active</span></div>
+        <div class="calc-control-group">
+          <div class="calc-label">
+            <span>Quantization Level</span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #00cec9;">Bits Per Weight</span>
+          </div>
+          <select id="calc-quant-select" class="calc-select">
+            <option value="q4_k_m" selected>Q4_K_M &mdash; 4.5-bit (Recommended)</option>
+            <option value="q5_k_m">Q5_K_M &mdash; 5.5-bit (Balanced)</option>
+            <option value="q8_0">Q8_0 &mdash; 8.5-bit (High Precision)</option>
+            <option value="fp16">FP16 &mdash; 16.0-bit (Baseline)</option>
+            <option value="q2_k">Q2_K &mdash; 2.6-bit (Extreme)</option>
+          </select>
         </div>
       </div>
 
-      <!-- Right Stage: Interactive Quantization & VRAM Calculator -->
-      <div class="hero-right-stage">
-        <div class="calc-card">
-          <div class="calc-header">
-            <div class="calc-title">
-              <i class="ti ti-calculator"></i> LOCAL INFERENCE & VRAM FIT CALCULATOR
-            </div>
-            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #10b981;">RTX 4060 (8GB)</span>
-          </div>
+      <div class="calc-control-group">
+        <div class="calc-label">
+          <span>Context Window (KV Cache)</span>
+          <span id="calc-ctx-val" style="font-family: var(--font-mono); font-size: 0.75rem; color: #38bdf8;">8k Tokens</span>
+        </div>
+        <input type="range" id="calc-ctx-range" class="calc-range" min="2048" max="32768" step="2048" value="8192">
+      </div>
 
-          <div class="calc-control-group">
-            <div class="calc-label">
-              <span>Select Model Architecture</span>
-              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan);">GGUF Engine</span>
-            </div>
-            <select id="calc-model-select" class="calc-select">
-              <option value="llama3_8b" selected>Meta Llama-3 8B (8.03B Parameters)</option>
-              <option value="mistral_7b">Mistral 7B v0.3 (7.24B Parameters)</option>
-              <option value="qwen25_7b">Qwen 2.5 7B Coder (7.61B Parameters)</option>
-              <option value="deepseek_8b">DeepSeek-R1 Distill 8B (8.10B Parameters)</option>
-              <option value="llama3_70b">Meta Llama-3 70B (70.6B Parameters)</option>
-            </select>
-          </div>
+      <div class="calc-metric-box">
+        <div class="calc-metric-row">
+          <span style="color: var(--text-muted);">Estimated VRAM Footprint:</span>
+          <strong id="calc-vram-val" style="color: #FFF; font-size: 0.95rem;">5.42 GB</strong>
+        </div>
+        <div class="calc-metric-row">
+          <span style="color: var(--text-muted);">Hardware Allocation Status:</span>
+          <span id="calc-fit-status"></span>
+        </div>
+        <div class="calc-metric-row">
+          <span style="color: var(--text-muted);">Estimated Inference Speed:</span>
+          <strong id="calc-speed-val" style="color: #38bdf8;">78.0 tok/s</strong>
+        </div>
 
-          <div class="calc-control-group">
-            <div class="calc-label">
-              <span>Quantization Level</span>
-              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan);">Bits Per Weight</span>
-            </div>
-            <select id="calc-quant-select" class="calc-select">
-              <option value="q4_k_m" selected>Q4_K_M &mdash; 4.5-bit (Recommended Performance)</option>
-              <option value="q5_k_m">Q5_K_M &mdash; 5.5-bit (Balanced Perplexity)</option>
-              <option value="q8_0">Q8_0 &mdash; 8.5-bit (Near-FP16 Precision)</option>
-              <option value="fp16">FP16 &mdash; 16.0-bit (Uncompressed Baseline)</option>
-              <option value="q2_k">Q2_K &mdash; 2.6-bit (Extreme Compression)</option>
-            </select>
-          </div>
-
-          <div class="calc-control-group">
-            <div class="calc-label">
-              <span>Context Window (KV Cache)</span>
-              <span id="calc-ctx-val" style="font-family: var(--font-mono); font-size: 0.75rem; color: #38bdf8;">8k Tokens</span>
-            </div>
-            <input type="range" id="calc-ctx-range" class="calc-range" min="2048" max="32768" step="2048" value="8192">
-          </div>
-
-          <div class="calc-metric-box">
-            <div class="calc-metric-row">
-              <span style="color: var(--text-muted);">Estimated VRAM Footprint:</span>
-              <strong id="calc-vram-val" style="color: #fff; font-size: 0.95rem;">5.42 GB</strong>
-            </div>
-            <div class="calc-metric-row">
-              <span style="color: var(--text-muted);">Hardware Allocation Status:</span>
-              <span id="calc-fit-status"></span>
-            </div>
-            <div class="calc-metric-row">
-              <span style="color: var(--text-muted);">Estimated Inference Speed:</span>
-              <strong id="calc-speed-val" style="color: #38bdf8;">78.0 tok/s</strong>
-            </div>
-
-            <div class="calc-progress-track">
-              <div id="calc-vram-fill" class="calc-progress-fill"></div>
-            </div>
-          </div>
+        <div class="calc-progress-track">
+          <div id="calc-vram-fill" class="calc-progress-fill"></div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- =====================================================================
-         MOTIONSITES DUAL INFINITE MARQUEE (Tech & Model Ecosystem)
-         ===================================================================== -->
-    <div class="motionsites-marquee-section">
-      <div class="marquee-track track-right">
-        <div class="marquee-pill"><i class="ti ti-brain" style="color:#a855f7;"></i> Meta Llama-3 8B</div>
-        <div class="marquee-pill"><i class="ti ti-shield-bolt" style="color:#ef4444;"></i> Zero-Trust Agent-Sentinel</div>
-        <div class="marquee-pill"><i class="ti ti-git-branch" style="color:#10b981;"></i> LangGraph Deterministic DAG</div>
-        <div class="marquee-pill"><i class="ti ti-microchip" style="color:#38bdf8;"></i> llama.cpp CUDA Kernel</div>
-        <div class="marquee-pill"><i class="ti ti-sparkles" style="color:#c084fc;"></i> Aegis Research RAG</div>
-        <div class="marquee-pill"><i class="ti ti-database" style="color:#0ea5e9;"></i> ChromaDB & BM25 Hybrid</div>
-        <div class="marquee-pill"><i class="ti ti-bolt" style="color:#f59e0b;"></i> FastAPI Low-Latency</div>
-        <div class="marquee-pill"><i class="ti ti-activity" style="color:#34d399;"></i> DeepSeek-R1 Distill 8B</div>
-        <!-- Duplicate for smooth seamless loop -->
-        <div class="marquee-pill"><i class="ti ti-brain" style="color:#a855f7;"></i> Meta Llama-3 8B</div>
-        <div class="marquee-pill"><i class="ti ti-shield-bolt" style="color:#ef4444;"></i> Zero-Trust Agent-Sentinel</div>
-        <div class="marquee-pill"><i class="ti ti-git-branch" style="color:#10b981;"></i> LangGraph Deterministic DAG</div>
-        <div class="marquee-pill"><i class="ti ti-microchip" style="color:#38bdf8;"></i> llama.cpp CUDA Kernel</div>
-        <div class="marquee-pill"><i class="ti ti-sparkles" style="color:#c084fc;"></i> Aegis Research RAG</div>
-        <div class="marquee-pill"><i class="ti ti-database" style="color:#0ea5e9;"></i> ChromaDB & BM25 Hybrid</div>
-        <div class="marquee-pill"><i class="ti ti-bolt" style="color:#f59e0b;"></i> FastAPI Low-Latency</div>
-        <div class="marquee-pill"><i class="ti ti-activity" style="color:#34d399;"></i> DeepSeek-R1 Distill 8B</div>
+  <!-- =========================================================================
+       5. CAPABILITIES SECTION (Numbered 01 - 05 Horizontal Layout)
+       ========================================================================= -->
+  <section class="jack-capabilities-section" id="capabilities">
+    <div class="section-label-kicker">
+      <i class="ti ti-cpu"></i> 02 &mdash; Technical Capabilities
+    </div>
+
+    <h2 class="hero-heading" style="font-size: clamp(2.5rem, 6vw, 5rem); margin-bottom: 3rem;">
+      CAPABILITIES
+    </h2>
+
+    <div class="capability-list">
+      <!-- 01 -->
+      <div class="capability-item">
+        <div class="capability-number">01</div>
+        <div class="capability-content">
+          <h3>Quantized Local LLM Inference</h3>
+          <p>Compiling high-performance GGUF models on consumer GPUs (NVIDIA RTX 4060) utilizing llama.cpp CUDA kernels and Flash Attention v2, achieving 75+ tok/s with zero cloud API reliance.</p>
+        </div>
       </div>
 
-      <div class="marquee-track track-left">
-        <div class="marquee-pill"><i class="ti ti-binary" style="color:#38bdf8;"></i> GGUF 4.5-bit Q4_K_M</div>
-        <div class="marquee-pill"><i class="ti ti-device-desktop" style="color:#10b981;"></i> NVIDIA RTX 4060 8GB VRAM</div>
-        <div class="marquee-pill"><i class="ti ti-chart-dots" style="color:#f59e0b;"></i> fraudlens-lstm Neural Anomaly</div>
-        <div class="marquee-pill"><i class="ti ti-file-analytics" style="color:#06b6d4;"></i> dockmind Offline Docs</div>
-        <div class="marquee-pill"><i class="ti ti-car" style="color:#a855f7;"></i> carin Vision & Voice AI</div>
-        <div class="marquee-pill"><i class="ti ti-certificate" style="color:#34d399;"></i> Google & Johns Hopkins Certified</div>
-        <!-- Duplicate for smooth seamless loop -->
-        <div class="marquee-pill"><i class="ti ti-binary" style="color:#38bdf8;"></i> GGUF 4.5-bit Q4_K_M</div>
-        <div class="marquee-pill"><i class="ti ti-device-desktop" style="color:#10b981;"></i> NVIDIA RTX 4060 8GB VRAM</div>
-        <div class="marquee-pill"><i class="ti ti-chart-dots" style="color:#f59e0b;"></i> fraudlens-lstm Neural Anomaly</div>
-        <div class="marquee-pill"><i class="ti ti-file-analytics" style="color:#06b6d4;"></i> dockmind Offline Docs</div>
-        <div class="marquee-pill"><i class="ti ti-car" style="color:#a855f7;"></i> carin Vision & Voice AI</div>
-        <div class="marquee-pill"><i class="ti ti-certificate" style="color:#34d399;"></i> Google & Johns Hopkins Certified</div>
+      <!-- 02 -->
+      <div class="capability-item">
+        <div class="capability-number">02</div>
+        <div class="capability-content">
+          <h3>Deterministic Multi-Node Agent Workflows</h3>
+          <p>Orchestrating stateful, multi-step LangGraph architectures (Ingest &rarr; Classify &rarr; Route) that eliminate hallucination loops and enforce bounded execution constraints.</p>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="capability-item">
+        <div class="capability-number">03</div>
+        <div class="capability-content">
+          <h3>Zero-Trust Behavioral AI Firewalls</h3>
+          <p>Designing real-time execution circuit breakers and runtime guardrails that constrain autonomous agents against prompt injections, unauthorized API tool calls, and data exfiltration.</p>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="capability-item">
+        <div class="capability-number">04</div>
+        <div class="capability-content">
+          <h3>Hybrid Vector & Lexical RAG Engines</h3>
+          <p>Sub-millisecond retrieval pipelines fusing dense embeddings with BM25 sparse keyword matching using Reciprocal Rank Fusion (RRF) and ChromaDB embedded vector stores.</p>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="capability-item">
+        <div class="capability-number">05</div>
+        <div class="capability-content">
+          <h3>Sequence Deep Learning & Vision AI</h3>
+          <p>Building sequential LSTM neural networks for financial anomaly thresholding, alongside multimodal edge vision streams for real-time computer vision detection.</p>
+        </div>
       </div>
     </div>
 
-    <!-- =====================================================================
-         STAGE 2: SIEM THREAT DEFENSE RADAR (25% - 45% Scroll)
-         ===================================================================== -->
-    <section id="stage-architecture" class="stage-section">
-      <div class="stage-header">
-        <div class="stage-kicker"><i class="ti ti-shield-bolt"></i> 02. Architectural Foundations</div>
-        <h2 class="stage-title">Why Localized & Agentic AI?</h2>
-      </div>
-
-      <!-- Core Value Propositions Bento Grid -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
-        <div class="glass-panel">
-          <div style="font-weight: 700; font-size: 1.05rem; color: #10b981; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="ti ti-coin-off"></i> Zero API Overhead
-          </div>
-          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
-            Deploying quantized models locally via llama.cpp completely eliminates third-party token bills, delivering infinite high-throughput scaling with zero transactional cost.
-          </p>
+    <!-- Live 3-Node SIEM Threat Pipeline Simulator -->
+    <div class="calc-jack-wrapper" style="margin-top: 4rem; max-width: 100%;">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+        <div style="font-family: var(--font-mono); font-size: 0.95rem; font-weight: 700; color: #34d399; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="ti ti-radar"></i> Live 3-Node SIEM Threat Pipeline Simulator
         </div>
-
-        <div class="glass-panel">
-          <div style="font-weight: 700; font-size: 1.05rem; color: #0ea5e9; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="ti ti-shield-lock"></i> Air-Gapped SIEM
-          </div>
-          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
-            Routing sensitive security logs to cloud endpoints introduces data leakage risks. Local inference processes telemetry entirely on-premises for total compliance.
-          </p>
-        </div>
-
-        <div class="glass-panel">
-          <div style="font-weight: 700; font-size: 1.05rem; color: #a855f7; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="ti ti-git-branch"></i> LangGraph Resiliency
-          </div>
-          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
-            Stateful multi-node DAG transitions (Ingest &rarr; Classify &rarr; Route) constrain LLMs to deterministic execution paths, eliminating hallucinations.
-          </p>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button class="btn-secondary-ghost" style="font-size: 0.75rem; border-color: #ef4444; color: #f87171;" onclick="window.langGraphSim.runSimulation('ssh_brute')">
+            <i class="ti ti-alert-triangle"></i> Simulate SSH Brute Force
+          </button>
+          <button class="btn-secondary-ghost" style="font-size: 0.75rem; border-color: #0ea5e9; color: #38bdf8;" onclick="window.langGraphSim.runSimulation('sqli_attempt')">
+            <i class="ti ti-bug"></i> Simulate SQL Injection
+          </button>
+          <button class="btn-secondary-ghost" style="font-size: 0.75rem; border-color: #10b981; color: #34d399;" onclick="window.langGraphSim.runSimulation('benign_telemetry')">
+            <i class="ti ti-circle-check"></i> Simulate Benign Ping
+          </button>
         </div>
       </div>
 
-      <!-- Interactive 3-Node LangGraph SIEM Threat Simulator -->
-      <div class="glass-panel" style="padding: 2rem; border-color: rgba(16, 185, 129, 0.3);">
-        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="font-family: var(--font-mono); font-size: 1rem; font-weight: 700; color: #34d399; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="ti ti-radar"></i> Live 3-Node SIEM Threat Pipeline Simulator
-          </div>
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            <button class="btn-secondary" style="font-size: 0.75rem; border-color: #ef4444; color: #f87171;" onclick="window.langGraphSim.runSimulation('ssh_brute')">
-              <i class="ti ti-alert-triangle"></i> Simulate SSH Brute Force
-            </button>
-            <button class="btn-secondary" style="font-size: 0.75rem; border-color: #0ea5e9; color: #38bdf8;" onclick="window.langGraphSim.runSimulation('sqli_attempt')">
-              <i class="ti ti-bug"></i> Simulate SQL Injection
-            </button>
-            <button class="btn-secondary" style="font-size: 0.75rem; border-color: #10b981; color: #34d399;" onclick="window.langGraphSim.runSimulation('benign_telemetry')">
-              <i class="ti ti-circle-check"></i> Simulate Benign Ping
-            </button>
-          </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 2rem 0; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 200px; text-align: center; padding: 1.25rem; background: #08090C; border: 1px solid var(--border-light); border-radius: 12px;" id="node-ingest">
+          <div style="font-size: 1.4rem; color: #0ea5e9; margin-bottom: 0.4rem;"><i class="ti ti-database-import"></i></div>
+          <div style="font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem;">NODE 1: INGEST</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">Packet Schema Extraction</div>
         </div>
 
-        <!-- 3-Node Optical Laser Flow Container -->
-        <div class="laser-pipeline-wrapper">
-          <svg class="beam-svg-overlay" id="laser-beam-svg">
-            <defs>
-              <filter id="glow-beam" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="3" result="blur" />
-                <feComposite in="SourceGraphic" in2="blur" operator="over" />
-              </filter>
-              <linearGradient id="beam-pulse-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.2" />
-                <stop offset="50%" stop-color="#38bdf8" stop-opacity="1" />
-                <stop offset="100%" stop-color="#10b981" stop-opacity="0.2" />
-              </linearGradient>
-            </defs>
-            <path id="laser-path-glow" d="M 120 30 L 700 30" stroke="url(#beam-pulse-gradient)" stroke-width="3" filter="url(#glow-beam)" fill="none" opacity="0.7" />
-            <path id="laser-path-core" d="M 120 30 L 700 30" stroke="#ffffff" stroke-width="1" fill="none" opacity="0.9" />
-          </svg>
+        <div style="flex: 0 0 30px; height: 2px; background: rgba(255,255,255,0.15);" id="conn-1"></div>
 
-          <!-- Splash Radial Impacts -->
-          <div class="splash-glow" id="splash-node-1" style="left: 16%;"></div>
-          <div class="splash-glow" id="splash-node-2" style="left: 50%;"></div>
-          <div class="splash-glow" id="splash-node-3" style="left: 84%;"></div>
-
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; position: relative; z-index: 3;" class="dag-nodes-wrapper">
-            <div class="glass-panel" id="node-ingest" style="flex: 1; text-align: center; padding: 1.25rem;">
-              <div style="font-size: 1.5rem; color: #0ea5e9; margin-bottom: 0.5rem;"><i class="ti ti-database-import"></i></div>
-              <div style="font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem;">NODE 1: INGEST</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">Packet Schema Extraction</div>
-            </div>
-
-            <div style="flex: 0 0 40px; height: 2px; background: rgba(255,255,255,0.15);" id="conn-1"></div>
-
-            <div class="glass-panel" id="node-classify" style="flex: 1; text-align: center; padding: 1.25rem;">
-              <div style="font-size: 1.5rem; color: #a855f7; margin-bottom: 0.5rem;"><i class="ti ti-brain"></i></div>
-              <div style="font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem;">NODE 2: CLASSIFY</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">llama.cpp Quantized Model</div>
-            </div>
-
-            <div style="flex: 0 0 40px; height: 2px; background: rgba(255,255,255,0.15);" id="conn-2"></div>
-
-            <div class="glass-panel" id="node-route" style="flex: 1; text-align: center; padding: 1.25rem;">
-              <div style="font-size: 1.5rem; color: #10b981; margin-bottom: 0.5rem;"><i class="ti ti-route"></i></div>
-              <div style="font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem;">NODE 3: ROUTE</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">FastAPI Action Trigger</div>
-            </div>
-          </div>
+        <div style="flex: 1; min-width: 200px; text-align: center; padding: 1.25rem; background: #08090C; border: 1px solid var(--border-light); border-radius: 12px;" id="node-classify">
+          <div style="font-size: 1.4rem; color: #a855f7; margin-bottom: 0.4rem;"><i class="ti ti-brain"></i></div>
+          <div style="font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem;">NODE 2: CLASSIFY</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">llama.cpp Quantized Model</div>
         </div>
 
-        <!-- Live Forensic Terminal Stream Output -->
-        <div id="dag-log-output" style="background: rgba(5, 6, 8, 0.95); border: 1px solid var(--border-glass); border-radius: 8px; padding: 1rem 1.25rem; font-family: var(--font-mono); font-size: 0.82rem; color: #34d399; min-height: 80px; max-height: 160px; overflow-y: auto; line-height: 1.6;">
-          <span style="color: #94a3b8;">[SIEM READY]: Click one of the simulation triggers above to evaluate real-time threat routing...</span>
+        <div style="flex: 0 0 30px; height: 2px; background: rgba(255,255,255,0.15);" id="conn-2"></div>
+
+        <div style="flex: 1; min-width: 200px; text-align: center; padding: 1.25rem; background: #08090C; border: 1px solid var(--border-light); border-radius: 12px;" id="node-route">
+          <div style="font-size: 1.4rem; color: #10b981; margin-bottom: 0.4rem;"><i class="ti ti-route"></i></div>
+          <div style="font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem;">NODE 3: ROUTE</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">FastAPI Action Trigger</div>
         </div>
       </div>
-    </section>
 
-    <!-- =====================================================================
-         STAGE 3: 3D PROJECT MONOLITHS (45% - 70% Scroll)
-         ===================================================================== -->
-    <section id="stage-projects" class="stage-section">
-      <div class="stage-header">
-        <div class="stage-kicker"><i class="ti ti-cpu"></i> 03. Production Engineering</div>
-        <h2 class="stage-title">Featured GitHub Repositories</h2>
+      <div id="dag-log-output" style="background: #08090C; border: 1px solid var(--border-light); border-radius: 8px; padding: 1rem 1.25rem; font-family: var(--font-mono); font-size: 0.82rem; color: #34d399; min-height: 80px; max-height: 160px; overflow-y: auto; line-height: 1.6;">
+        <span style="color: #8E9BAE;">[SIEM READY]: Click one of the simulation triggers above to evaluate real-time threat routing...</span>
       </div>
+    </div>
+  </section>
 
-      <div class="projects-3d-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+  <!-- =========================================================================
+       6. PROJECTS SECTION (Sticky-Stacking Cards)
+       ========================================================================= -->
+  <section class="jack-projects-section" id="projects">
+    <div class="section-label-kicker">
+      <i class="ti ti-folder"></i> 03 &mdash; Production Engineering
+    </div>
 
-        <!-- Project 1: local-ai-log-analyzer -->
-        <div class="glass-panel" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86/local-ai-log-analyzer', '_blank')">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-            <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: #10b981; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px;">
-              <i class="ti ti-shield-check"></i> Production SIEM
-            </span>
-            <i class="ti ti-brand-github" style="color: var(--text-muted); font-size: 1.1rem;"></i>
+    <h2 class="hero-heading" style="font-size: clamp(2.5rem, 6vw, 5rem); margin-bottom: 2rem;">
+      PROJECTS
+    </h2>
+
+    <div class="sticky-stack-container">
+
+      <!-- Card 1: local-ai-log-analyzer -->
+      <div class="sticky-project-card" style="top: 100px;">
+        <div>
+          <div class="project-card-header">
+            <span class="project-card-num">01</span>
+            <span class="project-category-badge"><i class="ti ti-shield-check"></i> SIEM & Agents</span>
           </div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">local-ai-log-analyzer</h3>
-          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          <h3 class="project-title">local-ai-log-analyzer</h3>
+          <p class="project-desc">
             Full-stack SIEM tool using LangGraph agentic workflows and local LLMs (llama.cpp) for real-time security log analysis with zero cloud API overhead.
           </p>
-          <div class="project-tag-row">
-            <span class="project-tag">LangGraph</span>
-            <span class="project-tag">llama.cpp</span>
-            <span class="project-tag">FastAPI</span>
-            <span class="project-tag">Python</span>
+          <div class="project-tech-tags">
+            <span class="tech-tag">LangGraph</span>
+            <span class="tech-tag">llama.cpp</span>
+            <span class="tech-tag">FastAPI</span>
+            <span class="tech-tag">Python</span>
           </div>
         </div>
+        <div>
+          <a href="https://github.com/iam-tarun-86/local-ai-log-analyzer" target="_blank" class="btn-secondary-ghost" style="padding: 0.6rem 1.4rem;">
+            <i class="ti ti-brand-github"></i> View on GitHub &rarr;
+          </a>
+        </div>
+      </div>
 
-        <!-- Project 2: agent-sentinel -->
-        <div class="glass-panel" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86/agent-sentinel', '_blank')">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-            <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: #ef4444; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px;">
-              <i class="ti ti-shield-bolt"></i> AI Safety & Firewall
-            </span>
-            <i class="ti ti-brand-github" style="color: var(--text-muted); font-size: 1.1rem;"></i>
+      <!-- Card 2: agent-sentinel -->
+      <div class="sticky-project-card" style="top: 125px;">
+        <div>
+          <div class="project-card-header">
+            <span class="project-card-num">02</span>
+            <span class="project-category-badge" style="color: #ef4444;"><i class="ti ti-shield-bolt"></i> AI Safety</span>
           </div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">agent-sentinel</h3>
-          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          <h3 class="project-title">agent-sentinel</h3>
+          <p class="project-desc">
             Zero-Trust Behavioral Firewall & Runtime Circuit Breaker for Autonomous AI Agents, constraining execution paths against prompt injection and unauthorized tool calls.
           </p>
-          <div class="project-tag-row">
-            <span class="project-tag">Zero-Trust</span>
-            <span class="project-tag">AI Safety</span>
-            <span class="project-tag">Circuit Breaker</span>
-            <span class="project-tag">Python</span>
+          <div class="project-tech-tags">
+            <span class="tech-tag">Zero-Trust</span>
+            <span class="tech-tag">AI Safety</span>
+            <span class="tech-tag">Circuit Breaker</span>
+            <span class="tech-tag">Python</span>
           </div>
         </div>
+        <div>
+          <a href="https://github.com/iam-tarun-86/agent-sentinel" target="_blank" class="btn-secondary-ghost" style="padding: 0.6rem 1.4rem;">
+            <i class="ti ti-brand-github"></i> View on GitHub &rarr;
+          </a>
+        </div>
+      </div>
 
-        <!-- Project 3: Aegis -->
-        <div class="glass-panel" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86/Aegis', '_blank')">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-            <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: #a855f7; background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px;">
-              <i class="ti ti-sparkles"></i> Research Intelligence
-            </span>
-            <i class="ti ti-brand-github" style="color: var(--text-muted); font-size: 1.1rem;"></i>
+      <!-- Card 3: Aegis -->
+      <div class="sticky-project-card" style="top: 150px;">
+        <div>
+          <div class="project-card-header">
+            <span class="project-card-num">03</span>
+            <span class="project-category-badge" style="color: #a855f7;"><i class="ti ti-sparkles"></i> Research RAG</span>
           </div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">Aegis</h3>
-          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          <h3 class="project-title">Aegis</h3>
+          <p class="project-desc">
             Zero-cloud, privacy-preserving research intelligence platform with automated web extraction, academic report synthesis, and dense vector RAG pipelines.
           </p>
-          <div class="project-tag-row">
-            <span class="project-tag">LangGraph</span>
-            <span class="project-tag">Privacy-First</span>
-            <span class="project-tag">Dense RAG</span>
-            <span class="project-tag">JavaScript</span>
+          <div class="project-tech-tags">
+            <span class="tech-tag">LangGraph</span>
+            <span class="tech-tag">Privacy-First</span>
+            <span class="tech-tag">Dense RAG</span>
+            <span class="tech-tag">JavaScript</span>
           </div>
         </div>
+        <div>
+          <a href="https://github.com/iam-tarun-86/Aegis" target="_blank" class="btn-secondary-ghost" style="padding: 0.6rem 1.4rem;">
+            <i class="ti ti-brand-github"></i> View on GitHub &rarr;
+          </a>
+        </div>
+      </div>
 
-        <!-- Project 4: dockmind -->
-        <div class="glass-panel" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86/dockmind', '_blank')">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-            <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: #0ea5e9; background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(14, 165, 233, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px;">
-              <i class="ti ti-database"></i> Hybrid RAG
-            </span>
-            <i class="ti ti-brand-github" style="color: var(--text-muted); font-size: 1.1rem;"></i>
+      <!-- Card 4: dockmind -->
+      <div class="sticky-project-card" style="top: 175px;">
+        <div>
+          <div class="project-card-header">
+            <span class="project-card-num">04</span>
+            <span class="project-category-badge" style="color: #0ea5e9;"><i class="ti ti-database"></i> Hybrid Retrieval</span>
           </div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">dockmind</h3>
-          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          <h3 class="project-title">dockmind</h3>
+          <p class="project-desc">
             Intelligent local AI assistant for document analysis. Chat with PDFs, Word docs, and text files offline using a Hybrid RAG pipeline (ChromaDB + BM25) and local LLMs.
           </p>
-          <div class="project-tag-row">
-            <span class="project-tag">ChromaDB</span>
-            <span class="project-tag">BM25</span>
-            <span class="project-tag">Hybrid RAG</span>
-            <span class="project-tag">Python</span>
+          <div class="project-tech-tags">
+            <span class="tech-tag">ChromaDB</span>
+            <span class="tech-tag">BM25</span>
+            <span class="tech-tag">Hybrid RAG</span>
+            <span class="tech-tag">Python</span>
           </div>
         </div>
+        <div>
+          <a href="https://github.com/iam-tarun-86/dockmind" target="_blank" class="btn-secondary-ghost" style="padding: 0.6rem 1.4rem;">
+            <i class="ti ti-brand-github"></i> View on GitHub &rarr;
+          </a>
+        </div>
+      </div>
 
-        <!-- Project 5: fraudlens-lstm -->
-        <div class="glass-panel" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86/fraudlens-lstm', '_blank')">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-            <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: #f59e0b; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px;">
-              <i class="ti ti-brain"></i> Deep Learning
-            </span>
-            <i class="ti ti-brand-github" style="color: var(--text-muted); font-size: 1.1rem;"></i>
+      <!-- Card 5: fraudlens-lstm -->
+      <div class="sticky-project-card" style="top: 200px;">
+        <div>
+          <div class="project-card-header">
+            <span class="project-card-num">05</span>
+            <span class="project-category-badge" style="color: #f59e0b;"><i class="ti ti-chart-dots"></i> Deep Learning</span>
           </div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">fraudlens-lstm</h3>
-          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          <h3 class="project-title">fraudlens-lstm</h3>
+          <p class="project-desc">
             Sequential deep learning financial transaction fraud detection leveraging sequence LSTM neural networks and real-time statistical anomaly thresholding.
           </p>
-          <div class="project-tag-row">
-            <span class="project-tag">LSTM</span>
-            <span class="project-tag">TypeScript</span>
-            <span class="project-tag">Deep Learning</span>
-            <span class="project-tag">PyTorch</span>
+          <div class="project-tech-tags">
+            <span class="tech-tag">LSTM</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Deep Learning</span>
+            <span class="tech-tag">PyTorch</span>
           </div>
         </div>
+        <div>
+          <a href="https://github.com/iam-tarun-86/fraudlens-lstm" target="_blank" class="btn-secondary-ghost" style="padding: 0.6rem 1.4rem;">
+            <i class="ti ti-brand-github"></i> View on GitHub &rarr;
+          </a>
+        </div>
+      </div>
 
-        <!-- Project 6: carin -->
-        <div class="glass-panel" style="cursor: pointer;" onclick="window.open('https://github.com/iam-tarun-86/carin', '_blank')">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-            <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: #06b6d4; background: rgba(6, 182, 212, 0.12); border: 1px solid rgba(6, 182, 212, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px;">
-              <i class="ti ti-car"></i> Vision & Voice AI
-            </span>
-            <i class="ti ti-brand-github" style="color: var(--text-muted); font-size: 1.1rem;"></i>
+      <!-- Card 6: carin -->
+      <div class="sticky-project-card" style="top: 225px;">
+        <div>
+          <div class="project-card-header">
+            <span class="project-card-num">06</span>
+            <span class="project-category-badge" style="color: #06b6d4;"><i class="ti ti-car"></i> Vision & Voice</span>
           </div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">carin</h3>
-          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          <h3 class="project-title">carin</h3>
+          <p class="project-desc">
             Intelligent in-vehicle AI co-pilot assistant combining multi-modal computer vision edge feeds, voice telemetry processing, and vehicle diagnostics.
           </p>
-          <div class="project-tag-row">
-            <span class="project-tag">Computer Vision</span>
-            <span class="project-tag">Voice AI</span>
-            <span class="project-tag">Edge AI</span>
-            <span class="project-tag">Python</span>
+          <div class="project-tech-tags">
+            <span class="tech-tag">Computer Vision</span>
+            <span class="tech-tag">Voice AI</span>
+            <span class="tech-tag">Edge AI</span>
+            <span class="tech-tag">Python</span>
           </div>
         </div>
-
-      </div>
-    </section>
-
-    <!-- =====================================================================
-         STAGE 4: SKILLS REACTOR & CERTIFICATIONS (70% - 88% Scroll)
-         ===================================================================== -->
-    <section id="stage-arsenal" class="stage-section">
-      <div class="stage-header">
-        <div class="stage-kicker"><i class="ti ti-code"></i> 04. Technical Capabilities</div>
-        <h2 class="stage-title">Engineering Arsenal & Accreditations</h2>
-      </div>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
-
-        <!-- Skills Card -->
-        <div class="glass-panel">
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; color: #38bdf8; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="ti ti-tool"></i> Core Tooling
-          </h3>
-          <div style="margin-bottom: 1.25rem;">
-            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.5rem; text-transform: uppercase;">LLM & Agentic AI</div>
-            <div class="project-tag-row">
-              <span class="project-tag">llama.cpp</span>
-              <span class="project-tag">LangGraph</span>
-              <span class="project-tag">LangChain</span>
-              <span class="project-tag">Ollama</span>
-              <span class="project-tag">LlamaIndex</span>
-            </div>
-          </div>
-          <div>
-            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.5rem; text-transform: uppercase;">Backend & Systems</div>
-            <div class="project-tag-row">
-              <span class="project-tag">Python</span>
-              <span class="project-tag">FastAPI</span>
-              <span class="project-tag">Docker</span>
-              <span class="project-tag">Linux / Bash</span>
-              <span class="project-tag">PyTorch</span>
-              <span class="project-tag">CUDA</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Certifications Card -->
-        <div class="glass-panel">
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; color: #fbbf24; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="ti ti-certificate"></i> Certification Ledger
-          </h3>
-          <div style="display: flex; flex-direction: column; gap: 0.85rem;">
-            <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-glass);">
-              <div>
-                <div style="font-size: 0.88rem; font-weight: 600; color: #fff;">Prompting Essentials</div>
-                <div style="font-size: 0.75rem; color: var(--text-muted);">Google Professional Certification</div>
-              </div>
-              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #fbbf24;">Google</span>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-glass);">
-              <div>
-                <div style="font-size: 0.88rem; font-weight: 600; color: #fff;">Introduction to Artificial Intelligence</div>
-                <div style="font-size: 0.75rem; color: var(--text-muted);">Neural architectures & heuristics</div>
-              </div>
-              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #fbbf24;">Google</span>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-              <div>
-                <div style="font-size: 0.88rem; font-weight: 600; color: #fff;">Advanced Statistical Methods</div>
-                <div style="font-size: 0.75rem; color: var(--text-muted);">Computational Probability Models</div>
-              </div>
-              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #0ea5e9;">Johns Hopkins</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =====================================================================
-         STAGE 5: COMMUNICATIONS UPLINK & CLI TERMINAL (88% - 100% Scroll)
-         ===================================================================== -->
-    <section id="stage-contact" class="stage-section" style="padding-bottom: 8rem;">
-      <div class="stage-header">
-        <div class="stage-kicker"><i class="ti ti-terminal-2"></i> 05. Command Center & Uplink</div>
-        <h2 class="stage-title">Interactive Terminal & Contact</h2>
-      </div>
-
-      <!-- Terminal Component -->
-      <div class="glass-panel" style="padding: 0; overflow: hidden; margin-bottom: 2rem;">
-        <div style="background: rgba(20, 24, 38, 0.9); padding: 0.75rem 1.25rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-glass);">
-          <div style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; color: #38bdf8; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="ti ti-terminal-2"></i> INFERENCE_CLI // guest@skct-agent
-          </div>
-          <div style="display: flex; gap: 6px;">
-            <span style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444;"></span>
-            <span style="width: 10px; height: 10px; border-radius: 50%; background: #f59e0b;"></span>
-            <span style="width: 10px; height: 10px; border-radius: 50%; background: #10b981;"></span>
-          </div>
-        </div>
-
-        <div style="padding: 1.5rem; background: rgba(5, 6, 8, 0.95); min-height: 220px; display: flex; flex-direction: column; font-family: var(--font-mono);">
-          <div id="cli-output" style="flex: 1; max-height: 180px; overflow-y: auto; font-size: 0.85rem; line-height: 1.7; color: #38bdf8; margin-bottom: 1rem;">
-            <span style="color: #64748b;">[SYSTEM]: 3D Cyberpunk Lab Environment Online.</span><br>
-            <span style="color: #10b981;">[ONLINE]: Type 'help', 'bench', 'cat bio.md', or 'ls projects/'.</span><br>
-          </div>
-
-          <div style="display: flex; align-items: center; gap: 0.5rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.75rem;">
-            <span style="color: #10b981; font-size: 0.85rem; white-space: nowrap;">guest@skct-agent:~$</span>
-            <input type="text" id="cli-input-field" style="background: transparent; border: none; outline: none; color: #38bdf8; font-family: var(--font-mono); font-size: 0.85rem; width: 100%;" placeholder="Type command..." autocomplete="off" />
-          </div>
-        </div>
-      </div>
-
-      <!-- Direct Contact Channels -->
-      <div class="glass-panel" style="text-align: center; padding: 3rem 2rem;">
-        <h3 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff;">Let's Build High-Throughput AI Systems</h3>
-        <p style="color: var(--text-muted); max-width: 550px; margin: 0 auto 2rem; font-size: 0.95rem;">
-          Available for engineering roles, LLM infrastructure optimizations, and collaborative research.
-        </p>
-
-        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
-          <a href="mailto:tarunsanjay1910@gmail.com" class="btn-contact-motionsites">
-            <i class="ti ti-mail"></i> tarunsanjay1910@gmail.com
-          </a>
-          <a href="https://linkedin.com/in/tarun-r-ai-ml" target="_blank" class="btn-secondary" style="padding: 0.7rem 1.4rem; font-size: 0.85rem;">
-            <i class="ti ti-brand-linkedin"></i> LinkedIn
-          </a>
-          <a href="https://github.com/iam-tarun-86" target="_blank" class="btn-secondary" style="padding: 0.7rem 1.4rem; font-size: 0.85rem;">
-            <i class="ti ti-brand-github"></i> GitHub
+        <div>
+          <a href="https://github.com/iam-tarun-86/carin" target="_blank" class="btn-secondary-ghost" style="padding: 0.6rem 1.4rem;">
+            <i class="ti ti-brand-github"></i> View on GitHub &rarr;
           </a>
         </div>
+      </div>
 
-        <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim);">
-          <i class="ti ti-phone"></i> +91 94896 60152 &nbsp;|&nbsp; <i class="ti ti-map-pin"></i> Coimbatore, TN, India
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. TERMINAL & CONTACT SECTION
+       ========================================================================= -->
+  <section class="jack-contact-section" id="terminal">
+    <div class="section-label-kicker">
+      <i class="ti ti-terminal-2"></i> 04 &mdash; Command Center & Uplink
+    </div>
+
+    <h2 class="hero-heading" style="font-size: clamp(2.5rem, 6vw, 5rem); margin-bottom: 2.5rem;">
+      TERMINAL
+    </h2>
+
+    <!-- In-Browser Terminal -->
+    <div class="terminal-jack-wrapper">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <div class="terminal-dot dot-red"></div>
+          <div class="terminal-dot dot-yellow"></div>
+          <div class="terminal-dot dot-green"></div>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #38bdf8;">guest@skct-agent: ~</div>
+        <div style="width: 40px;"></div>
+      </div>
+
+      <div class="terminal-body">
+        <div id="cli-output" style="max-height: 180px; overflow-y: auto; line-height: 1.7; color: #38bdf8; margin-bottom: 1rem;">
+          <span style="color: #8E9BAE;">[SYSTEM]: 3D Jack Portfolio Environment Online.</span><br>
+          <span style="color: #10b981;">[ONLINE]: Type 'help', 'bench', 'cat bio.md', or 'ls projects/'.</span><br>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.5rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.75rem;">
+          <span style="color: #10b981; font-size: 0.85rem; white-space: nowrap;">guest@skct-agent:~$</span>
+          <input type="text" id="cli-input-field" style="background: transparent; border: none; outline: none; color: #38bdf8; font-family: var(--font-mono); font-size: 0.85rem; width: 100%;" placeholder="Type command..." autocomplete="off" />
         </div>
       </div>
-    </section>
+    </div>
 
-  </main>
+    <!-- Final Contact Box -->
+    <div class="contact-final-box" id="contact">
+      <h3 style="font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 800; text-transform: uppercase; margin-bottom: 1rem; letter-spacing: -0.02em;">
+        LET'S BUILD TOGETHER
+      </h3>
+      <p style="color: var(--text-silver); max-width: 580px; margin: 0 auto 2.5rem; font-size: 1.05rem; font-weight: 300; line-height: 1.6;">
+        Available for engineering roles, LLM infrastructure optimizations, and collaborative research.
+      </p>
 
-  <!-- Bottom Spatial HUD Navigation -->
-  <div class="spatial-hud-nav">
-    <a href="#stage-hero" class="spatial-nav-link active">🌌 Core Lab</a>
-    <a href="#stage-architecture" class="spatial-nav-link">🛡️ SIEM Radar</a>
-    <a href="#stage-projects" class="spatial-nav-link">💻 Projects</a>
-    <a href="#stage-arsenal" class="spatial-nav-link">⚡ Reactor</a>
-    <a href="#stage-contact" class="spatial-nav-link">📬 Uplink</a>
-  </div>
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+        <a href="mailto:tarunsanjay1910@gmail.com" class="btn-contact-motionsites">
+          <i class="ti ti-mail"></i> tarunsanjay1910@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/tarun-r-ai-ml" target="_blank" class="btn-secondary-ghost">
+          <i class="ti ti-brand-linkedin"></i> LinkedIn &rarr;
+        </a>
+        <a href="https://github.com/iam-tarun-86" target="_blank" class="btn-secondary-ghost">
+          <i class="ti ti-brand-github"></i> GitHub &rarr;
+        </a>
+      </div>
+
+      <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-dim);">
+        <i class="ti ti-phone"></i> +91 94896 60152 &nbsp;|&nbsp; <i class="ti ti-map-pin"></i> Coimbatore, TN, India
+      </div>
+    </div>
+  </section>
 
   <!-- Scripts -->
   <script src="js/audio.js"></script>
